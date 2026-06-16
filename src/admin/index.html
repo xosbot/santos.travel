@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IVA Cortex — Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #C9A84C; --gold-light: #E8CC7A; --gold-pale: #F5EDD6;
+  --deep-teal: #0A2E2B; --teal: #0D4A42; --teal-mid: #1A6B5E; --teal-light: #2A9D8F; --teal-pale: #E8F5F3;
+  --ink: #1C1C2E; --ink-soft: #3D3D52; --muted: #7A7A9D;
+  --white: #FFFFFF; --off-white: #FAFAF8; --border: #E2E2E8;
+  --red: #DC3545; --red-bg: #FFF0F0; --green: #1A7A40; --green-bg: #EAF7EF; --amber: #B87A10; --amber-bg: #FFF8EA;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: var(--off-white); color: var(--ink); font-size: 14px; line-height: 1.5; }
+
+/* Layout */
+.app { display: flex; min-height: 100vh; }
+.sidebar {
+  width: 240px; background: var(--deep-teal); color: var(--white);
+  padding: 24px 0; flex-shrink: 0; display: flex; flex-direction: column;
+}
+.sidebar-brand { padding: 0 20px 24px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 16px; }
+.sidebar-brand h1 { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; }
+.sidebar-brand h1 span { color: var(--gold-light); }
+.sidebar-brand small { display: block; font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 2px; }
+.nav { list-style: none; padding: 0 8px; }
+.nav li { padding: 10px 16px; margin: 2px 0; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.65); display: flex; align-items: center; gap: 10px; transition: all 0.15s; }
+.nav li:hover { background: rgba(255,255,255,0.06); color: var(--white); }
+.nav li.active { background: rgba(201,168,76,0.15); color: var(--gold-light); }
+
+.main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+.topbar {
+  background: var(--white); border-bottom: 1px solid var(--border);
+  padding: 16px 32px; display: flex; justify-content: space-between; align-items: center;
+}
+.topbar h2 { font-size: 18px; font-weight: 600; color: var(--deep-teal); }
+.topbar-status { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); }
+.topbar-status .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+
+.content { flex: 1; padding: 24px 32px; overflow-y: auto; }
+
+/* Cards */
+.card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 20px; }
+.card-header { padding: 16px 20px; border-bottom: 1px solid var(--border); font-weight: 600; font-size: 14px; display: flex; justify-content: space-between; align-items: center; }
+.card-body { padding: 20px; }
+
+/* Stats row */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.stat-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 20px;
+}
+.stat-card .stat-val { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--deep-teal); margin-bottom: 4px; }
+.stat-card .stat-label { font-size: 12px; color: var(--muted); font-weight: 500; }
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+thead th { text-align: left; padding: 10px 12px; font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid var(--border); }
+tbody td { padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--ink-soft); }
+tbody tr:hover { background: var(--off-white); }
+
+/* Badges */
+.badge { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; letter-spacing: 0.3px; }
+.badge-new { background: #EAF4FF; color: #1A6BAF; }
+.badge-triaged { background: var(--amber-bg); color: var(--amber); }
+.badge-quoted { background: var(--teal-pale); color: var(--teal); }
+.badge-converted { background: var(--green-bg); color: var(--green); }
+.badge-lost { background: var(--red-bg); color: var(--red); }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px;
+  border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer;
+  border: none; transition: all 0.15s;
+}
+.btn-primary { background: var(--teal); color: var(--white); }
+.btn-primary:hover { background: var(--teal-mid); }
+.btn-outline { background: transparent; border: 1px solid var(--border); color: var(--ink-soft); }
+.btn-outline:hover { background: var(--off-white); border-color: var(--muted); }
+.btn-sm { padding: 5px 12px; font-size: 12px; }
+.btn-gold { background: var(--gold); color: var(--deep-teal); }
+.btn-gold:hover { background: var(--gold-light); }
+.btn-danger { background: var(--red); color: var(--white); }
+.btn-danger:hover { background: #C82333; }
+
+/* Modal */
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 1000; align-items: center; justify-content: center; }
+.modal-overlay.open { display: flex; }
+.modal { background: var(--white); border-radius: 12px; width: 90%; max-width: 600px; max-height: 80vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
+.modal-header { padding: 20px 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.modal-header h3 { font-size: 16px; font-weight: 600; }
+.modal-close { background: none; border: none; font-size: 20px; cursor: pointer; color: var(--muted); }
+.modal-body { padding: 24px; }
+.modal-footer { padding: 16px 24px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 8px; }
+
+/* Form */
+.form-group { margin-bottom: 16px; }
+.form-group label { display: block; font-size: 12px; font-weight: 600; color: var(--ink-soft); margin-bottom: 4px; }
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%; padding: 8px 12px; border: 1px solid var(--border); border-radius: 6px;
+  font-size: 13px; font-family: inherit; color: var(--ink); background: var(--white);
+}
+.form-group textarea { min-height: 80px; resize: vertical; }
+.form-group input:focus, .form-group select:focus { outline: none; border-color: var(--teal-light); box-shadow: 0 0 0 2px var(--teal-pale); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+/* Toast */
+.toast {
+  position: fixed; bottom: 24px; right: 24px; padding: 12px 20px;
+  border-radius: 8px; font-size: 13px; font-weight: 500; z-index: 2000;
+  display: none; box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+.toast.show { display: block; animation: slideIn 0.3s ease; }
+.toast-success { background: var(--green); color: var(--white); }
+.toast-error { background: var(--red); color: var(--white); }
+@keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+/* Empty state */
+.empty { text-align: center; padding: 48px 20px; color: var(--muted); }
+.empty .icon { font-size: 48px; margin-bottom: 16px; }
+.empty p { font-size: 14px; }
+
+.loading { text-align: center; padding: 40px; color: var(--muted); }
+
+/* Product select in quote builder */
+.product-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--border); }
+.product-row:last-child { border-bottom: none; }
+.product-row input[type="number"] { width: 60px; padding: 4px 8px; border: 1px solid var(--border); border-radius: 4px; }
+.product-row .product-name { flex: 1; }
+.product-row .product-price { color: var(--muted); font-size: 12px; min-width: 80px; text-align: right; }
+
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .content { padding: 16px; }
+  .stats { grid-template-columns: 1fr 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <h1>santos<span>.travel</span></h1>
+      <small>IVA Cortex Admin</small>
+    </div>
+    <ul class="nav">
+      <li class="active" data-page="dashboard">📊 Dashboard</li>
+      <li data-page="inquiries">📩 Inquiries</li>
+      <li data-page="quotes">📋 Quotes</li>
+      <li data-page="new-quote">➕ New Quote</li>
+      <li data-page="products">🏷️ Products</li>
+      <li data-page="vendors">🏢 Vendors</li>
+      <li data-page="settings">⚙️ Settings</li>
+    </ul>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <h2 id="pageTitle">Dashboard</h2>
+      <div class="topbar-status"><span class="dot"></span> System Online</div>
+    </div>
+    <div class="content" id="pageContent">
+      <div class="loading">Loading dashboard...</div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modalTitle">Modal</h3>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-footer" id="modalFooter"></div>
+  </div>
+</div>
+
+<script>
+// ── API helper ─────────────────────────────────────────
+const API = {
+  async get(path) {
+    const r = await fetch(path);
+    if (!r.ok) throw new Error(await r.text());
+    return r.json();
+  },
+  async post(path, body) {
+    const r = await fetch(path, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    if (!r.ok) throw new Error((await r.json()).error || r.statusText);
+    return r.json();
+  },
+};
+
+// ── Toast ──────────────────────────────────────────────
+function showToast(msg, type = 'success') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = `toast toast-${type} show`;
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ── Modal ──────────────────────────────────────────────
+function openModal(title, bodyHtml, footerHtml = '') {
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalBody').innerHTML = bodyHtml;
+  document.getElementById('modalFooter').innerHTML = footerHtml;
+  document.getElementById('modal').classList.add('open');
+}
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+}
+
+// ── Format helpers ─────────────────────────────────────
+function fmtMoney(n) {
+  if (n == null) return '-';
+  return '₹' + Number(n).toLocaleString('en-IN');
+}
+function statusBadge(status) {
+  const cls = `badge-${status}`;
+  return `<span class="badge ${cls}">${status}</span>`;
+}
+
+// ── Navigation ─────────────────────────────────────────
+document.querySelectorAll('.nav li').forEach(el => {
+  el.addEventListener('click', () => {
+    document.querySelectorAll('.nav li').forEach(l => l.classList.remove('active'));
+    el.classList.add('active');
+    const page = el.dataset.page;
+    const titles = { dashboard: 'Dashboard', inquiries: 'Inquiries', quotes: 'Quotes', 'new-quote': 'New Quote', products: 'Products', vendors: 'Vendors', settings: 'Settings' };
+    document.getElementById('pageTitle').textContent = titles[page] || page;
+    loadPage(page);
+  });
+});
+
+// ── Page loader ────────────────────────────────────────
+function loadPage(page) {
+  const container = document.getElementById('pageContent');
+  switch (page) {
+    case 'dashboard': renderDashboard(container); break;
+    case 'inquiries': renderInquiries(container); break;
+    case 'quotes': renderQuotes(container); break;
+    case 'new-quote': renderNewQuote(container); break;
+    case 'products': renderProducts(container); break;
+    case 'vendors': renderVendors(container); break;
+    case 'settings': renderSettings(container); break;
+    default: container.innerHTML = '<div class="empty"><p>Page not found</p></div>';
+  }
+}
+
+// ── Dashboard ──────────────────────────────────────────
+async function renderDashboard(container) {
+  container.innerHTML = '<div class="loading">Loading dashboard...</div>';
+  try {
+    const [inquiries, quotes, products] = await Promise.all([
+      API.get('/api/inquiries'),
+      API.get('/api/quotes'),
+      API.get('/api/products'),
+    ]);
+    const newCount = inquiries.filter(i => i.status === 'new').length;
+    const quotedCount = inquiries.filter(i => i.status === 'quoted').length;
+    const totalRevenue = quotes.reduce((s, q) => s + Number(q.total_cost || 0) + Number(q.total_margin || 0), 0);
+
+    container.innerHTML = `
+      <div class="stats">
+        <div class="stat-card"><div class="stat-val">${inquiries.length}</div><div class="stat-label">Total Inquiries</div></div>
+        <div class="stat-card"><div class="stat-val">${newCount}</div><div class="stat-label">Needs Attention</div></div>
+        <div class="stat-card"><div class="stat-val">${quotedCount}</div><div class="stat-label">Quotes Sent</div></div>
+        <div class="stat-card"><div class="stat-val">${products.length}</div><div class="stat-label">Active Products</div></div>
+        <div class="stat-card"><div class="stat-val">${fmtMoney(totalRevenue)}</div><div class="stat-label">Total Quoted Value</div></div>
+        <div class="stat-card"><div class="stat-val">${quotes.length}</div><div class="stat-label">Total Quotes</div></div>
+      </div>
+      <div class="card">
+        <div class="card-header">Recent Inquiries</div>
+        <div class="card-body">
+          ${inquiries.length === 0 ? '<div class="empty"><p>No inquiries yet</p></div>' : `
+          <table>
+            <thead><tr><th>Date</th><th>Destination</th><th>Pax</th><th>Lead</th><th>Status</th><th>Source</th></tr></thead>
+            <tbody>
+              ${inquiries.slice(0, 10).map(i => `
+                <tr onclick="showInquiryDetail('${i.id}')" style="cursor:pointer">
+                  <td>${new Date(i.created_at).toLocaleDateString()}</td>
+                  <td>${i.destination || '-'}</td>
+                  <td>${i.pax_adults || 0}${i.pax_children ? '+' + i.pax_children : ''}</td>
+                  <td>${i.lead_name || i.lead_phone || '-'}</td>
+                  <td>${statusBadge(i.status)}</td>
+                  <td>${i.source}</td>
+                </tr>`).join('')}
+            </tbody>
+          </table>`}
+        </div>
+      </div>`;
+  } catch (err) {
+    container.innerHTML = `<div class="empty"><div class="icon">⚠️</div><p>Error: ${err.message}</p></div>`;
+  }
+}
+
+// ── Inquiries ──────────────────────────────────────────
+async function renderInquiries(container) {
+  container.innerHTML = '<div class="loading">Loading inquiries...</div>';
+  try {
+    const inquiries = await API.get('/api/inquiries');
+    container.innerHTML = `
+      <div class="card">
+        <div class="card-header">
+          <span>All Inquiries</span>
+          <span style="font-size:12px;color:var(--muted)">${inquiries.length} total</span>
+        </div>
+        <div class="card-body">
+          ${inquiries.length === 0 ? '<div class="empty"><p>No inquiries yet</p></div>' : `
+          <table>
+            <thead><tr><th>Date</th><th>Destination</th><th>Pax</th><th>Lead</th><th>Contact</th><th>Source</th><th>Status</th></tr></thead>
+            <tbody>
+              ${inquiries.map(i => `
+                <tr onclick="showInquiryDetail('${i.id}')" style="cursor:pointer">
+                  <td>${new Date(i.created_at).toLocaleDateString()}</td>
+                  <td>${i.destination || '-'}</td>
+                  <td>${i.pax_adults || 0}${i.pax_children ? '+' + i.pax_children : ''}</td>
+                  <td>${i.lead_name || '-'}</td>
+                  <td>${i.lead_phone || i.lead_email || '-'}</td>
+                  <td><span class="badge badge-${i.source}">${i.source}</span></td>
+                  <td>${statusBadge(i.status)}</td>
+                </tr>`).join('')}
+            </tbody>
+          </table>`}
+        </div>
+      </div>`;
+  } catch (err) {
+    container.innerHTML = `<div class="empty"><div class="icon">⚠️</div><p>Error: ${err.message}</p></div>`;
+  }
+}
+
+async function showInquiryDetail(id) {
+  try {
+    const inquiries = await API.get('/api/inquiries');
+    const i = inquiries.find(x => x.id === id);
+    if (!i) return;
+    openModal('Inquiry Detail', `
+      <div class="form-group"><label>ID</label><input type="text" value="${i.id}" readonly></div>
+      <div class="form-row">
+        <div class="form-group"><label>Name</label><input type="text" value="${i.lead_name || ''}"></div>
+        <div class="form-group"><label>Phone</label><input type="text" value="${i.lead_phone || ''}"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Destination</label><input type="text" value="${i.destination || ''}"></div>
+        <div class="form-group"><label>Status</label><select><option ${i.status === 'new' ? 'selected' : ''}>new</option><option ${i.status === 'triaged' ? 'selected' : ''}>triaged</option><option ${i.status === 'quoted' ? 'selected' : ''}>quoted</option><option ${i.status === 'converted' ? 'selected' : ''}>converted</option><option ${i.status === 'lost' ? 'selected' : ''}>lost</option></select></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Adults</label><input type="number" value="${i.pax_adults || 0}"></div>
+        <div class="form-group"><label>Children</label><input type="number" value="${i.pax_children || 0}"></div>
+      </div>
+      <div class="form-group"><label>Message</label><textarea readonly>${i.raw_message || ''}</textarea></div>
+    `, `<button class="btn btn-outline" onclick="closeModal()">Close</button>`);
+  } catch (err) {
+    showToast(err.message, 'error');
+  }
+}
+
+// ── Quotes ─────────────────────────────────────────────
+async function renderQuotes(container) {
+  container.innerHTML = '<div class="loading">Loading quotes...</div>';
+  try {
+    const quotes = await API.get('/api/quotes');
+    container.innerHTML = `
+      <div class="card">
+        <div class="card-header">
+          <span>All Quotes</span>
+          <span style="font-size:12px;color:var(--muted)">${quotes.length} total</span>
+        </div>
+        <div class="card-body">
+          ${quotes.length === 0 ? '<div class="empty"><p>No quotes yet. Create one from the "New Quote" page.</p></div>' : `
+          <table>
+            <thead><tr><th>Quote #</th><th>Date</th><th>Total</th><th>Margin</th><th>Status</th><th>Items</th></tr></thead>
+            <tbody>
+              ${quotes.map(q => `
+                <tr style="cursor:pointer">
+                  <td><strong>${q.quote_number}</strong></td>
+                  <td>${new Date(q.created_at).toLocaleDateString()}</td>
+                  <td>${fmtMoney(Number(q.total_cost) + Number(q.total_margin))}</td>
+                  <td>${fmtMoney(q.total_margin)}</td>
+                  <td>${statusBadge(q.status)}</td>
+                  <td><a href="/pdf/${q.quote_number}.pdf" target="_blank" class="btn btn-sm btn-outline">PDF</a></td>
+                </tr>`).join('')}
+            </tbody>
+          </table>`}
+        </div>
+      </div>`;
+  } catch (err) {
+    container.innerHTML = `<div class="empty"><div class="icon">⚠️</div><p>Error: ${err.message}</p></div>`;
+  }
+}
+
+// ── New Quote (Full Pipeline) ─────────────────────────
+async function renderNewQuote(container) {
+  container.innerHTML = '<div class="loading">Loading...</div>';
+  try {
+    const [inquiries, products] = await Promise.all([
+      API.get('/api/inquiries'),
+      API.get('/api/products'),
+    ]);
+
+    const pendingInquiries = inquiries.filter(i => i.status !== 'converted' && i.status !== 'lost');
+
+    container.innerHTML = `
+      <div class="card">
+        <div class="card-header">Create Quote — Full Pipeline</div>
+        <div class="card-body">
+          <div class="form-group">
+            <label>Inquiry Message (or select existing)</label>
+            <textarea id="quoteMessage" rows="3" placeholder="Paste inquiry message or type one...">Sample: 2 adults, 3 nights in Munnar, budget 50k</textarea>
+          </div>
+          <div class="form-group">
+            <label>Or select existing inquiry</label>
+            <select id="inquirySelect" onchange="document.getElementById('quoteMessage').value = this.options[this.selectedIndex]?.dataset?.msg || ''">
+              <option value="">— Type a new message above —</option>
+              ${pendingInquiries.map(i => `<option value="${i.id}" data-msg="${(i.raw_message || '').replace(/"/g, '&quot;')}">${i.destination || 'N/A'} — ${i.lead_name || 'No name'} (${i.status})</option>`).join('')}
+            </select>
+          </div>
+          <hr style="border:none;border-top:1px solid var(--border);margin:16px 0">
+          <div class="form-group"><label>Valid Until (days)</label><input type="number" id="validDays" value="30"></div>
+          <div class="form-group"><label>Terms & Conditions</label><textarea id="termsText" rows="3">Prices are subject to change based on availability. Booking confirmation required 7 days prior to travel. Cancellation policy applies.</textarea></div>
+          <hr style="border:none;border-top:1px solid var(--border);margin:16px 0">
+          <label style="font-weight:600;font-size:13px;margin-bottom:8px;display:block">Select Products</label>
+          <div id="productSelection">
+            ${products.map(p => `
+              <div class="product-row">
+                <input type="checkbox" class="product-cb" data-id="${p.id}" data-price="${p.base_price}" data-name="${p.name}">
+                <span class="product-name">${p.name} <span style="color:var(--muted);font-size:11px">(${p.vendor_name})</span></span>
+                <span class="product-price">${fmtMoney(p.base_price)}/${p.pricing_unit}</span>
+                <input type="number" class="product-qty" value="1" min="1" style="width:50px" disabled>
+              </div>
+            `).join('')}
+          </div>
+          <div style="margin-top:16px;display:flex;gap:8px">
+            <button class="btn btn-primary" onclick="runPipeline()">🚀 Run Full Pipeline</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" id="pipelineResult" style="display:none">
+        <div class="card-header">Pipeline Result</div>
+        <div class="card-body" id="pipelineResultBody"></div>
+      </div>`;
+
+    // Enable quantity inputs when checkbox is checked
+    document.querySelectorAll('.product-cb').forEach(cb => {
+      cb.addEventListener('change', () => {
+        cb.closest('.product-row').querySelector('.product-qty').disabled = !cb.checked;
+      });
+    });
+
+    window.runPipeline = async () => {
+      const message = document.getElementById('quoteMessage').value.trim();
+      if (!message) { showToast('Enter a message or select an inquiry', 'error'); return; }
+
+      const selected = [];
+      document.querySelectorAll('.product-cb:checked').forEach(cb => {
+        selected.push({
+          productId: cb.dataset.id,
+          quantity: parseInt(cb.closest('.product-row').querySelector('.product-qty').value) || 1,
+        });
+      });
+      if (selected.length === 0) { showToast('Select at least one product', 'error'); return; }
+
+      const resultDiv = document.getElementById('pipelineResult');
+      const body = document.getElementById('pipelineResultBody');
+      resultDiv.style.display = 'block';
+      body.innerHTML = '<div class="loading">Running pipeline (extract → quote → augment → PDF)...</div>';
+
+      try {
+        const result = await API.post('/api/quotes', {
+          message,
+          selections: selected,
+          termsConditions: document.getElementById('termsText').value || null,
+          validUntil: new Date(Date.now() + (parseInt(document.getElementById('validDays').value) || 30) * 86400000).toISOString().split('T')[0],
+        });
+        body.innerHTML = `
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px">
+            <div class="stat-card"><div class="stat-val">${result.quote_number}</div><div class="stat-label">Quote Number</div></div>
+            <div class="stat-card"><div class="stat-val">${fmtMoney(result.grand_total)}</div><div class="stat-label">Grand Total</div></div>
+            <div class="stat-card"><div class="stat-val">${result.line_items}</div><div class="stat-label">Line Items</div></div>
+          </div>
+          <div style="display:flex;gap:8px">
+            <a href="${result.pdf_url}" target="_blank" class="btn btn-gold">📄 View PDF</a>
+            <button class="btn btn-outline" onclick="closePipelineResult()">Close</button>
+          </div>`;
+        showToast(`Quote ${result.quote_number} created successfully!`);
+      } catch (err) {
+        body.innerHTML = `<div class="empty"><div class="icon">⚠️</div><p>${err.message}</p></div>`;
+        showToast(err.message, 'error');
+      }
+    };
+    window.closePipelineResult = () => {
+      document.getElementById('pipelineResult').style.display = 'none';
+    };
+  } catch (err) {
+    container.innerHTML = `<div class="empty"><div class="icon">⚠️</div><p>Error loading form: ${err.message}</p></div>`;
+  }
+}
+
+// ── Products ───────────────────────────────────────────
+async function renderProducts(container) {
+  container.innerHTML = '<div class="loading">Loading products...</div>';
+  try {
+    const products = await API.get('/api/products');
+    container.innerHTML = `
+      <div class="card">
+        <div class="card-header">
+          <span>Vendor Products</span>
+          <span style="font-size:12px;color:var(--muted)">${products.length} active</span>
+        </div>
+        <div class="card-body">
+          ${products.length === 0 ? '<div class="empty"><p>No products found</p></div>' : `
+          <table>
+            <thead><tr><th>Product</th><th>Vendor</th><th>Category</th><th>Price</th><th>Unit</th><th>Valid</th></tr></thead>
+            <tbody>
+              ${products.map(p => `
+                <tr>
+                  <td><strong>${p.name}</strong></td>
+                  <td>${p.vendor_name}</td>
+                  <td><span class="badge badge-triaged">${p.category}</span></td>
+                  <td>${fmtMoney(p.base_price)}</td>
+                  <td>${p.pricing_unit}</td>
+                  <td style="font-size:11px">${p.valid_from} – ${p.valid_until}</td>
+                </tr>`).join('')}
+            </tbody>
+          </table>`}
+        </div>
+      </div>`;
+  } catch (err) {
+    container.innerHTML = `<div class="empty"><div class="icon">⚠️</div><p>Error: ${err.message}</p></div>`;
+  }
+}
+
+// ── Vendors ────────────────────────────────────────────
+async function renderVendors(container) {
+  container.innerHTML = '<div class="empty"><div class="icon">🏢</div><p>Vendor management coming in Phase 1.2 — use the API directly.</p></div>';
+}
+
+// ── Settings ────────────────────────────────────────────
+function renderSettings(container) {
+  container.innerHTML = `
+    <div class="card">
+      <div class="card-header">System Settings</div>
+      <div class="card-body">
+        <div class="form-group"><label>Default Markup — Accommodation</label><input type="number" value="15" id="mkp-accommodation"></div>
+        <div class="form-group"><label>Default Markup — Transfers</label><input type="number" value="10" id="mkp-transfer"></div>
+        <div class="form-group"><label>Default Markup — Sightseeing</label><input type="number" value="12" id="mkp-sightseeing"></div>
+        <div class="form-group"><label>Default Markup — Guide</label><input type="number" value="10" id="mkp-guide"></div>
+        <div class="form-group"><label>Default Markup — Activities</label><input type="number" value="15" id="mkp-activity"></div>
+        <button class="btn btn-primary" onclick="showToast('Settings saved (local only)')">Save</button>
+      </div>
+    </div>`;
+}
+
+// ── Init: load dashboard ───────────────────────────────
+loadPage('dashboard');
+</script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+node_modules
+.git
+.env
+pdf_output/*
+!pdf_output/.gitkeep
+proposal/node_modules
+*.log

@@ -1,0 +1,8 @@
+node_modules/
+.env
+pdf_output/*
+!pdf_output/.gitkeep
+*.log
+/tmp/
+proposal/node_modules/
+proposal/santos_travel_IVA_cortex_proposal.pdf
