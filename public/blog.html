@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>25 Exotic Tour Destinations Worldwide | Santos Travel Blog</title>
+  <meta name="description" content="Discover 25 of the world's most exotic and exclusive tour destinations — curated by Santos Travel from deep market research across National Geographic, Forbes, luxury operators, and travel vlogs.">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #C9A84C; --gold-light: #E8CC7A; --gold-pale: #F5EDD6;
+      --deep-teal: #0A2E2B; --teal: #0D4A42; --teal-mid: #1A6B5E;
+      --teal-light: #2A9D8F; --teal-pale: #E8F5F3;
+      --ink: #1C1C2E; --ink-soft: #3D3D52; --muted: #7A7A9D;
+      --white: #FFFFFF; --off-white: #FAFAF8; --border: #E2E2E8;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: var(--off-white); color: var(--ink); line-height: 1.7; }
+    a { color: inherit; text-decoration: none; }
+
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(10,46,43,0.95); backdrop-filter: blur(12px); padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .nav-logo { display: flex; align-items: center; gap: 12px; }
+    .nav-logo-icon { width: 36px; height: 36px; background: linear-gradient(135deg, var(--gold), var(--gold-light)); border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+    .nav-logo-text { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--white); }
+    .nav-logo-text span { color: var(--gold-light); }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.7); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold-light); }
+    .nav-cta { background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--deep-teal); font-size: 12px; font-weight: 700; padding: 8px 20px; border-radius: 6px; letter-spacing: 0.5px; }
+
+    .hero { position: relative; min-height: 60vh; background: var(--deep-teal); display: flex; align-items: center; overflow: hidden; padding-top: 64px; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 120% -10%, rgba(201,168,76,0.18) 0%, transparent 60%), radial-gradient(ellipse 60% 50% at -20% 110%, rgba(42,157,143,0.22) 0%, transparent 55%); }
+    .hero-content { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 80px 40px; }
+    .hero-eyebrow { font-size: 11px; font-weight: 600; color: var(--gold); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+    .hero-eyebrow::before { content: ''; width: 40px; height: 2px; background: var(--gold); }
+    .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(32px, 5vw, 56px); font-weight: 800; color: var(--white); line-height: 1.1; margin-bottom: 16px; }
+    .hero-title span { color: var(--gold-light); }
+    .hero-subtitle { font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.7); max-width: 640px; line-height: 1.7; }
+    .hero-gold-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold)); }
+
+    .section { padding: 80px 40px; max-width: 1200px; margin: 0 auto; }
+    .section-eyebrow { font-size: 10px; font-weight: 700; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+    .section-eyebrow::before { content: ''; width: 24px; height: 2px; background: var(--gold); }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(26px, 3.5vw, 38px); font-weight: 700; color: var(--deep-teal); line-height: 1.2; margin-bottom: 12px; }
+    .section-lead { font-size: 16px; color: var(--ink-soft); max-width: 700px; margin-bottom: 48px; }
+
+    .tier-header { background: var(--deep-teal); color: var(--white); padding: 24px 32px; border-radius: 12px; margin-bottom: 32px; display: flex; align-items: center; gap: 16px; }
+    .tier-header h3 { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; }
+    .tier-header p { font-size: 13px; color: rgba(255,255,255,0.65); }
+    .tier-header .tier-num { min-width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--gold-light)); display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 800; color: var(--deep-teal); }
+
+    .dest-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 24px; margin-bottom: 60px; }
+    .dest-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: transform 0.25s, box-shadow 0.25s; }
+    .dest-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(10,46,43,0.12); }
+    .dest-card-header { height: 180px; display: flex; align-items: center; justify-content: center; font-size: 64px; position: relative; }
+    .dest-card-header::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 60px; background: linear-gradient(transparent, rgba(10,46,43,0.5)); }
+    .dest-card-body { padding: 24px; }
+    .dest-card-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+    .dest-card-tag { font-size: 10px; font-weight: 600; color: var(--teal); background: var(--teal-pale); padding: 3px 10px; border-radius: 20px; letter-spacing: 0.5px; text-transform: uppercase; }
+    .dest-card-tag.price { background: var(--gold-pale); color: #8A6A1A; }
+    .dest-card-body h3 { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--deep-teal); margin-bottom: 8px; }
+    .dest-card-body p { font-size: 13px; color: var(--ink-soft); line-height: 1.65; margin-bottom: 12px; }
+    .dest-card-meta { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--muted); border-top: 1px solid var(--border); padding-top: 12px; }
+    .dest-card-meta .price { font-weight: 700; color: var(--teal); font-size: 14px; }
+
+    .sources { background: var(--white); border-radius: 16px; padding: 40px; border: 1px solid var(--border); }
+    .sources h3 { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--deep-teal); margin-bottom: 20px; }
+    .sources-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+    .source-item { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: var(--ink-soft); padding: 8px 0; }
+    .source-item::before { content: ''; min-width: 6px; height: 6px; border-radius: 50%; background: var(--gold); margin-top: 6px; }
+
+    .cta-section { background: linear-gradient(135deg, var(--deep-teal), var(--teal)); border-radius: 20px; padding: 60px; text-align: center; color: var(--white); position: relative; overflow: hidden; }
+    .cta-section::after { content: ''; position: absolute; top: -40px; right: -40px; width: 180px; height: 180px; border-radius: 50%; background: rgba(201,168,76,0.1); }
+    .cta-section h2 { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; margin-bottom: 12px; }
+    .cta-section h2 span { color: var(--gold-light); }
+    .cta-section p { font-size: 16px; color: rgba(255,255,255,0.7); margin-bottom: 32px; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--deep-teal); font-size: 14px; font-weight: 700; padding: 14px 32px; border-radius: 8px; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 16px rgba(201,168,76,0.3); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.4); }
+
+    .footer { background: var(--deep-teal); color: var(--white); padding: 60px 40px 32px; }
+    .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+    .footer-brand h3 { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; margin-bottom: 12px; }
+    .footer-brand h3 span { color: var(--gold-light); }
+    .footer-brand p { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.7; max-width: 300px; }
+    .footer h4 { font-size: 11px; font-weight: 700; color: var(--gold-light); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
+    .footer ul { list-style: none; }
+    .footer ul li { margin-bottom: 8px; }
+    .footer ul li a { font-size: 13px; color: rgba(255,255,255,0.55); transition: color 0.2s; }
+    .footer ul li a:hover { color: var(--gold-light); }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; }
+    .footer-bottom p { font-size: 11px; color: rgba(255,255,255,0.3); }
+    .footer-badges { display: flex; gap: 12px; }
+    .footer-badge { font-size: 10px; font-weight: 600; color: var(--gold-light); background: rgba(201,168,76,0.12); padding: 4px 12px; border-radius: 4px; letter-spacing: 0.5px; }
+
+    @media (max-width: 768px) {
+      .nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero-content { padding: 80px 20px 60px; }
+      .section { padding: 60px 20px; }
+      .dest-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .cta-section { padding: 40px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-icon">🌿</div>
+    <div class="nav-logo-text">santos<span>.travel</span></div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html#about">About</a>
+    <a href="index.html#destinations">Destinations</a>
+    <a href="blog.html">Blog</a>
+    <a href="proposal.html">Proposal</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+  <a href="index.html#contact" class="nav-cta">Get a Quote</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">Deep Market Research — June 2026</div>
+    <h1 class="hero-title">
+      25 Exotic Tour Destinations<br>That <span>Redefine</span> Travel
+    </h1>
+    <p class="hero-subtitle">
+      Curated from National Geographic, Forbes, Condé Nast Traveler, luxury tour operators, 
+      and travel vlogs worldwide — these are the destinations most agencies don't even know exist.
+    </p>
+  </div>
+  <div class="hero-gold-bar"></div>
+</section>
+
+<!-- TIER 1 -->
+<section class="section">
+  <div class="tier-header">
+    <div class="tier-num">1</div>
+    <div>
+      <h3>Ultra-Exotic / Once-in-a-Lifetime</h3>
+      <p>Destinations so remote and extraordinary that mass tourism literally cannot exist</p>
+    </div>
+  </div>
+
+  <div class="dest-grid">
+    <div class="dest-card">
+      <div class="dest-card-header" style="background:linear-gradient(135deg,#1a3a4a,#0d2233);">🌴</div>
+      <div class="dest-card-body">
+        <div class="dest-card-tags">
+          <span class="dest-card-tag">Eco-Expedition</span>
+          <span class="dest-card-tag price">$3,500–$6,000</span>
+        </div>
+        <h3>Socotra Island, Yemen</h3>
+        <p>The "most alien place on Earth." 37% of plant species exist nowhere else — including the iconic Dragon Blood Trees. Mass tourism literally cannot exist here. Camping on white sand beaches, cave exploration, snorkeling with dolphins, and endemic wildlife spotting.</p>
+        <div class="dest-card-meta">
+          <span>10 Days</span>
+          <span class="price">From $3,500/person</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dest-card">
+      <div class="dest-card-header" style="background:linear-gradient(135deg,#e8f0f0,#c5d8d8);">🏔️</div>
+      <div class="dest-card-body">
+        <div class="dest-card-tags">
+          <span class="dest-card-tag">Cultural Luxury</span>
+          <span class="dest-card-tag price">$4,000–$10,000</span>
+        </div>
+        <h3>Bhutan — Himalayan Kingdom</h3>
+        <p>The world's only carbon-negative country. "High Value, Low Impact" tourism policy ($100/day fee). Tiger's Nest Monastery, ancient dzongs, hot stone baths, and pristine Himalayan landscapes. Private monastery visits and festival attendance.</p>
+        <div class="dest-card-meta">
+          <span>10 Days</span>
+          <span class="price">From $4,000/person</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dest-card">
+      <div class="dest-card-header" style="background:linear-gradient(135deg,#1a2a3a,#0a1520);">🧊</div>
+      <div class="dest-card-body">
+        <div class="dest-card-tags">
+          <span class="dest-card-tag">Ultra-Luxury</span>
+          <span class="dest-card-tag price">$16,000–$70,000</span>
+        </div>
+        <h3>Antarctica — Polar Expedition</h3>
+        <p>Luxury camps like White Desert offer private jet transfers from Cape Town, heated pods, gourmet dining, and exclusive access to Emperor penguin colonies (28,000+ penguins). Ice climbing, South Pole visit, and penguin colony access.</p>
+        <div class="dest-card-meta">
+          <span>8 Days</span>
+          <span class="price">From $16,000/person</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dest-card">
+      <div class="dest-card-header" style="background:linear-gradient(135deg,#2a1a3a,#1a0d22);">🗿</div>
+      <div class="dest-card-body">
+        <div class="dest-card-tags">
+          <span class="dest-card-tag">Tribal & Marine</span>
+          <span class="dest-card-tag price">$5,000–$12,000</span>
+        </div>
+        <h3>Papua New Guinea</h3>
+        <p>One of the most culturally untouched places on Earth. Over 800 languages, Huli Wigmen, Asaro Mudmen, ancient ceremonial traditions, and pristine coral reefs. 14-day expedition from highlands to coast.</p>
+        <div class="dest-card-meta">
+          <span>14 Days</span>
+          <span class="price">From $5,000/person</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dest-card">
+      <div class="dest-card-header" style="background:linear-gradient(135deg,#3a2a1a,#221a0d);">🏺</div>
+      <div class="dest-card-body">
+        <div class="dest-card-tags">
+          <span class="dest-card-tag">Tribal Cultural</span>
+          <span class="dest-card-tag price">$3,000–$7,000</span>
+        </div>
+        <h3>Omo Valley, Ethiopia</h3>
+        <p>Home to over a dozen distinct semi-nomadic tribes (Hamer, Karo, Bume, Mursi) with ancient traditions untouched by modernity. Combined with Lalibela's rock-hewn churches and the Danakil Depression.</p>
+        <div class="dest-card-meta">
+          <span>12 Days</span>
+          <span class="price">From $3,000/person</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIER 2 -->
+<section class="section">
+  <div class="tier-header">
+    <div class="tier-num">2</div>
+    <div>
+      <h3>Remote & Undiscovered</h3>
+      <p>Europe's last hidden gems and islands where nature still dominates</p>
+    </div>
+  </div>
+
+  <div class="dest-grid">
+    <div class="dest-card">
+      <div class="dest-card-header" style="background:linear-gradient(135deg,#2a3a4a,#1a2a3a);">🏔️</div>
+      <div class="dest-card-body">
+        <div class="dest-card-tags">
+          <span class="dest-card-tag">Slow Travel</span>
+          <span class="dest-card-tag price">$2,500–$5,000</span>
+        </div>
+        <h3>Faroe Islands, Denmark</h3>
+        <p>18 volcanic islands between Norway and Iceland. More sheep than people, dramatic fjords, turf-roofed villages, world-class dining, and ethereal landscapes. One of Europe's last undiscovered gems.</p>
+        <div class="dest-card-meta">
+          <span>7 Days</span>
+          <span class="price">From $2,500/person</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dest-card">
+      <div class="dest-card-header" style="background:linear-gradient(135deg,#e0e8f0,#c0d0e0);">🐻‍❄️</div>
+      <div class="dest-card-body">
+        <div class="dest-card-tags">
+          <span class="dest-card-tag">Arctic Wildlife</span>
+          <span class="dest-card-tag price">$4,000–$8,000</span>
+        </div>
+        <h3>Svalbard, Arctic Norway</h3>
+        <p>One of the world's northernmost inhabited settlements. Polar bears outnumber people. Northern Lights, glacier expeditions, dog sledding, and midnight sun. True Arctic wilderness.</p>
+        <div class="dest-card-meta">
+          <span>7 Days</span>
+          <span class="price">From $4,000/person</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dest-card">
+      <div class="dest-card-header" style="background:linear-gradient(135deg,#1a4a3a,#0d2e22);">🐠</div>
+      <div class="dest-card-body">
+        <div class="dest-card-tags">
+          <span class="dest-card-tag">Marine Diving</span>
+          <span class="dest-card-tag price">$3,000–$8,000</span>
+        </div>
+        <h3>Raja Ampat, Indonesia</h3>
+        <p>The most biodiverse marine environment on Earth, off the coast of West Papua. Over 1,500 fish species, pristine coral reefs, and remote island homesteads with baby sharks at your doorstep.</p>
+        <div class="dest-card-meta">
+          <span>10 Days</span>
+          <span class="price">From $3,000/person</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dest-card">
+      <div class="dest-card-header" style="background:linear-gradient(135deg,#4a3a1a,#2e220d);">🦎</div>
+      <div class="dest-card-body">
+        <div class="dest-card-tags">
+          <span class="dest-card-tag">Wildlife Expedition</span>
+          <span class="dest-card-tag price">$4,000–$15,000</span>
+        </div>
+        <h3>Madagascar</h3>
+        <p>90% of wildlife is endemic — found nowhere else on Earth. Lemurs, panther chameleons, baobab forests, and untouched coastline. The world's fourth-largest island.</p>
+        <div class="dest-card-meta">
+          <span>14 Days</span>
+          <span class="price">From $4,000/person</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dest-card">
+      <div class="dest-card-header" style="background:linear-gradient(135deg,#3a4a2a,#1a2e0d);">🏇</div>
+      <div class="dest-card-body">
+        <div class="dest-card-tags">
+          <span class="dest-card-tag">Silk Road Adventure</span>
+          <span class="dest-card-tag price">$1,500–$4,000</span>
+        </div>
+        <h3>Kyrgyzstan</h3>
+        <p>Endless roads through breathtaking mountain landscapes, yurt camps with nomadic families, ancient ruins, and almost zero tourists. One of the world's most underrated adventure destinations.</p>
+        <div class="dest-card-meta">
+          <span>10 Days</span>
+          <span class="price">From $1,500/person</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIER 3 -->
+<section class="section">
+  <div class="tier-header">
+    <div class="tier-num">3</div>
+    <div>
+      <h3>Unique Experiential Packages</h3>
+      <p>Immersive nature, wellness, and conservation-led experiences</p>
+    </div>
+  </div>
+
+  <div class="dest-grid">
+    <div class="dest-card">
+      <div class="dest-card-header" style="background:linear-gradient(135deg,#1a3a5a,#0d2240);">🐋</div>
+      <div class="dest-card-body">
+        <div class="dest-card-tags">
+          <span class="dest-card-tag">Nature & Wellness</span>
+          <span class="dest-card-tag price">$2,000–$5,000</span>
+        </div>
+        <h3>Azores, Portugal</h3>
+        <p>Mid-Atlantic volcanic paradise. Whale song research with marine biologists, geothermal hot springs, two-color volcanic crater lakes, and Europe's only tea plantation. Called "the Hawaii of Europe."</p>
+        <div class="dest-card-meta">
+          <span>8 Days</span>
+          <span class="price">From $2,000/person</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dest-card">
+      <div class="dest-card-header" style="background:linear-gradient(135deg,#2a3a4a,#1a2a3a);">🏃</div>
+      <div class="dest-card-body">
+        <div class="dest-card-tags">
+          <span class="dest-card-tag">Trail Running</span>
+          <span class="dest-card-tag price">$3,000–$6,000</span>
+        </div>
+        <h3>Lofoten Islands, Norway</h3>
+        <p>Dramatic volcanic peaks plunging into pristine waters, turf-roofed red cabins, midnight sun running, and world-class seafood. Sail between islands on a 56ft liveaboard yacht.</p>
+        <div class="dest-card-meta">
+          <span>7 Days</span>
+          <span class="price">From $3,000/person</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dest-card">
+      <div class="dest-card-header" style="background:linear-gradient(135deg,#2a4a2a,#1a2e1a);">🐺</div>
+      <div class="dest-card-body">
+        <div class="dest-card-tags">
+          <span class="dest-card-tag">Conservation</span>
+          <span class="dest-card-tag price">$1,200–$3,000</span>
+        </div>
+        <h3>Romania — Rewilding</h3>
+        <p>600,000 acres of virgin forest. Reintroduced European bison, brown bears, wolves, and lynx roam the Carpathians. Join WWF conservationists on Europe's great rewilding success story.</p>
+        <div class="dest-card-meta">
+          <span>5 Days</span>
+          <span class="price">From $1,200/person</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dest-card">
+      <div class="dest-card-header" style="background:linear-gradient(135deg,#1a1a3a,#0d0d22);">✨</div>
+      <div class="dest-card-body">
+        <div class="dest-card-tags">
+          <span class="dest-card-tag">Bioluminescence</span>
+          <span class="dest-card-tag price">$1,500–$3,500</span>
+        </div>
+        <h3>Puerto Rico</h3>
+        <p>Fajardo Bay's Laguna Grande transforms into a sparkling disco-ball of bioluminescent phytoplankton on moonless nights. Every paddle stroke ignites white, blue, and turquoise light.</p>
+        <div class="dest-card-meta">
+          <span>5 Days</span>
+          <span class="price">From $1,500/person</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dest-card">
+      <div class="dest-card-header" style="background:linear-gradient(135deg,#2a3a2a,#1a2e1a);">🌲</div>
+      <div class="dest-card-body">
+        <div class="dest-card-tags">
+          <span class="dest-card-tag">Forest Wellness</span>
+          <span class="dest-card-tag price">$2,500–$6,000</span>
+        </div>
+        <h3>Kii Peninsula, Japan</h3>
+        <p><em>Shinrin yoku</em> (forest bathing) in cedar and cypress woods. Stay in a high-design cedar lodge, craft with cedar shavings, and experience Japan's inner spiritual life. Traditional ryokan and onsen experiences.</p>
+        <div class="dest-card-meta">
+          <span>7 Days</span>
+          <span class="price">From $2,500/person</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIER 4 -->
+<section class="section">
+  <div class="tier-header">
+    <div class="tier-num">4</div>
+    <div>
+      <h3>Adventure & Adrenaline</h3>
+      <p>Multi-sport, extreme landscapes, and heart-pumping experiences</p>
+    </div>
+  </div>
+
+  <div class="dest-grid">
+    <div class="dest-card">
+      <div class="dest-card-header" style="background:linear-gradient(135deg,#3a4a2a,#1a2e0d);">🚵</div>
+      <div class="dest-card-body">
+        <div class="dest-card-tags">
+          <span class="dest-card-tag">Multi-Sport</span>
+          <span class="dest-card-tag price">$1,000–$2,500</span>
+        </div>
+        <h3>Slovenia — Outdoor Rebels</h3>
+        <p>Europe's emerging adventure capital. Bike, climb, raft, via ferrata, hike, and paraglide across the Julian Alps, Vipava Valley, and Soča River. Summit Mt. Triglav (9,395ft) for the grand finale.</p>
+        <div class="dest-card-meta">
+          <span>6 Days</span>
+          <span class="price">From $1,000/person</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dest-card">
+      <div class="dest-card-header" style="background:linear-gradient(135deg,#e8e0d0,#d0c8b8);">🏜️</div>
+      <div class="dest-card-body">
+        <div class="dest-card-tags">
+          <span class="dest-card-tag">Luxury Expedition</span>
+          <span class="dest-card-tag price">$2,500–$7,000</span>
+        </div>
+        <h3>Salar de Uyuni, Bolivia</h3>
+        <p>The world's largest salt flat creates mirror-effect landscapes. Red lagoons, flamingo flocks, towering peaks, and new luxury lodges opening in the region. Stargazing on the mirror surface.</p>
+        <div class="dest-card-meta">
+          <span>7 Days</span>
+          <span class="price">From $2,500/person</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dest-card">
+      <div class="dest-card-header" style="background:linear-gradient(135deg,#4a3a1a,#2e220d);">🐉</div>
+      <div class="dest-card-body">
+        <div class="dest-card-tags">
+          <span class="dest-card-tag">Wildlife & Diving</span>
+          <span class="dest-card-tag price">$2,000–$5,000</span>
+        </div>
+        <h3>Komodo, Indonesia</h3>
+        <p>Come face-to-face with 3-meter Komodo Dragons on uninhabited islands. Pink sand beaches, manta ray diving, and dramatic panoramas from Padar Island. Liveaboard diving expeditions.</p>
+        <div class="dest-card-meta">
+          <span>8 Days</span>
+          <span class="price">From $2,000/person</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dest-card">
+      <div class="dest-card-header" style="background:linear-gradient(135deg,#1a4a2a,#0d2e1a);">🌿</div>
+      <div class="dest-card-body">
+        <div class="dest-card-tags">
+          <span class="dest-card-tag">Eco-Adventure</span>
+          <span class="dest-card-tag price">$2,000–$4,500</span>
+        </div>
+        <h3>Dominica — Nature Island</h3>
+        <p>The Caribbean's hidden adventure gem. Canyoning through waterfalls, sperm whale spotting, volcanic hot springs, indigenous Kalinago Territory, and the world's longest cable car (opening 2026). No mass tourism.</p>
+        <div class="dest-card-meta">
+          <span>7 Days</span>
+          <span class="price">From $2,000/person</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dest-card">
+      <div class="dest-card-header" style="background:linear-gradient(135deg,#3a4a5a,#1a2a3a);">🐧</div>
+      <div class="dest-card-body">
+        <div class="dest-card-tags">
+          <span class="dest-card-tag">Wildlife Photography</span>
+          <span class="dest-card-tag price">$3,500–$7,000</span>
+        </div>
+        <h3>Falkland Islands</h3>
+        <p>500,000 pairs of breeding penguins across 5 species. Untouched beaches, albatross colonies, and total solitude. New flight routes from São Paulo via Córdoba launching in 2026.</p>
+        <div class="dest-card-meta">
+          <span>10 Days</span>
+          <span class="price">From $3,500/person</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIER 5 -->
+<section class="section">
+  <div class="tier-header">
+    <div class="tier-num">5</div>
+    <div>
+      <h3>Cultural Deep Dives</h3>
+      <p>Heritage, artisan traditions, and immersive cultural experiences</p>
+    </div>
+  </div>
+
+  <div class="dest-grid">
+    <div class="dest-card">
+      <div class="dest-card-header" style="background:linear-gradient(135deg,#4a3a2a,#2e1a0d);">🏺</div>
+      <div class="dest-card-body">
+        <div class="dest-card-tags">
+          <span class="dest-card-tag">Artisan Culture</span>
+          <span class="dest-card-tag price">$2,700–$5,000</span>
+        </div>
+        <h3>Oaxaca, Mexico</h3>
+        <p>Hands-on immersion in Mexico's creative heartland. Shape clay in Zapotec pottery studios, learn natural dyeing with cochineal and indigo, sample mezcal among mountains. UNESCO-recognized traditions.</p>
+        <div class="dest-card-meta">
+          <span>8 Days</span>
+          <span class="price">From $2,700/person</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dest-card">
+      <div class="dest-card-header" style="background:linear-gradient(135deg,#2a3a4a,#1a2a3a);">🏄</div>
+      <div class="dest-card-body">
+        <div class="dest-card-tags">
+          <span class="dest-card-tag">Language Immersion</span>
+          <span class="dest-card-tag price">$2,000–$4,000</span>
+        </div>
+        <h3>Okinawa, Japan</h3>
+        <p>Tropical Japanese island with unique Sino-Japanese fusion culture. Homestay with local families, daily language classes, coral reef snorkeling, and traditional soba dinners. Surf lessons included.</p>
+        <div class="dest-card-meta">
+          <span>10 Days</span>
+          <span class="price">From $2,000/person</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dest-card">
+      <div class="dest-card-header" style="background:linear-gradient(135deg,#4a4a1a,#2e2e0d);">🏛️</div>
+      <div class="dest-card-body">
+        <div class="dest-card-tags">
+          <span class="dest-card-tag">Heritage & Culture</span>
+          <span class="dest-card-tag price">$3,000–$5,000</span>
+        </div>
+        <h3>Ghana — Ancestral Heritage</h3>
+        <p>Focal point for ancestry-inspired travel. Welcoming ceremonies, UNESCO-listed Elmina Castle, artisanal villages for beading and brass-casting, and Kakum National Park canopy walks.</p>
+        <div class="dest-card-meta">
+          <span>10 Days</span>
+          <span class="price">From $3,000/person</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dest-card">
+      <div class="dest-card-header" style="background:linear-gradient(135deg,#4a2a1a,#2e1a0d);">🌋</div>
+      <div class="dest-card-body">
+        <div class="dest-card-tags">
+          <span class="dest-card-tag">Volcanic Wellness</span>
+          <span class="dest-card-tag price">$2,500–$6,000</span>
+        </div>
+        <h3>Aeolian Islands, Sicily</h3>
+        <p>Seven distinct volcanic islands off Sicily's north coast. Therapeutic mud baths and fumaroles on Vulcano, dramatic hikes, dark-sand beaches, and stunning Mediterranean sunsets. Etna volcano hike included.</p>
+        <div class="dest-card-meta">
+          <span>7 Days</span>
+          <span class="price">From $2,500/person</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dest-card">
+      <div class="dest-card-header" style="background:linear-gradient(135deg,#1a1a2a,#0d0d1a);">🔭</div>
+      <div class="dest-card-body">
+        <div class="dest-card-tags">
+          <span class="dest-card-tag">Dark Sky Safari</span>
+          <span class="dest-card-tag price">$1,200–$3,000</span>
+        </div>
+        <h3>Northumberland, UK</h3>
+        <p>572 square miles of Dark Sky Park with Kielder Observatory. Luxury stargazing cabins with retractable roofs, astronomy workshops, Hadrian's Wall heritage, and craft breweries.</p>
+        <div class="dest-card-meta">
+          <span>5 Days</span>
+          <span class="price">From $1,200/person</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<section class="section">
+  <div class="sources">
+    <h3>Research Sources</h3>
+    <p style="font-size:14px;color:var(--ink-soft);margin-bottom:20px;">This list was compiled from deep market research across the world's leading travel publications, luxury tour operators, and travel vlogs in 2026.</p>
+    <div class="sources-grid">
+      <div class="source-item">National Geographic Traveller UK — "20 Travel Adventures to Book in 2026"</div>
+      <div class="source-item">Forbes — "11 Unique Travel Destinations to Visit in 2026"</div>
+      <div class="source-item">Condé Nast Traveler — "The Best Places to Go in 2026"</div>
+      <div class="source-item">Euronews — "Private Polar Tours and Trips to Space"</div>
+      <div class="source-item">Luxury Travel Expert — "My Top 10 Most Exciting Trips for 2026"</div>
+      <div class="source-item">DanFlyingSolo — "25 Unique and Incredible Islands to Visit"</div>
+      <div class="source-item">BuzzFeed — "Travel Lovers Reveal Hidden Gems"</div>
+      <div class="source-item">Kiwi.com — "World's Most Underrated Destinations"</div>
+      <div class="source-item">Black Tomato — Luxury Madagascar Tours</div>
+      <div class="source-item">Wild Earth Expeditions — Papua New Guinea & Madagascar</div>
+      <div class="source-item">Pelorus Travel — Luxury Socotra Adventures</div>
+      <div class="source-item">Jacada Travel — Luxury Bhutan Tours</div>
+      <div class="source-item">Much Better Adventures — Romania Rewilding</div>
+      <div class="source-item">Responsible Travel — Ghana Ancestral Tours</div>
+      <div class="source-item">Outventure-X — Slovenia Outdoor Week</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section">
+  <div class="cta-section">
+    <h2>Ready for Your <span>Extraordinary</span> Journey?</h2>
+    <p>Let Santos Travel design a bespoke itinerary to any of these 25 exotic destinations — or beyond.</p>
+    <a href="index.html#contact" class="btn-primary">Request a Custom Quote →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h3>santos<span>.travel</span></h3>
+      <p>Govt. of India Approved Inbound Tour Operator. Crafting extraordinary journeys through Kerala, South India, and the world's most exclusive destinations.</p>
+    </div>
+    <div>
+      <h4>Destinations</h4>
+      <ul>
+        <li><a href="index.html#destinations">Kerala & South India</a></li>
+        <li><a href="blog.html">Exotic Worldwide</a></li>
+        <li><a href="blog.html">Adventure Tours</a></li>
+        <li><a href="blog.html">Wellness Retreats</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="index.html#about">About Us</a></li>
+        <li><a href="proposal.html">IVA Cortex Proposal</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="mailto:info@santos.travel">info@santos.travel</a></li>
+        <li><a href="https://wa.me/919876543210">WhatsApp</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Facebook</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 santos.travel — All rights reserved. Govt. of India Approved.</p>
+    <div class="footer-badges">
+      <span class="footer-badge">Govt. Approved</span>
+      <span class="footer-badge">IATA Certified</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
