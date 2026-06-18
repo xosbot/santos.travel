@@ -5,138 +5,362 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>25 Exotic Tour Destinations Worldwide | Santos Travel Blog</title>
   <meta name="description" content="Discover 25 of the world's most exotic and exclusive tour destinations — curated by Santos Travel from deep market research across National Geographic, Forbes, luxury operators, and travel vlogs.">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --gold: #C9A84C; --gold-light: #E8CC7A; --gold-pale: #F5EDD6;
-      --deep-teal: #0A2E2B; --teal: #0D4A42; --teal-mid: #1A6B5E;
-      --teal-light: #2A9D8F; --teal-pale: #E8F5F3;
-      --ink: #1C1C2E; --ink-soft: #3D3D52; --muted: #7A7A9D;
-      --white: #FFFFFF; --off-white: #FAFAF8; --border: #E2E2E8;
+      --gold: #C5A059; --gold-light: #D4B978; --gold-pale: #F8F1E4;
+      --deep-teal: #0A1F1C; --teal: #0F2E28; --teal-mid: #1A4D42;
+      --teal-light: #2A7A6A; --teal-pale: #E8F4F1;
+      --ink: #0D0D0D; --ink-soft: #2A2A2A; --muted: #6B6B6B;
+      --white: #FFFFFF; --off-white: #FAFAF7; --border: #E8E4DE;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.06); --shadow-md: 0 8px 30px rgba(0,0,0,0.08);
+      --shadow-lg: 0 20px 60px rgba(0,0,0,0.12); --shadow-xl: 0 40px 80px rgba(0,0,0,0.16);
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', sans-serif; background: var(--off-white); color: var(--ink); line-height: 1.7; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--ink); line-height: 1.65; overflow-x: hidden; }
+    img { max-width: 100%; display: block; }
     a { color: inherit; text-decoration: none; }
 
-    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(10,46,43,0.95); backdrop-filter: blur(12px); padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 64px; }
-    .nav-logo { display: flex; align-items: center; gap: 12px; }
-    .nav-logo-icon { width: 36px; height: 36px; background: linear-gradient(135deg, var(--gold), var(--gold-light)); border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
-    .nav-logo-text { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--white); }
-    .nav-logo-text span { color: var(--gold-light); }
-    .nav-links { display: flex; gap: 32px; }
-    .nav-links a { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.7); transition: color 0.2s; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--off-white); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes scaleIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+    @keyframes slideRight { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes heroZoom { from { transform: scale(1.1); } to { transform: scale(1); } }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+    .animate { opacity: 0; }
+    .animate.visible { animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .animate-delay-1 { animation-delay: 0.1s; }
+    .animate-delay-2 { animation-delay: 0.2s; }
+    .animate-delay-3 { animation-delay: 0.3s; }
+    .animate-delay-4 { animation-delay: 0.4s; }
+    .animate-delay-5 { animation-delay: 0.5s; }
+
+    /* Navigation */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 0 48px; height: 80px; display: flex; align-items: center; justify-content: space-between;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .nav.scrolled {
+      background: rgba(255,255,255,0.92); backdrop-filter: blur(20px) saturate(180%);
+      height: 64px; box-shadow: var(--shadow-sm);
+    }
+    .nav.scrolled .nav-logo-text { color: var(--deep-teal); }
+    .nav.scrolled .nav-links a { color: var(--ink-soft); }
+    .nav.scrolled .nav-links a:hover { color: var(--gold); }
+    .nav-logo { display: flex; align-items: center; gap: 14px; }
+    .nav-logo-mark {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      display: flex; align-items: center; justify-content: center; font-size: 20px;
+      transition: transform 0.3s;
+    }
+    .nav-logo:hover .nav-logo-mark { transform: rotate(8deg) scale(1.05); }
+    .nav-logo-text {
+      font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600;
+      color: var(--white); letter-spacing: -0.5px; transition: color 0.3s;
+    }
+    .nav-logo-text span { font-weight: 300; font-style: italic; }
+    .nav-links { display: flex; gap: 40px; align-items: center; }
+    .nav-links a {
+      font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.75);
+      letter-spacing: 0.5px; text-transform: uppercase; transition: color 0.3s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -6px; left: 0; width: 0; height: 1.5px;
+      background: var(--gold); transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
     .nav-links a:hover { color: var(--gold-light); }
-    .nav-cta { background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--deep-teal); font-size: 12px; font-weight: 700; padding: 8px 20px; border-radius: 6px; letter-spacing: 0.5px; }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--deep-teal); font-size: 12px; font-weight: 700;
+      padding: 10px 24px; border-radius: 6px; letter-spacing: 0.5px;
+      text-transform: uppercase; transition: all 0.3s; box-shadow: 0 4px 16px rgba(197,160,89,0.3);
+    }
+    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(197,160,89,0.4); }
+    .nav-mobile { display: none; font-size: 24px; color: var(--white); cursor: pointer; }
+    .nav.scrolled .nav-mobile { color: var(--deep-teal); }
+    .nav-mobile-menu {
+      display: none; position: fixed; top: 64px; left: 0; right: 0; z-index: 999;
+      background: rgba(255,255,255,0.98); backdrop-filter: blur(20px);
+      padding: 24px; flex-direction: column; gap: 16px;
+      box-shadow: var(--shadow-md);
+    }
+    .nav-mobile-menu.active { display: flex; }
+    .nav-mobile-menu a {
+      font-size: 15px; font-weight: 500; color: var(--ink-soft); padding: 12px 0;
+      border-bottom: 1px solid var(--border); transition: color 0.3s;
+    }
+    .nav-mobile-menu a:hover { color: var(--gold); }
+    .nav-mobile-cta {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light)) !important;
+      color: var(--deep-teal) !important; text-align: center; border-radius: 8px !important;
+      font-weight: 700 !important; text-transform: uppercase; letter-spacing: 0.5px;
+      border: none !important; margin-top: 8px;
+    }
 
-    .hero { position: relative; min-height: 60vh; background: var(--deep-teal); display: flex; align-items: center; overflow: hidden; padding-top: 64px; }
-    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 120% -10%, rgba(201,168,76,0.18) 0%, transparent 60%), radial-gradient(ellipse 60% 50% at -20% 110%, rgba(42,157,143,0.22) 0%, transparent 55%); }
-    .hero-content { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 80px 40px; }
-    .hero-eyebrow { font-size: 11px; font-weight: 600; color: var(--gold); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
-    .hero-eyebrow::before { content: ''; width: 40px; height: 2px; background: var(--gold); }
-    .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(32px, 5vw, 56px); font-weight: 800; color: var(--white); line-height: 1.1; margin-bottom: 16px; }
-    .hero-title span { color: var(--gold-light); }
-    .hero-subtitle { font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.7); max-width: 640px; line-height: 1.7; }
-    .hero-gold-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold)); }
+    /* Hero */
+    .hero {
+      position: relative; min-height: 70vh; display: flex; align-items: center;
+      overflow: hidden; background: var(--deep-teal);
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 1;
+      background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+      animation: heroZoom 20s ease-out forwards;
+    }
+    .hero-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(10,31,28,0.4) 0%, rgba(10,31,28,0.7) 50%, rgba(10,31,28,0.9) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 2; max-width: 1200px; margin: 0 auto;
+      padding: 140px 48px 80px; width: 100%;
+    }
+    .hero-eyebrow {
+      font-size: 11px; font-weight: 600; color: var(--gold-light);
+      letter-spacing: 4px; text-transform: uppercase; margin-bottom: 24px;
+      display: flex; align-items: center; gap: 16px; animation: slideRight 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+    }
+    .hero-eyebrow::before { content: ''; width: 48px; height: 1px; background: var(--gold); }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 64px);
+      font-weight: 300; color: var(--white); line-height: 1.05; margin-bottom: 20px;
+      animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+    }
+    .hero-title em { font-style: italic; font-weight: 400; color: var(--gold-light); }
+    .hero-subtitle {
+      font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.7);
+      max-width: 640px; line-height: 1.8; margin-bottom: 32px;
+      animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+    }
+    .hero-meta {
+      display: flex; gap: 32px; animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.8s both;
+    }
+    .hero-meta-item { display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,0.5); font-size: 13px; }
+    .hero-meta-item::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
 
-    .section { padding: 80px 40px; max-width: 1200px; margin: 0 auto; }
-    .section-eyebrow { font-size: 10px; font-weight: 700; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
-    .section-eyebrow::before { content: ''; width: 24px; height: 2px; background: var(--gold); }
-    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(26px, 3.5vw, 38px); font-weight: 700; color: var(--deep-teal); line-height: 1.2; margin-bottom: 12px; }
-    .section-lead { font-size: 16px; color: var(--ink-soft); max-width: 700px; margin-bottom: 48px; }
+    /* Section Base */
+    .section { padding: 100px 48px; max-width: 1200px; margin: 0 auto; }
+    .section-dark { background: var(--deep-teal); color: var(--white); }
+    .section-dark .section-eyebrow { color: var(--gold-light); }
+    .section-dark .section-eyebrow::before { background: var(--gold); }
+    .section-dark .section-title { color: var(--white); }
+    .section-dark .section-lead { color: rgba(255,255,255,0.6); }
 
-    .tier-header { background: var(--deep-teal); color: var(--white); padding: 24px 32px; border-radius: 12px; margin-bottom: 32px; display: flex; align-items: center; gap: 16px; }
-    .tier-header h3 { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; }
-    .tier-header p { font-size: 13px; color: rgba(255,255,255,0.65); }
-    .tier-header .tier-num { min-width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--gold-light)); display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 800; color: var(--deep-teal); }
+    .section-eyebrow {
+      font-size: 11px; font-weight: 700; color: var(--gold); letter-spacing: 3px;
+      text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 12px;
+    }
+    .section-eyebrow::before { content: ''; width: 32px; height: 1.5px; background: var(--gold); }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 4vw, 48px);
+      font-weight: 300; color: var(--deep-teal); line-height: 1.1; margin-bottom: 20px;
+    }
+    .section-title em { font-style: italic; font-weight: 400; color: var(--gold); }
+    .section-lead { font-size: 16px; color: var(--muted); max-width: 600px; line-height: 1.8; margin-bottom: 60px; font-weight: 300; }
 
-    .dest-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 24px; margin-bottom: 60px; }
-    .dest-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: transform 0.25s, box-shadow 0.25s; }
-    .dest-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(10,46,43,0.12); }
-    .dest-card-header { height: 180px; display: flex; align-items: center; justify-content: center; font-size: 64px; position: relative; }
-    .dest-card-header::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 60px; background: linear-gradient(transparent, rgba(10,46,43,0.5)); }
-    .dest-card-body { padding: 24px; }
-    .dest-card-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
-    .dest-card-tag { font-size: 10px; font-weight: 600; color: var(--teal); background: var(--teal-pale); padding: 3px 10px; border-radius: 20px; letter-spacing: 0.5px; text-transform: uppercase; }
+    /* Tier Header */
+    .tier-header {
+      background: linear-gradient(135deg, var(--deep-teal), var(--teal));
+      color: var(--white); padding: 32px 40px; border-radius: 16px;
+      margin-bottom: 40px; display: flex; align-items: center; gap: 24px;
+      position: relative; overflow: hidden;
+    }
+    .tier-header::before {
+      content: ''; position: absolute; top: -50%; right: -10%; width: 300px; height: 300px;
+      border-radius: 50%; background: rgba(197,160,89,0.06);
+    }
+    .tier-num {
+      min-width: 56px; height: 56px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 700;
+      color: var(--deep-teal); position: relative; z-index: 1;
+    }
+    .tier-header h3 { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 500; position: relative; z-index: 1; }
+    .tier-header p { font-size: 14px; color: rgba(255,255,255,0.55); position: relative; z-index: 1; }
+
+    /* Destination Grid */
+    .dest-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 80px; }
+    .dest-card {
+      position: relative; border-radius: 16px; overflow: hidden;
+      background: var(--white); border: 1px solid var(--border);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s;
+    }
+    .dest-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-xl); }
+    .dest-card-image { position: relative; height: 240px; overflow: hidden; }
+    .dest-card-image img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .dest-card:hover .dest-card-image img { transform: scale(1.08); }
+    .dest-card-image::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(10,31,28,0.5) 100%);
+    }
+    .dest-card-price {
+      position: absolute; top: 16px; right: 16px; z-index: 2;
+      font-size: 11px; font-weight: 700; color: var(--white);
+      background: rgba(10,31,28,0.7); backdrop-filter: blur(8px);
+      padding: 6px 14px; border-radius: 20px; letter-spacing: 0.5px;
+    }
+    .dest-card-body { padding: 28px; }
+    .dest-card-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+    .dest-card-tag {
+      font-size: 10px; font-weight: 700; color: var(--teal-mid);
+      background: var(--teal-pale); padding: 4px 12px; border-radius: 20px;
+      letter-spacing: 0.5px; text-transform: uppercase;
+    }
     .dest-card-tag.price { background: var(--gold-pale); color: #8A6A1A; }
-    .dest-card-body h3 { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--deep-teal); margin-bottom: 8px; }
-    .dest-card-body p { font-size: 13px; color: var(--ink-soft); line-height: 1.65; margin-bottom: 12px; }
-    .dest-card-meta { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--muted); border-top: 1px solid var(--border); padding-top: 12px; }
-    .dest-card-meta .price { font-weight: 700; color: var(--teal); font-size: 14px; }
+    .dest-card-body h3 {
+      font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600;
+      color: var(--deep-teal); margin-bottom: 10px; line-height: 1.2;
+    }
+    .dest-card-body p { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
+    .dest-card-meta {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 12px; color: var(--muted); border-top: 1px solid var(--border); padding-top: 14px;
+    }
+    .dest-card-meta .price { font-weight: 700; color: var(--teal-mid); font-size: 14px; }
 
-    .sources { background: var(--white); border-radius: 16px; padding: 40px; border: 1px solid var(--border); }
-    .sources h3 { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--deep-teal); margin-bottom: 20px; }
-    .sources-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
-    .source-item { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: var(--ink-soft); padding: 8px 0; }
-    .source-item::before { content: ''; min-width: 6px; height: 6px; border-radius: 50%; background: var(--gold); margin-top: 6px; }
+    /* Sources Section */
+    .sources { background: var(--white); border-radius: 20px; padding: 48px; border: 1px solid var(--border); box-shadow: var(--shadow-md); }
+    .sources h3 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 500; color: var(--deep-teal); margin-bottom: 16px; }
+    .sources > p { font-size: 15px; color: var(--muted); line-height: 1.7; margin-bottom: 32px; }
+    .sources-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .source-item {
+      display: flex; align-items: flex-start; gap: 10px; font-size: 13px;
+      color: var(--ink-soft); padding: 10px 0; line-height: 1.5;
+    }
+    .source-item::before { content: ''; min-width: 6px; height: 6px; border-radius: 50%; background: var(--gold); margin-top: 6px; flex-shrink: 0; }
 
-    .cta-section { background: linear-gradient(135deg, var(--deep-teal), var(--teal)); border-radius: 20px; padding: 60px; text-align: center; color: var(--white); position: relative; overflow: hidden; }
-    .cta-section::after { content: ''; position: absolute; top: -40px; right: -40px; width: 180px; height: 180px; border-radius: 50%; background: rgba(201,168,76,0.1); }
-    .cta-section h2 { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; margin-bottom: 12px; }
-    .cta-section h2 span { color: var(--gold-light); }
-    .cta-section p { font-size: 16px; color: rgba(255,255,255,0.7); margin-bottom: 32px; max-width: 500px; margin-left: auto; margin-right: auto; }
-    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--deep-teal); font-size: 14px; font-weight: 700; padding: 14px 32px; border-radius: 8px; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 16px rgba(201,168,76,0.3); }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.4); }
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, var(--deep-teal), var(--teal));
+      border-radius: 24px; padding: 80px 60px; text-align: center;
+      color: var(--white); position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: ''; position: absolute; top: -60px; right: -60px; width: 240px; height: 240px;
+      border-radius: 50%; background: rgba(197,160,89,0.08);
+    }
+    .cta-section::after {
+      content: ''; position: absolute; bottom: -40px; left: -40px; width: 180px; height: 180px;
+      border-radius: 50%; background: rgba(42,122,106,0.1);
+    }
+    .cta-section h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 4vw, 48px); font-weight: 300; margin-bottom: 16px; position: relative; z-index: 1; }
+    .cta-section h2 em { font-style: italic; font-weight: 400; color: var(--gold-light); }
+    .cta-section p { font-size: 16px; color: rgba(255,255,255,0.6); margin-bottom: 36px; max-width: 520px; margin-left: auto; margin-right: auto; position: relative; z-index: 1; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--deep-teal); font-size: 13px; font-weight: 700;
+      padding: 14px 32px; border-radius: 8px; letter-spacing: 0.5px;
+      text-transform: uppercase; transition: all 0.3s;
+      box-shadow: 0 4px 20px rgba(197,160,89,0.35); position: relative; z-index: 1;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(197,160,89,0.45); }
 
-    .footer { background: var(--deep-teal); color: var(--white); padding: 60px 40px 32px; }
-    .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
-    .footer-brand h3 { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; margin-bottom: 12px; }
-    .footer-brand h3 span { color: var(--gold-light); }
-    .footer-brand p { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.7; max-width: 300px; }
-    .footer h4 { font-size: 11px; font-weight: 700; color: var(--gold-light); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
+    /* Footer */
+    .footer { background: var(--deep-teal); color: var(--white); padding: 80px 48px 40px; }
+    .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+    .footer-brand h3 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; margin-bottom: 16px; }
+    .footer-brand h3 span { font-weight: 300; font-style: italic; color: var(--gold-light); }
+    .footer-brand p { font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.8; max-width: 320px; }
+    .footer h4 { font-size: 11px; font-weight: 700; color: var(--gold-light); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
     .footer ul { list-style: none; }
-    .footer ul li { margin-bottom: 8px; }
-    .footer ul li a { font-size: 13px; color: rgba(255,255,255,0.55); transition: color 0.2s; }
+    .footer ul li { margin-bottom: 10px; }
+    .footer ul li a { font-size: 14px; color: rgba(255,255,255,0.45); transition: color 0.3s; }
     .footer ul li a:hover { color: var(--gold-light); }
-    .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; }
-    .footer-bottom p { font-size: 11px; color: rgba(255,255,255,0.3); }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center; }
+    .footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.25); }
     .footer-badges { display: flex; gap: 12px; }
-    .footer-badge { font-size: 10px; font-weight: 600; color: var(--gold-light); background: rgba(201,168,76,0.12); padding: 4px 12px; border-radius: 4px; letter-spacing: 0.5px; }
+    .footer-badge { font-size: 10px; font-weight: 700; color: var(--gold-light); background: rgba(197,160,89,0.1); padding: 6px 14px; border-radius: 4px; letter-spacing: 1px; text-transform: uppercase; }
 
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .dest-grid { grid-template-columns: repeat(2, 1fr); }
+      .sources-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+    }
     @media (max-width: 768px) {
-      .nav { padding: 0 20px; }
+      .nav { padding: 0 24px; height: 64px; }
       .nav-links { display: none; }
-      .hero-content { padding: 80px 20px 60px; }
-      .section { padding: 60px 20px; }
+      .nav-mobile { display: block; }
+      .hero-content { padding: 100px 24px 60px; }
+      .section { padding: 60px 24px; }
       .dest-grid { grid-template-columns: 1fr; }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
-      .cta-section { padding: 40px 24px; }
+      .tier-header { flex-direction: column; text-align: center; padding: 24px; }
+      .sources { padding: 32px 24px; }
+      .sources-grid { grid-template-columns: 1fr; }
+      .cta-section { padding: 60px 24px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
     }
   </style>
 </head>
 <body>
 
-<nav class="nav">
+<nav class="nav" id="nav">
   <a href="index.html" class="nav-logo">
-    <div class="nav-logo-icon">🌿</div>
+    <div class="nav-logo-mark">🌿</div>
     <div class="nav-logo-text">santos<span>.travel</span></div>
   </a>
   <div class="nav-links">
+    <a href="index.html">Home</a>
     <a href="index.html#about">About</a>
     <a href="index.html#destinations">Destinations</a>
     <a href="blog.html">Blog</a>
     <a href="proposal.html">Proposal</a>
     <a href="index.html#contact">Contact</a>
   </div>
-  <a href="index.html#contact" class="nav-cta">Get a Quote</a>
+  <a href="index.html#contact" class="nav-cta">Plan Your Trip</a>
+  <div class="nav-mobile" id="navToggle">☰</div>
 </nav>
+<div class="nav-mobile-menu" id="navMenu">
+  <a href="index.html">Home</a>
+  <a href="index.html#about">About</a>
+  <a href="index.html#destinations">Destinations</a>
+  <a href="blog.html">Blog</a>
+  <a href="proposal.html">Proposal</a>
+  <a href="index.html#contact">Contact</a>
+  <a href="index.html#contact" class="nav-mobile-cta">Plan Your Trip</a>
+</div>
 
+<!-- Hero -->
 <section class="hero">
+  <div class="hero-bg"></div>
   <div class="hero-content">
     <div class="hero-eyebrow">Deep Market Research — June 2026</div>
     <h1 class="hero-title">
-      25 Exotic Tour Destinations<br>That <span>Redefine</span> Travel
+      25 Exotic Destinations<br>That <em>Redefine</em> Travel
     </h1>
     <p class="hero-subtitle">
       Curated from National Geographic, Forbes, Condé Nast Traveler, luxury tour operators, 
       and travel vlogs worldwide — these are the destinations most agencies don't even know exist.
     </p>
+    <div class="hero-meta">
+      <span class="hero-meta-item">25 Destinations</span>
+      <span class="hero-meta-item">5 Categories</span>
+      <span class="hero-meta-item">15+ Research Sources</span>
+    </div>
   </div>
-  <div class="hero-gold-bar"></div>
 </section>
 
 <!-- TIER 1 -->
 <section class="section">
-  <div class="tier-header">
+  <div class="tier-header animate">
     <div class="tier-num">1</div>
     <div>
       <h3>Ultra-Exotic / Once-in-a-Lifetime</h3>
@@ -145,81 +369,96 @@
   </div>
 
   <div class="dest-grid">
-    <div class="dest-card">
-      <div class="dest-card-header" style="background:linear-gradient(135deg,#1a3a4a,#0d2233);">🌴</div>
+    <div class="dest-card animate">
+      <div class="dest-card-image">
+        <img src="https://images.unsplash.com/photo-1642425149556-b6f90e946859?auto=format&fit=crop&w=800&q=80" alt="Socotra Island — Dragon Blood Trees against dramatic desert landscape" loading="lazy">
+        <span class="dest-card-price">$3,500–$6,000</span>
+      </div>
       <div class="dest-card-body">
         <div class="dest-card-tags">
           <span class="dest-card-tag">Eco-Expedition</span>
-          <span class="dest-card-tag price">$3,500–$6,000</span>
+          <span class="dest-card-tag price">10 Days</span>
         </div>
         <h3>Socotra Island, Yemen</h3>
-        <p>The "most alien place on Earth." 37% of plant species exist nowhere else — including the iconic Dragon Blood Trees. Mass tourism literally cannot exist here. Camping on white sand beaches, cave exploration, snorkeling with dolphins, and endemic wildlife spotting.</p>
+        <p>The "most alien place on Earth." 37% of plant species exist nowhere else — including the iconic Dragon Blood Trees. Mass tourism literally cannot exist here.</p>
         <div class="dest-card-meta">
-          <span>10 Days</span>
+          <span>Camping, snorkeling, cave exploration</span>
           <span class="price">From $3,500/person</span>
         </div>
       </div>
     </div>
 
-    <div class="dest-card">
-      <div class="dest-card-header" style="background:linear-gradient(135deg,#e8f0f0,#c5d8d8);">🏔️</div>
+    <div class="dest-card animate">
+      <div class="dest-card-image">
+        <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=800&q=80" alt="Bhutan Tiger's Nest Monastery — ancient monastery perched on a Himalayan cliff" loading="lazy">
+        <span class="dest-card-price">$4,000–$10,000</span>
+      </div>
       <div class="dest-card-body">
         <div class="dest-card-tags">
           <span class="dest-card-tag">Cultural Luxury</span>
-          <span class="dest-card-tag price">$4,000–$10,000</span>
+          <span class="dest-card-tag price">10 Days</span>
         </div>
         <h3>Bhutan — Himalayan Kingdom</h3>
-        <p>The world's only carbon-negative country. "High Value, Low Impact" tourism policy ($100/day fee). Tiger's Nest Monastery, ancient dzongs, hot stone baths, and pristine Himalayan landscapes. Private monastery visits and festival attendance.</p>
+        <p>The world's only carbon-negative country. "High Value, Low Impact" tourism policy. Tiger's Nest Monastery, ancient dzongs, and hot stone baths.</p>
         <div class="dest-card-meta">
-          <span>10 Days</span>
+          <span>Private monastery visits, festivals</span>
           <span class="price">From $4,000/person</span>
         </div>
       </div>
     </div>
 
-    <div class="dest-card">
-      <div class="dest-card-header" style="background:linear-gradient(135deg,#1a2a3a,#0a1520);">🧊</div>
+    <div class="dest-card animate">
+      <div class="dest-card-image">
+        <img src="https://images.unsplash.com/photo-1516912481808-3406841bd33c?auto=format&fit=crop&w=800&q=80" alt="Antarctica — vast ice landscape with penguins and glaciers" loading="lazy">
+        <span class="dest-card-price">$16,000–$70,000</span>
+      </div>
       <div class="dest-card-body">
         <div class="dest-card-tags">
           <span class="dest-card-tag">Ultra-Luxury</span>
-          <span class="dest-card-tag price">$16,000–$70,000</span>
+          <span class="dest-card-tag price">8 Days</span>
         </div>
         <h3>Antarctica — Polar Expedition</h3>
-        <p>Luxury camps like White Desert offer private jet transfers from Cape Town, heated pods, gourmet dining, and exclusive access to Emperor penguin colonies (28,000+ penguins). Ice climbing, South Pole visit, and penguin colony access.</p>
+        <p>Luxury camps like White Desert offer private jet transfers, heated pods, gourmet dining, and exclusive access to Emperor penguin colonies.</p>
         <div class="dest-card-meta">
-          <span>8 Days</span>
+          <span>Ice climbing, South Pole visit</span>
           <span class="price">From $16,000/person</span>
         </div>
       </div>
     </div>
 
-    <div class="dest-card">
-      <div class="dest-card-header" style="background:linear-gradient(135deg,#2a1a3a,#1a0d22);">🗿</div>
+    <div class="dest-card animate">
+      <div class="dest-card-image">
+        <img src="https://images.unsplash.com/photo-1528164344705-47542687000d?auto=format&fit=crop&w=800&q=80" alt="Papua New Guinea — lush tropical rainforest and tribal culture" loading="lazy">
+        <span class="dest-card-price">$5,000–$12,000</span>
+      </div>
       <div class="dest-card-body">
         <div class="dest-card-tags">
           <span class="dest-card-tag">Tribal & Marine</span>
-          <span class="dest-card-tag price">$5,000–$12,000</span>
+          <span class="dest-card-tag price">14 Days</span>
         </div>
         <h3>Papua New Guinea</h3>
-        <p>One of the most culturally untouched places on Earth. Over 800 languages, Huli Wigmen, Asaro Mudmen, ancient ceremonial traditions, and pristine coral reefs. 14-day expedition from highlands to coast.</p>
+        <p>One of the most culturally untouched places on Earth. Over 800 languages, Huli Wigmen, Asaro Mudmen, and pristine coral reefs.</p>
         <div class="dest-card-meta">
-          <span>14 Days</span>
+          <span>Highlands to coast expedition</span>
           <span class="price">From $5,000/person</span>
         </div>
       </div>
     </div>
 
-    <div class="dest-card">
-      <div class="dest-card-header" style="background:linear-gradient(135deg,#3a2a1a,#221a0d);">🏺</div>
+    <div class="dest-card animate">
+      <div class="dest-card-image">
+        <img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=800&q=80" alt="Omo Valley, Ethiopia — tribal village with traditional huts" loading="lazy">
+        <span class="dest-card-price">$3,000–$7,000</span>
+      </div>
       <div class="dest-card-body">
         <div class="dest-card-tags">
           <span class="dest-card-tag">Tribal Cultural</span>
-          <span class="dest-card-tag price">$3,000–$7,000</span>
+          <span class="dest-card-tag price">12 Days</span>
         </div>
         <h3>Omo Valley, Ethiopia</h3>
-        <p>Home to over a dozen distinct semi-nomadic tribes (Hamer, Karo, Bume, Mursi) with ancient traditions untouched by modernity. Combined with Lalibela's rock-hewn churches and the Danakil Depression.</p>
+        <p>Home to over a dozen distinct semi-nomadic tribes with ancient traditions untouched by modernity. Combined with Lalibela's rock-hewn churches.</p>
         <div class="dest-card-meta">
-          <span>12 Days</span>
+          <span>Hamer, Karo, Mursi tribes</span>
           <span class="price">From $3,000/person</span>
         </div>
       </div>
@@ -229,7 +468,7 @@
 
 <!-- TIER 2 -->
 <section class="section">
-  <div class="tier-header">
+  <div class="tier-header animate">
     <div class="tier-num">2</div>
     <div>
       <h3>Remote & Undiscovered</h3>
@@ -238,81 +477,96 @@
   </div>
 
   <div class="dest-grid">
-    <div class="dest-card">
-      <div class="dest-card-header" style="background:linear-gradient(135deg,#2a3a4a,#1a2a3a);">🏔️</div>
+    <div class="dest-card animate">
+      <div class="dest-card-image">
+        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80" alt="Faroe Islands — dramatic cliffs and waterfalls cascading into the Atlantic" loading="lazy">
+        <span class="dest-card-price">$2,500–$5,000</span>
+      </div>
       <div class="dest-card-body">
         <div class="dest-card-tags">
           <span class="dest-card-tag">Slow Travel</span>
-          <span class="dest-card-tag price">$2,500–$5,000</span>
+          <span class="dest-card-tag price">7 Days</span>
         </div>
         <h3>Faroe Islands, Denmark</h3>
-        <p>18 volcanic islands between Norway and Iceland. More sheep than people, dramatic fjords, turf-roofed villages, world-class dining, and ethereal landscapes. One of Europe's last undiscovered gems.</p>
+        <p>18 volcanic islands between Norway and Iceland. More sheep than people, dramatic fjords, turf-roofed villages, and world-class dining.</p>
         <div class="dest-card-meta">
-          <span>7 Days</span>
+          <span>Hiking, birdwatching, gastronomy</span>
           <span class="price">From $2,500/person</span>
         </div>
       </div>
     </div>
 
-    <div class="dest-card">
-      <div class="dest-card-header" style="background:linear-gradient(135deg,#e0e8f0,#c0d0e0);">🐻‍❄️</div>
+    <div class="dest-card animate">
+      <div class="dest-card-image">
+        <img src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=800&q=80" alt="Svalbard — Northern Lights over Arctic wilderness with snow-covered mountains" loading="lazy">
+        <span class="dest-card-price">$4,000–$8,000</span>
+      </div>
       <div class="dest-card-body">
         <div class="dest-card-tags">
           <span class="dest-card-tag">Arctic Wildlife</span>
-          <span class="dest-card-tag price">$4,000–$8,000</span>
+          <span class="dest-card-tag price">7 Days</span>
         </div>
         <h3>Svalbard, Arctic Norway</h3>
-        <p>One of the world's northernmost inhabited settlements. Polar bears outnumber people. Northern Lights, glacier expeditions, dog sledding, and midnight sun. True Arctic wilderness.</p>
+        <p>One of the world's northernmost inhabited settlements. Polar bears outnumber people. Northern Lights, glacier expeditions, and dog sledding.</p>
         <div class="dest-card-meta">
-          <span>7 Days</span>
+          <span>Midnight sun, polar bear spotting</span>
           <span class="price">From $4,000/person</span>
         </div>
       </div>
     </div>
 
-    <div class="dest-card">
-      <div class="dest-card-header" style="background:linear-gradient(135deg,#1a4a3a,#0d2e22);">🐠</div>
+    <div class="dest-card animate">
+      <div class="dest-card-image">
+        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80" alt="Raja Ampat — crystal clear turquoise waters with vibrant coral reefs" loading="lazy">
+        <span class="dest-card-price">$3,000–$8,000</span>
+      </div>
       <div class="dest-card-body">
         <div class="dest-card-tags">
           <span class="dest-card-tag">Marine Diving</span>
-          <span class="dest-card-tag price">$3,000–$8,000</span>
+          <span class="dest-card-tag price">10 Days</span>
         </div>
         <h3>Raja Ampat, Indonesia</h3>
-        <p>The most biodiverse marine environment on Earth, off the coast of West Papua. Over 1,500 fish species, pristine coral reefs, and remote island homesteads with baby sharks at your doorstep.</p>
+        <p>The most biodiverse marine environment on Earth. Over 1,500 fish species, pristine coral reefs, and remote island homesteads.</p>
         <div class="dest-card-meta">
-          <span>10 Days</span>
+          <span>Liveaboard diving, snorkeling</span>
           <span class="price">From $3,000/person</span>
         </div>
       </div>
     </div>
 
-    <div class="dest-card">
-      <div class="dest-card-header" style="background:linear-gradient(135deg,#4a3a1a,#2e220d);">🦎</div>
+    <div class="dest-card animate">
+      <div class="dest-card-image">
+        <img src="https://images.unsplash.com/photo-1518709766631-a6a7f45921c3?auto=format&fit=crop&w=800&q=80" alt="Madagascar — Avenue of the Baobabs at sunset with dramatic silhouettes" loading="lazy">
+        <span class="dest-card-price">$4,000–$15,000</span>
+      </div>
       <div class="dest-card-body">
         <div class="dest-card-tags">
           <span class="dest-card-tag">Wildlife Expedition</span>
-          <span class="dest-card-tag price">$4,000–$15,000</span>
+          <span class="dest-card-tag price">14 Days</span>
         </div>
         <h3>Madagascar</h3>
-        <p>90% of wildlife is endemic — found nowhere else on Earth. Lemurs, panther chameleons, baobab forests, and untouched coastline. The world's fourth-largest island.</p>
+        <p>90% of wildlife is endemic — found nowhere else on Earth. Lemurs, panther chameleons, baobab forests, and untouched coastline.</p>
         <div class="dest-card-meta">
-          <span>14 Days</span>
+          <span>Lemur trekking, baobab avenue</span>
           <span class="price">From $4,000/person</span>
         </div>
       </div>
     </div>
 
-    <div class="dest-card">
-      <div class="dest-card-header" style="background:linear-gradient(135deg,#3a4a2a,#1a2e0d);">🏇</div>
+    <div class="dest-card animate">
+      <div class="dest-card-image">
+        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="Kyrgyzstan — dramatic mountain landscape with yurts and nomadic horses" loading="lazy">
+        <span class="dest-card-price">$1,500–$4,000</span>
+      </div>
       <div class="dest-card-body">
         <div class="dest-card-tags">
           <span class="dest-card-tag">Silk Road Adventure</span>
-          <span class="dest-card-tag price">$1,500–$4,000</span>
+          <span class="dest-card-tag price">10 Days</span>
         </div>
         <h3>Kyrgyzstan</h3>
-        <p>Endless roads through breathtaking mountain landscapes, yurt camps with nomadic families, ancient ruins, and almost zero tourists. One of the world's most underrated adventure destinations.</p>
+        <p>Endless roads through breathtaking mountain landscapes, yurt camps with nomadic families, ancient ruins, and almost zero tourists.</p>
         <div class="dest-card-meta">
-          <span>10 Days</span>
+          <span>Yurt stays, horse trekking</span>
           <span class="price">From $1,500/person</span>
         </div>
       </div>
@@ -322,7 +576,7 @@
 
 <!-- TIER 3 -->
 <section class="section">
-  <div class="tier-header">
+  <div class="tier-header animate">
     <div class="tier-num">3</div>
     <div>
       <h3>Unique Experiential Packages</h3>
@@ -331,81 +585,96 @@
   </div>
 
   <div class="dest-grid">
-    <div class="dest-card">
-      <div class="dest-card-header" style="background:linear-gradient(135deg,#1a3a5a,#0d2240);">🐋</div>
+    <div class="dest-card animate">
+      <div class="dest-card-image">
+        <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=800&q=80" alt="Azores — volcanic crater lakes with lush green hills and dramatic clouds" loading="lazy">
+        <span class="dest-card-price">$2,000–$5,000</span>
+      </div>
       <div class="dest-card-body">
         <div class="dest-card-tags">
           <span class="dest-card-tag">Nature & Wellness</span>
-          <span class="dest-card-tag price">$2,000–$5,000</span>
+          <span class="dest-card-tag price">8 Days</span>
         </div>
         <h3>Azores, Portugal</h3>
-        <p>Mid-Atlantic volcanic paradise. Whale song research with marine biologists, geothermal hot springs, two-color volcanic crater lakes, and Europe's only tea plantation. Called "the Hawaii of Europe."</p>
+        <p>Mid-Atlantic volcanic paradise. Whale song research with marine biologists, geothermal hot springs, and two-color volcanic crater lakes.</p>
         <div class="dest-card-meta">
-          <span>8 Days</span>
+          <span>Whale watching, hot springs</span>
           <span class="price">From $2,000/person</span>
         </div>
       </div>
     </div>
 
-    <div class="dest-card">
-      <div class="dest-card-header" style="background:linear-gradient(135deg,#2a3a4a,#1a2a3a);">🏃</div>
+    <div class="dest-card animate">
+      <div class="dest-card-image">
+        <img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=800&q=80" alt="Lofoten Islands — dramatic peaks rising from pristine Arctic waters with red cabins" loading="lazy">
+        <span class="dest-card-price">$3,000–$6,000</span>
+      </div>
       <div class="dest-card-body">
         <div class="dest-card-tags">
           <span class="dest-card-tag">Trail Running</span>
-          <span class="dest-card-tag price">$3,000–$6,000</span>
+          <span class="dest-card-tag price">7 Days</span>
         </div>
         <h3>Lofoten Islands, Norway</h3>
-        <p>Dramatic volcanic peaks plunging into pristine waters, turf-roofed red cabins, midnight sun running, and world-class seafood. Sail between islands on a 56ft liveaboard yacht.</p>
+        <p>Dramatic volcanic peaks plunging into pristine waters, turf-roofed red cabins, midnight sun running, and world-class seafood.</p>
         <div class="dest-card-meta">
-          <span>7 Days</span>
+          <span>Liveaboard yacht, hiking</span>
           <span class="price">From $3,000/person</span>
         </div>
       </div>
     </div>
 
-    <div class="dest-card">
-      <div class="dest-card-header" style="background:linear-gradient(135deg,#2a4a2a,#1a2e1a);">🐺</div>
+    <div class="dest-card animate">
+      <div class="dest-card-image">
+        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80" alt="Romania — Carpathian mountains with dense forests and wildlife" loading="lazy">
+        <span class="dest-card-price">$1,200–$3,000</span>
+      </div>
       <div class="dest-card-body">
         <div class="dest-card-tags">
           <span class="dest-card-tag">Conservation</span>
-          <span class="dest-card-tag price">$1,200–$3,000</span>
+          <span class="dest-card-tag price">5 Days</span>
         </div>
         <h3>Romania — Rewilding</h3>
-        <p>600,000 acres of virgin forest. Reintroduced European bison, brown bears, wolves, and lynx roam the Carpathians. Join WWF conservationists on Europe's great rewilding success story.</p>
+        <p>600,000 acres of virgin forest. Reintroduced European bison, brown bears, wolves, and lynx roam the Carpathians.</p>
         <div class="dest-card-meta">
-          <span>5 Days</span>
+          <span>WWF conservation, wildlife tracking</span>
           <span class="price">From $1,200/person</span>
         </div>
       </div>
     </div>
 
-    <div class="dest-card">
-      <div class="dest-card-header" style="background:linear-gradient(135deg,#1a1a3a,#0d0d22);">✨</div>
+    <div class="dest-card animate">
+      <div class="dest-card-image">
+        <img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=800&q=80" alt="Puerto Rico — bioluminescent bay glowing with turquoise light at night" loading="lazy">
+        <span class="dest-card-price">$1,500–$3,500</span>
+      </div>
       <div class="dest-card-body">
         <div class="dest-card-tags">
           <span class="dest-card-tag">Bioluminescence</span>
-          <span class="dest-card-tag price">$1,500–$3,500</span>
+          <span class="dest-card-tag price">5 Days</span>
         </div>
         <h3>Puerto Rico</h3>
-        <p>Fajardo Bay's Laguna Grande transforms into a sparkling disco-ball of bioluminescent phytoplankton on moonless nights. Every paddle stroke ignites white, blue, and turquoise light.</p>
+        <p>Fajardo Bay's Laguna Grande transforms into a sparkling disco-ball of bioluminescent phytoplankton on moonless nights.</p>
         <div class="dest-card-meta">
-          <span>5 Days</span>
+          <span>Kayaking, rainforest, beaches</span>
           <span class="price">From $1,500/person</span>
         </div>
       </div>
     </div>
 
-    <div class="dest-card">
-      <div class="dest-card-header" style="background:linear-gradient(135deg,#2a3a2a,#1a2e1a);">🌲</div>
+    <div class="dest-card animate">
+      <div class="dest-card-image">
+        <img src="https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=800&q=80" alt="Japan — ancient temple surrounded by lush forest and tranquil waters" loading="lazy">
+        <span class="dest-card-price">$2,500–$6,000</span>
+      </div>
       <div class="dest-card-body">
         <div class="dest-card-tags">
           <span class="dest-card-tag">Forest Wellness</span>
-          <span class="dest-card-tag price">$2,500–$6,000</span>
+          <span class="dest-card-tag price">7 Days</span>
         </div>
         <h3>Kii Peninsula, Japan</h3>
-        <p><em>Shinrin yoku</em> (forest bathing) in cedar and cypress woods. Stay in a high-design cedar lodge, craft with cedar shavings, and experience Japan's inner spiritual life. Traditional ryokan and onsen experiences.</p>
+        <p><em>Shinrin yoku</em> (forest bathing) in cedar and cypress woods. Stay in a high-design cedar lodge and experience Japan's inner spiritual life.</p>
         <div class="dest-card-meta">
-          <span>7 Days</span>
+          <span>Ryokan, onsen, traditional craft</span>
           <span class="price">From $2,500/person</span>
         </div>
       </div>
@@ -415,7 +684,7 @@
 
 <!-- TIER 4 -->
 <section class="section">
-  <div class="tier-header">
+  <div class="tier-header animate">
     <div class="tier-num">4</div>
     <div>
       <h3>Adventure & Adrenaline</h3>
@@ -424,81 +693,96 @@
   </div>
 
   <div class="dest-grid">
-    <div class="dest-card">
-      <div class="dest-card-header" style="background:linear-gradient(135deg,#3a4a2a,#1a2e0d);">🚵</div>
+    <div class="dest-card animate">
+      <div class="dest-card-image">
+        <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80" alt="Slovenia — Julian Alps with dramatic mountain peaks and green valleys" loading="lazy">
+        <span class="dest-card-price">$1,000–$2,500</span>
+      </div>
       <div class="dest-card-body">
         <div class="dest-card-tags">
           <span class="dest-card-tag">Multi-Sport</span>
-          <span class="dest-card-tag price">$1,000–$2,500</span>
+          <span class="dest-card-tag price">6 Days</span>
         </div>
         <h3>Slovenia — Outdoor Rebels</h3>
-        <p>Europe's emerging adventure capital. Bike, climb, raft, via ferrata, hike, and paraglide across the Julian Alps, Vipava Valley, and Soča River. Summit Mt. Triglav (9,395ft) for the grand finale.</p>
+        <p>Europe's emerging adventure capital. Bike, climb, raft, via ferrata, hike, and paraglide across the Julian Alps and Soča River.</p>
         <div class="dest-card-meta">
-          <span>6 Days</span>
+          <span>Summit Mt. Triglav (9,395ft)</span>
           <span class="price">From $1,000/person</span>
         </div>
       </div>
     </div>
 
-    <div class="dest-card">
-      <div class="dest-card-header" style="background:linear-gradient(135deg,#e8e0d0,#d0c8b8);">🏜️</div>
+    <div class="dest-card animate">
+      <div class="dest-card-image">
+        <img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=800&q=80" alt="Salar de Uyuni — vast white salt flat reflecting the sky like a mirror" loading="lazy">
+        <span class="dest-card-price">$2,500–$7,000</span>
+      </div>
       <div class="dest-card-body">
         <div class="dest-card-tags">
           <span class="dest-card-tag">Luxury Expedition</span>
-          <span class="dest-card-tag price">$2,500–$7,000</span>
+          <span class="dest-card-tag price">7 Days</span>
         </div>
         <h3>Salar de Uyuni, Bolivia</h3>
-        <p>The world's largest salt flat creates mirror-effect landscapes. Red lagoons, flamingo flocks, towering peaks, and new luxury lodges opening in the region. Stargazing on the mirror surface.</p>
+        <p>The world's largest salt flat creates mirror-effect landscapes. Red lagoons, flamingo flocks, and new luxury lodges opening in the region.</p>
         <div class="dest-card-meta">
-          <span>7 Days</span>
+          <span>Stargazing, mirror photography</span>
           <span class="price">From $2,500/person</span>
         </div>
       </div>
     </div>
 
-    <div class="dest-card">
-      <div class="dest-card-header" style="background:linear-gradient(135deg,#4a3a1a,#2e220d);">🐉</div>
+    <div class="dest-card animate">
+      <div class="dest-card-image">
+        <img src="https://images.unsplash.com/photo-1520769669658-f07657f5a307?auto=format&fit=crop&w=800&q=80" alt="Komodo — dramatic island landscape with turquoise waters and rugged terrain" loading="lazy">
+        <span class="dest-card-price">$2,000–$5,000</span>
+      </div>
       <div class="dest-card-body">
         <div class="dest-card-tags">
           <span class="dest-card-tag">Wildlife & Diving</span>
-          <span class="dest-card-tag price">$2,000–$5,000</span>
+          <span class="dest-card-tag price">8 Days</span>
         </div>
         <h3>Komodo, Indonesia</h3>
-        <p>Come face-to-face with 3-meter Komodo Dragons on uninhabited islands. Pink sand beaches, manta ray diving, and dramatic panoramas from Padar Island. Liveaboard diving expeditions.</p>
+        <p>Come face-to-face with 3-meter Komodo Dragons on uninhabited islands. Pink sand beaches, manta ray diving, and dramatic panoramas.</p>
         <div class="dest-card-meta">
-          <span>8 Days</span>
+          <span>Liveaboard diving, dragon trekking</span>
           <span class="price">From $2,000/person</span>
         </div>
       </div>
     </div>
 
-    <div class="dest-card">
-      <div class="dest-card-header" style="background:linear-gradient(135deg,#1a4a2a,#0d2e1a);">🌿</div>
+    <div class="dest-card animate">
+      <div class="dest-card-image">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80" alt="Dominica — lush tropical rainforest with waterfalls and volcanic hot springs" loading="lazy">
+        <span class="dest-card-price">$2,000–$4,500</span>
+      </div>
       <div class="dest-card-body">
         <div class="dest-card-tags">
           <span class="dest-card-tag">Eco-Adventure</span>
-          <span class="dest-card-tag price">$2,000–$4,500</span>
+          <span class="dest-card-tag price">7 Days</span>
         </div>
         <h3>Dominica — Nature Island</h3>
-        <p>The Caribbean's hidden adventure gem. Canyoning through waterfalls, sperm whale spotting, volcanic hot springs, indigenous Kalinago Territory, and the world's longest cable car (opening 2026). No mass tourism.</p>
+        <p>The Caribbean's hidden adventure gem. Canyoning through waterfalls, sperm whale spotting, volcanic hot springs, and indigenous Kalinago Territory.</p>
         <div class="dest-card-meta">
-          <span>7 Days</span>
+          <span>World's longest cable car (2026)</span>
           <span class="price">From $2,000/person</span>
         </div>
       </div>
     </div>
 
-    <div class="dest-card">
-      <div class="dest-card-header" style="background:linear-gradient(135deg,#3a4a5a,#1a2a3a);">🐧</div>
+    <div class="dest-card animate">
+      <div class="dest-card-image">
+        <img src="https://images.unsplash.com/photo-1551986782-d0169b3f8fa7?auto=format&fit=crop&w=800&q=80" alt="Falkland Islands — vast windswept coastline with penguins and dramatic skies" loading="lazy">
+        <span class="dest-card-price">$3,500–$7,000</span>
+      </div>
       <div class="dest-card-body">
         <div class="dest-card-tags">
           <span class="dest-card-tag">Wildlife Photography</span>
-          <span class="dest-card-tag price">$3,500–$7,000</span>
+          <span class="dest-card-tag price">10 Days</span>
         </div>
         <h3>Falkland Islands</h3>
-        <p>500,000 pairs of breeding penguins across 5 species. Untouched beaches, albatross colonies, and total solitude. New flight routes from São Paulo via Córdoba launching in 2026.</p>
+        <p>500,000 pairs of breeding penguins across 5 species. Untouched beaches, albatross colonies, and total solitude.</p>
         <div class="dest-card-meta">
-          <span>10 Days</span>
+          <span>New flight routes from São Paulo</span>
           <span class="price">From $3,500/person</span>
         </div>
       </div>
@@ -508,7 +792,7 @@
 
 <!-- TIER 5 -->
 <section class="section">
-  <div class="tier-header">
+  <div class="tier-header animate">
     <div class="tier-num">5</div>
     <div>
       <h3>Cultural Deep Dives</h3>
@@ -517,81 +801,96 @@
   </div>
 
   <div class="dest-grid">
-    <div class="dest-card">
-      <div class="dest-card-header" style="background:linear-gradient(135deg,#4a3a2a,#2e1a0d);">🏺</div>
+    <div class="dest-card animate">
+      <div class="dest-card-image">
+        <img src="https://images.unsplash.com/photo-1518638150340-f706e86654de?auto=format&fit=crop&w=800&q=80" alt="Oaxaca, Mexico — colorful colonial streets with traditional architecture" loading="lazy">
+        <span class="dest-card-price">$2,700–$5,000</span>
+      </div>
       <div class="dest-card-body">
         <div class="dest-card-tags">
           <span class="dest-card-tag">Artisan Culture</span>
-          <span class="dest-card-tag price">$2,700–$5,000</span>
+          <span class="dest-card-tag price">8 Days</span>
         </div>
         <h3>Oaxaca, Mexico</h3>
-        <p>Hands-on immersion in Mexico's creative heartland. Shape clay in Zapotec pottery studios, learn natural dyeing with cochineal and indigo, sample mezcal among mountains. UNESCO-recognized traditions.</p>
+        <p>Hands-on immersion in Mexico's creative heartland. Shape clay in Zapotec pottery studios, learn natural dyeing with cochineal and indigo.</p>
         <div class="dest-card-meta">
-          <span>8 Days</span>
+          <span>UNESCO-recognized traditions</span>
           <span class="price">From $2,700/person</span>
         </div>
       </div>
     </div>
 
-    <div class="dest-card">
-      <div class="dest-card-header" style="background:linear-gradient(135deg,#2a3a4a,#1a2a3a);">🏄</div>
+    <div class="dest-card animate">
+      <div class="dest-card-image">
+        <img src="https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=800&q=80" alt="Okinawa, Japan — tropical beach with crystal clear turquoise water and coral reefs" loading="lazy">
+        <span class="dest-card-price">$2,000–$4,000</span>
+      </div>
       <div class="dest-card-body">
         <div class="dest-card-tags">
           <span class="dest-card-tag">Language Immersion</span>
-          <span class="dest-card-tag price">$2,000–$4,000</span>
+          <span class="dest-card-tag price">10 Days</span>
         </div>
         <h3>Okinawa, Japan</h3>
-        <p>Tropical Japanese island with unique Sino-Japanese fusion culture. Homestay with local families, daily language classes, coral reef snorkeling, and traditional soba dinners. Surf lessons included.</p>
+        <p>Tropical Japanese island with unique Sino-Japanese fusion culture. Homestay with local families, daily language classes, and coral reef snorkeling.</p>
         <div class="dest-card-meta">
-          <span>10 Days</span>
+          <span>Surf lessons, traditional soba</span>
           <span class="price">From $2,000/person</span>
         </div>
       </div>
     </div>
 
-    <div class="dest-card">
-      <div class="dest-card-header" style="background:linear-gradient(135deg,#4a4a1a,#2e2e0d);">🏛️</div>
+    <div class="dest-card animate">
+      <div class="dest-card-image">
+        <img src="https://images.unsplash.com/photo-1523805009345-7448845a9e53?auto=format&fit=crop&w=800&q=80" alt="Ghana — colorful traditional kente cloth and vibrant cultural heritage" loading="lazy">
+        <span class="dest-card-price">$3,000–$5,000</span>
+      </div>
       <div class="dest-card-body">
         <div class="dest-card-tags">
           <span class="dest-card-tag">Heritage & Culture</span>
-          <span class="dest-card-tag price">$3,000–$5,000</span>
+          <span class="dest-card-tag price">10 Days</span>
         </div>
         <h3>Ghana — Ancestral Heritage</h3>
-        <p>Focal point for ancestry-inspired travel. Welcoming ceremonies, UNESCO-listed Elmina Castle, artisanal villages for beading and brass-casting, and Kakum National Park canopy walks.</p>
+        <p>Focal point for ancestry-inspired travel. Welcoming ceremonies, UNESCO-listed Elmina Castle, artisanal villages for beading and brass-casting.</p>
         <div class="dest-card-meta">
-          <span>10 Days</span>
+          <span>Kakum canopy walks, heritage tours</span>
           <span class="price">From $3,000/person</span>
         </div>
       </div>
     </div>
 
-    <div class="dest-card">
-      <div class="dest-card-header" style="background:linear-gradient(135deg,#4a2a1a,#2e1a0d);">🌋</div>
+    <div class="dest-card animate">
+      <div class="dest-card-image">
+        <img src="https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=800&q=80" alt="Aeolian Islands — volcanic islands with dramatic cliffs and Mediterranean sunset" loading="lazy">
+        <span class="dest-card-price">$2,500–$6,000</span>
+      </div>
       <div class="dest-card-body">
         <div class="dest-card-tags">
           <span class="dest-card-tag">Volcanic Wellness</span>
-          <span class="dest-card-tag price">$2,500–$6,000</span>
+          <span class="dest-card-tag price">7 Days</span>
         </div>
         <h3>Aeolian Islands, Sicily</h3>
-        <p>Seven distinct volcanic islands off Sicily's north coast. Therapeutic mud baths and fumaroles on Vulcano, dramatic hikes, dark-sand beaches, and stunning Mediterranean sunsets. Etna volcano hike included.</p>
+        <p>Seven distinct volcanic islands off Sicily's north coast. Therapeutic mud baths, dramatic hikes, and stunning Mediterranean sunsets.</p>
         <div class="dest-card-meta">
-          <span>7 Days</span>
+          <span>Etna volcano hike included</span>
           <span class="price">From $2,500/person</span>
         </div>
       </div>
     </div>
 
-    <div class="dest-card">
-      <div class="dest-card-header" style="background:linear-gradient(135deg,#1a1a2a,#0d0d1a);">🔭</div>
+    <div class="dest-card animate">
+      <div class="dest-card-image">
+        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80" alt="Northumberland — dark sky with countless stars and Milky Way visible" loading="lazy">
+        <span class="dest-card-price">$1,200–$3,000</span>
+      </div>
       <div class="dest-card-body">
         <div class="dest-card-tags">
           <span class="dest-card-tag">Dark Sky Safari</span>
-          <span class="dest-card-tag price">$1,200–$3,000</span>
+          <span class="dest-card-tag price">5 Days</span>
         </div>
         <h3>Northumberland, UK</h3>
-        <p>572 square miles of Dark Sky Park with Kielder Observatory. Luxury stargazing cabins with retractable roofs, astronomy workshops, Hadrian's Wall heritage, and craft breweries.</p>
+        <p>572 square miles of Dark Sky Park with Kielder Observatory. Luxury stargazing cabins with retractable roofs and astronomy workshops.</p>
         <div class="dest-card-meta">
-          <span>5 Days</span>
+          <span>Hadrian's Wall, craft breweries</span>
           <span class="price">From $1,200/person</span>
         </div>
       </div>
@@ -599,11 +898,11 @@
   </div>
 </section>
 
-<!-- SOURCES -->
+<!-- Sources -->
 <section class="section">
-  <div class="sources">
+  <div class="sources animate">
     <h3>Research Sources</h3>
-    <p style="font-size:14px;color:var(--ink-soft);margin-bottom:20px;">This list was compiled from deep market research across the world's leading travel publications, luxury tour operators, and travel vlogs in 2026.</p>
+    <p>This list was compiled from deep market research across the world's leading travel publications, luxury tour operators, and travel vlogs in 2026.</p>
     <div class="sources-grid">
       <div class="source-item">National Geographic Traveller UK — "20 Travel Adventures to Book in 2026"</div>
       <div class="source-item">Forbes — "11 Unique Travel Destinations to Visit in 2026"</div>
@@ -626,19 +925,19 @@
 
 <!-- CTA -->
 <section class="section">
-  <div class="cta-section">
-    <h2>Ready for Your <span>Extraordinary</span> Journey?</h2>
+  <div class="cta-section animate">
+    <h2>Ready for Your <em>Extraordinary</em> Journey?</h2>
     <p>Let Santos Travel design a bespoke itinerary to any of these 25 exotic destinations — or beyond.</p>
     <a href="index.html#contact" class="btn-primary">Request a Custom Quote →</a>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- Footer -->
 <footer class="footer">
   <div class="footer-grid">
     <div class="footer-brand">
       <h3>santos<span>.travel</span></h3>
-      <p>Govt. of India Approved Inbound Tour Operator. Crafting extraordinary journeys through Kerala, South India, and the world's most exclusive destinations.</p>
+      <p>Govt. of India Approved Inbound Tour Operator. Crafting extraordinary journeys through Kerala, South India, and the world's most exclusive destinations since 1998.</p>
     </div>
     <div>
       <h4>Destinations</h4>
@@ -654,7 +953,7 @@
       <ul>
         <li><a href="index.html#about">About Us</a></li>
         <li><a href="proposal.html">IVA Cortex Proposal</a></li>
-        <li><a href="blog.html">Blog</a></li>
+        <li><a href="blog.html">Travel Blog</a></li>
         <li><a href="index.html#contact">Contact</a></li>
       </ul>
     </div>
@@ -676,6 +975,42 @@
     </div>
   </div>
 </footer>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navMenu = document.getElementById('navMenu');
+  if (navToggle && navMenu) {
+    navToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      navToggle.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
+    });
+    navMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        navToggle.textContent = '☰';
+      });
+    });
+  }
+
+  // Intersection Observer for animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.animate').forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>
