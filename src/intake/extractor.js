@@ -112,4 +112,4 @@ async function extract(rawMessage, source = 'whatsapp') {
   return dbResult.rows[0];
 }
 
-module.exports = { extract, EXTRACTION_SCHEMA };
+module.exports = { extract, EXTRACTION_SCHEMA, sanitize, sanitizeDate };

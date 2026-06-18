@@ -6,3 +6,4 @@ pdf_output/*
 /tmp/
 proposal/node_modules/
 proposal/santos_travel_IVA_cortex_proposal.pdf
+.vercel

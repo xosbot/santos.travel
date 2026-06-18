@@ -242,4 +242,4 @@ function fmt(n) {
   return '₹' + num.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
 }
 
-module.exports = { buildItineraryHtml };
+module.exports = { buildItineraryHtml, escHtml, fmt };

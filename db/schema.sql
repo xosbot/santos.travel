@@ -94,6 +94,7 @@ CREATE TABLE quotes (
   status          quote_status NOT NULL DEFAULT 'draft',
   total_cost      NUMERIC(12,2) NOT NULL DEFAULT 0,
   total_margin    NUMERIC(12,2) NOT NULL DEFAULT 0,
+  grand_total     NUMERIC(12,2) NOT NULL DEFAULT 0,
   markup_pct      NUMERIC(5,2) NOT NULL DEFAULT 0,
   currency        VARCHAR(3) NOT NULL DEFAULT 'INR',
   valid_until     DATE,

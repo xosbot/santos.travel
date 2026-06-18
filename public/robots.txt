@@ -1,0 +1,15 @@
+# robots.txt - Santos Travel
+# https://santos.travel
+
+User-agent: *
+Allow: /
+
+# Disallow admin and API areas
+Disallow: /admin/
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://santos.travel/sitemap.xml
+
+# Crawl-delay for polite bots
+Crawl-delay: 1

@@ -17,12 +17,12 @@ async function getInquiry(inquiryId) {
   return rows[0] || null;
 }
 
-async function createQuote({ inquiryId, quoteNumber, totalCost, totalMargin, markupPct, currency, validUntil, termsConditions, llmProse, status }) {
+async function createQuote({ inquiryId, quoteNumber, totalCost, totalMargin, grandTotal, markupPct, currency, validUntil, termsConditions, llmProse, status }) {
   const { rows } = await db.query(
-    `INSERT INTO quotes (inquiry_id, quote_number, status, total_cost, total_margin, markup_pct, currency, valid_until, terms_conditions, llm_prose)
-     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+    `INSERT INTO quotes (inquiry_id, quote_number, status, total_cost, total_margin, grand_total, markup_pct, currency, valid_until, terms_conditions, llm_prose)
+     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
      RETURNING *`,
-    [inquiryId, quoteNumber, status || 'draft', totalCost, totalMargin, markupPct, currency || 'INR', validUntil, termsConditions, llmProse]
+    [inquiryId, quoteNumber, status || 'draft', totalCost, totalMargin, grandTotal, markupPct, currency || 'INR', validUntil, termsConditions, llmProse]
   );
   return rows[0];
 }

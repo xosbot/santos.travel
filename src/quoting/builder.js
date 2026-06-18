@@ -65,6 +65,7 @@ async function buildQuote(inquiryId, selections, options = {}) {
     quoteNumber,
     totalCost: summary.totalCost,
     totalMargin: summary.totalMargin,
+    grandTotal: summary.grandTotal,
     markupPct: 0, // individual per line item
     currency,
     validUntil: validUntil || defaultValidUntil(),

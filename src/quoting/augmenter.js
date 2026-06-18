@@ -37,7 +37,7 @@ async function augmentQuote(quoteId) {
       adults: quote.pax_adults,
       children: quote.pax_children || 0,
     },
-    grand_total: Number(quote.total_cost) + Number(quote.total_margin),
+    grand_total: Number(quote.grand_total),
     line_items: lineItems.map(item => ({
       description: item.description,
       quantity: item.quantity,

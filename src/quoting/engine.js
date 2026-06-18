@@ -49,22 +49,30 @@ function computeQuoteSummary(lineItems) {
   let totalMargin = 0;
   let grandTotal  = 0;
 
-  for (const item of lineItems) {
-    const { unitCost, unitMargin, total } = computeLineItem(item);
-    item.unitCost    = unitCost;
-    item.unitMargin  = unitMargin;
-    item.unitSelling = unitCost + unitMargin;
-    item.total       = total;
+  const computedItems = lineItems.map(item => {
+    const result = computeLineItem(item);
+    const computed = {
+      ...item,
+      unitCost: result.unitCost,
+      unitMargin: result.unitMargin,
+      unitSelling: result.unitSelling,
+      total: result.total,
+    };
 
-    totalCost   = round2(totalCost   + unitCost * item.quantity);
-    totalMargin = round2(totalMargin + unitMargin * item.quantity);
-    grandTotal  = round2(grandTotal  + total);
-  }
+    totalCost   = round2(totalCost   + result.unitCost * item.quantity);
+    totalMargin = round2(totalMargin + result.unitMargin * item.quantity);
+    grandTotal  = round2(grandTotal  + result.total);
 
-  return { lineItems, totalCost, totalMargin, grandTotal };
+    return computed;
+  });
+
+  return { lineItems: computedItems, totalCost, totalMargin, grandTotal };
 }
 
 function getMarkupForCategory(category, overrides = {}) {
+  if (!overrides || typeof overrides !== 'object') {
+    return DEFAULT_MARKUP[category] ?? DEFAULT_MARKUP.misc;
+  }
   return overrides[category] ?? DEFAULT_MARKUP[category] ?? DEFAULT_MARKUP.misc;
 }
 
@@ -72,7 +80,7 @@ let _counter = 0;
 
 function generateQuoteNumber(year) {
   _counter += 1;
-  const y = year || new Date().getFullYear();
+  const y = year ?? new Date().getFullYear();
   return `Q-${y}-${String(_counter).padStart(4, '0')}`;
 }
 
@@ -81,7 +89,7 @@ function resetCounter() {
 }
 
 function round2(n) {
-  return Math.round(n * 100) / 100;
+  return Math.round((n + Number.EPSILON) * 100) / 100;
 }
 
 module.exports = {
