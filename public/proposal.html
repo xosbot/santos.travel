@@ -9,1011 +9,283 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --gold:        #C5A059;
-      --gold-light:  #D4B978;
-      --gold-pale:   #F8F1E4;
-      --deep-teal:   #0A1F1C;
-      --teal:        #0F2E28;
-      --teal-mid:    #1A4D42;
-      --teal-light:  #2A7A6A;
-      --teal-pale:   #E8F4F1;
-      --ink:         #0D0D0D;
-      --ink-soft:    #2A2A2A;
-      --muted:       #6B6B6B;
-      --white:       #FFFFFF;
-      --off-white:   #FAFAF7;
-      --border:      #E8E4DE;
-      --shadow:      0 4px 24px rgba(10,31,28,0.10);
-      --shadow-lg:   0 12px 48px rgba(10,31,28,0.16);
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--off-white);
-      color: var(--ink);
-      font-size: 10.5pt;
-      line-height: 1.7;
-    }
-
-    /* ─── PAGE WRAPPER ─────────────────────────────── */
-    .page {
-      width: 210mm;
-      margin: 0 auto;
-      background: var(--white);
-    }
-
-    /* ─── COVER PAGE ───────────────────────────────── */
-    .cover {
-      position: relative;
-      min-height: 297mm;
-      background: var(--deep-teal);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 0;
-      page-break-after: always;
-    }
-
-    .cover-bg-pattern {
-      position: absolute;
-      inset: 0;
-      background-image:
-        radial-gradient(ellipse 80% 60% at 120% -10%, rgba(201,168,76,0.18) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 50% at -20% 110%, rgba(42,157,143,0.22) 0%, transparent 55%),
-        repeating-linear-gradient(
-          45deg,
-          transparent,
-          transparent 40px,
-          rgba(255,255,255,0.012) 40px,
-          rgba(255,255,255,0.012) 41px
-        );
-    }
-
-    .cover-top-bar {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 36px 52px 0;
-    }
-
-    .cover-logo-block {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .cover-logo-icon {
-      width: 46px;
-      height: 46px;
-      background: linear-gradient(135deg, var(--gold), var(--gold-light));
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-    }
-
-    .cover-logo-text {
-      font-family: 'Playfair Display', serif;
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--white);
-      letter-spacing: 0.5px;
-    }
-
-    .cover-logo-sub {
-      font-size: 9px;
-      font-weight: 500;
-      color: var(--gold-light);
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      margin-top: 2px;
-    }
-
-    .cover-badge {
-      background: rgba(201,168,76,0.15);
-      border: 1px solid rgba(201,168,76,0.4);
-      border-radius: 6px;
-      padding: 6px 16px;
-      font-size: 8.5px;
-      font-weight: 600;
-      color: var(--gold-light);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .cover-hero {
-      position: relative;
-      z-index: 2;
-      padding: 0 52px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding-top: 48px;
-    }
-
-    .cover-eyebrow {
-      font-size: 8.5px;
-      font-weight: 600;
-      color: var(--gold);
-      letter-spacing: 3.5px;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .cover-eyebrow::before {
-      content: '';
-      display: block;
-      width: 32px;
-      height: 1.5px;
-      background: var(--gold);
-    }
-
-    .cover-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 52px;
-      font-weight: 800;
-      color: var(--white);
-      line-height: 1.1;
-      letter-spacing: -0.5px;
-      margin-bottom: 10px;
-    }
-
-    .cover-title span {
-      color: var(--gold-light);
-    }
-
-    .cover-subtitle {
-      font-size: 17px;
-      font-weight: 300;
-      color: rgba(255,255,255,0.70);
-      margin-bottom: 44px;
-      letter-spacing: 0.3px;
-    }
-
-    .cover-divider {
-      width: 64px;
-      height: 2px;
-      background: linear-gradient(90deg, var(--gold), transparent);
-      margin-bottom: 36px;
-    }
-
-    .cover-meta-row {
-      display: flex;
-      gap: 40px;
-    }
-
-    .cover-meta-item label {
-      display: block;
-      font-size: 8px;
-      font-weight: 600;
-      color: rgba(255,255,255,0.4);
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      margin-bottom: 5px;
-    }
-
-    .cover-meta-item span {
-      font-size: 11px;
-      font-weight: 500;
-      color: rgba(255,255,255,0.85);
-    }
-
-    .cover-bottom {
-      position: relative;
-      z-index: 2;
-      padding: 32px 52px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .cover-bottom-note {
-      font-size: 8.5px;
-      color: rgba(255,255,255,0.35);
-      letter-spacing: 0.5px;
-    }
-
-    .cover-confidential {
-      font-size: 8px;
-      font-weight: 600;
-      color: rgba(201,168,76,0.55);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    /* Gold accent bar at bottom of cover */
-    .cover-gold-bar {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 5px;
-      background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
-      z-index: 3;
-    }
-
-    /* ─── INNER PAGES ──────────────────────────────── */
-    .inner-page {
-      min-height: 297mm;
-      padding: 52px;
-      position: relative;
-      page-break-after: always;
-    }
-
-    .inner-page:last-child {
-      page-break-after: auto;
-    }
-
-    /* Page header */
-    .page-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-bottom: 20px;
-      border-bottom: 1.5px solid var(--border);
-      margin-bottom: 40px;
-    }
-
-    .page-header-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .page-header-logo-icon {
-      width: 28px;
-      height: 28px;
-      background: linear-gradient(135deg, var(--teal), var(--teal-mid));
-      border-radius: 7px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-    }
-
-    .page-header-logo-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--teal);
-    }
-
-    .page-header-right {
-      font-size: 8px;
-      font-weight: 500;
-      color: var(--muted);
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-
-    /* Section headings */
-    .section-eyebrow {
-      font-size: 8px;
-      font-weight: 700;
-      color: var(--gold);
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .section-eyebrow::before {
-      content: '';
-      display: block;
-      width: 20px;
-      height: 1.5px;
-      background: var(--gold);
-    }
-
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 26px;
-      font-weight: 700;
-      color: var(--deep-teal);
-      line-height: 1.25;
-      margin-bottom: 8px;
-    }
-
-    .section-lead {
-      font-size: 11px;
-      color: var(--ink-soft);
-      line-height: 1.75;
-      margin-bottom: 32px;
-      max-width: 88%;
-    }
-
-    /* ─── PROBLEM STATEMENT ─────────────────────────── */
-    .problem-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-bottom: 32px;
-    }
-
-    .problem-card {
-      background: #FEF7F0;
-      border: 1px solid #F5D9C4;
-      border-left: 3.5px solid #E07B3A;
-      border-radius: 8px;
-      padding: 16px 18px;
-    }
-
-    .problem-card h4 {
-      font-size: 10px;
-      font-weight: 700;
-      color: #C45E1A;
-      margin-bottom: 5px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .problem-card p {
-      font-size: 9.5px;
-      color: var(--ink-soft);
-      line-height: 1.65;
-    }
-
-    /* ─── SOLUTION OVERVIEW ─────────────────────────── */
-    .solution-box {
-      background: linear-gradient(135deg, var(--deep-teal) 0%, var(--teal) 100%);
-      border-radius: 14px;
-      padding: 30px 34px;
-      margin-bottom: 32px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .solution-box::after {
-      content: '';
-      position: absolute;
-      top: -30px; right: -30px;
-      width: 140px; height: 140px;
-      border-radius: 50%;
-      background: rgba(201,168,76,0.12);
-    }
-
-    .solution-box h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 10px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .solution-box p {
-      font-size: 10px;
-      color: rgba(255,255,255,0.78);
-      line-height: 1.75;
-      max-width: 82%;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* ─── PILLAR CARDS ──────────────────────────────── */
-    .pillar-list {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .pillar-card {
-      display: flex;
-      gap: 18px;
-      align-items: flex-start;
-      padding: 18px 20px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      background: var(--off-white);
-      transition: all 0.2s;
-    }
-
-    .pillar-num {
-      min-width: 36px;
-      height: 36px;
-      border-radius: 9px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      font-weight: 800;
-      font-family: 'Playfair Display', serif;
-      flex-shrink: 0;
-    }
-
-    .pillar-content h4 {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--deep-teal);
-      margin-bottom: 4px;
-    }
-
-    .pillar-content p {
-      font-size: 9.5px;
-      color: var(--ink-soft);
-      line-height: 1.65;
-    }
-
-    .pillar-tag {
-      display: inline-block;
-      font-size: 7.5px;
-      font-weight: 600;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      padding: 2px 8px;
-      border-radius: 4px;
-      margin-top: 6px;
-    }
-
-    /* Pillar color variants */
-    .p1 { background: #EAF4FF; color: #1A6BAF; }
-    .p1 .pillar-num { background: #EAF4FF; color: #1A6BAF; }
-    .p1 .pillar-tag { background: #D0E8FF; color: #1A6BAF; }
-
-    .p2 { background: #EAF7EF; }
-    .p2 .pillar-num { background: #EAF7EF; color: #1A7A40; }
-    .p2 .pillar-tag { background: #C9EDD4; color: #1A7A40; }
-
-    .p3 { background: #FFF8EA; }
-    .p3 .pillar-num { background: #FFF8EA; color: #B87A10; }
-    .p3 .pillar-tag { background: #FFE8A8; color: #8A5C0A; }
-
-    .p4 { background: #F5EAFF; }
-    .p4 .pillar-num { background: #F5EAFF; color: #7B2FAE; }
-    .p4 .pillar-tag { background: #E8D0FF; color: #7B2FAE; }
-
-    .p5 { background: #FFEAEA; }
-    .p5 .pillar-num { background: #FFEAEA; color: #AE2F2F; }
-    .p5 .pillar-tag { background: #FFD0D0; color: #AE2F2F; }
-
-    /* ─── METRICS / ROI ─────────────────────────────── */
-    .metrics-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-bottom: 32px;
-    }
-
-    .metric-card {
-      text-align: center;
-      padding: 22px 16px;
-      border-radius: 10px;
-      background: linear-gradient(145deg, var(--deep-teal), var(--teal));
-      color: var(--white);
-    }
-
-    .metric-card .metric-val {
-      font-family: 'Playfair Display', serif;
-      font-size: 30px;
-      font-weight: 800;
-      color: var(--gold-light);
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-
-    .metric-card .metric-label {
-      font-size: 9px;
-      font-weight: 500;
-      color: rgba(255,255,255,0.72);
-      line-height: 1.4;
-      letter-spacing: 0.3px;
-    }
-
-    .metrics-alt-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-      margin-bottom: 32px;
-    }
-
-    .metrics-alt-card {
-      padding: 18px 20px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: var(--off-white);
-    }
-
-    .metrics-alt-card .alt-icon {
-      font-size: 20px;
-      margin-bottom: 8px;
-    }
-
-    .metrics-alt-card h4 {
-      font-size: 10.5px;
-      font-weight: 700;
-      color: var(--deep-teal);
-      margin-bottom: 4px;
-    }
-
-    .metrics-alt-card p {
-      font-size: 9.5px;
-      color: var(--ink-soft);
-      line-height: 1.6;
-    }
-
-    /* ─── TIMELINE ──────────────────────────────────── */
-    .timeline {
-      position: relative;
-      padding-left: 28px;
-      margin-bottom: 10px;
-    }
-
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 9px;
-      top: 8px;
-      bottom: 8px;
-      width: 2px;
-      background: linear-gradient(180deg, var(--gold) 0%, var(--teal-light) 100%);
-      border-radius: 2px;
-    }
-
-    .timeline-item {
-      position: relative;
-      margin-bottom: 22px;
-    }
-
-    .timeline-item:last-child {
-      margin-bottom: 0;
-    }
-
-    .timeline-dot {
-      position: absolute;
-      left: -24px;
-      top: 4px;
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      border: 2.5px solid var(--white);
-      box-shadow: 0 0 0 2px currentColor;
-    }
-
-    .timeline-item-header {
-      display: flex;
-      align-items: baseline;
-      gap: 12px;
-      margin-bottom: 8px;
-    }
-
-    .timeline-phase-badge {
-      font-size: 8px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      padding: 3px 10px;
-      border-radius: 20px;
-      white-space: nowrap;
-    }
-
-    .timeline-duration {
-      font-size: 9px;
-      font-weight: 600;
-      color: var(--muted);
-    }
-
-    .timeline-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 13.5px;
-      font-weight: 700;
-      color: var(--deep-teal);
-      margin-bottom: 5px;
-    }
-
-    .timeline-deliverables {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 6px;
-    }
-
-    .deliverable-chip {
-      font-size: 8px;
-      font-weight: 500;
-      background: var(--teal-pale);
-      color: var(--teal);
-      padding: 2px 9px;
-      border-radius: 20px;
-      letter-spacing: 0.3px;
-    }
-
-    /* Timeline phase colors */
-    .phase-1 { color: #1A6BAF; }
-    .phase-1 .timeline-dot { color: #1A6BAF; background: #1A6BAF; }
-    .phase-1 .timeline-phase-badge { background: #D0E8FF; color: #1A6BAF; }
-
-    .phase-2 { color: #1A7A40; }
-    .phase-2 .timeline-dot { color: #1A7A40; background: #1A7A40; }
-    .phase-2 .timeline-phase-badge { background: #C9EDD4; color: #1A7A40; }
-
-    .phase-3 { color: #B87A10; }
-    .phase-3 .timeline-dot { color: #B87A10; background: #B87A10; }
-    .phase-3 .timeline-phase-badge { background: #FFE8A8; color: #8A5C0A; }
-
-    .phase-4 { color: #7B2FAE; }
-    .phase-4 .timeline-dot { color: #7B2FAE; background: #7B2FAE; }
-    .phase-4 .timeline-phase-badge { background: #E8D0FF; color: #7B2FAE; }
-
-    .phase-5 { color: #AE2F2F; }
-    .phase-5 .timeline-dot { color: #AE2F2F; background: #AE2F2F; }
-    .phase-5 .timeline-phase-badge { background: #FFD0D0; color: #AE2F2F; }
-
-    /* ─── TECH STACK ────────────────────────────────── */
-    .tech-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 28px;
-    }
-
-    .tech-card {
-      padding: 16px;
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      background: var(--off-white);
-      text-align: center;
-    }
-
-    .tech-card .tech-icon {
-      font-size: 22px;
-      margin-bottom: 7px;
-    }
-
-    .tech-card h4 {
-      font-size: 9.5px;
-      font-weight: 700;
-      color: var(--deep-teal);
-      margin-bottom: 3px;
-    }
-
-    .tech-card p {
-      font-size: 8.5px;
-      color: var(--muted);
-    }
-
-    /* ─── PHILOSOPHY BOX ────────────────────────────── */
-    .philosophy-box {
-      background: var(--gold-pale);
-      border: 1px solid #E0C875;
-      border-left: 4px solid var(--gold);
-      border-radius: 10px;
-      padding: 22px 26px;
-      margin-bottom: 28px;
-    }
-
-    .philosophy-box h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--deep-teal);
-      margin-bottom: 8px;
-    }
-
-    .philosophy-box p {
-      font-size: 10px;
-      color: var(--ink-soft);
-      line-height: 1.7;
-    }
-
-    .philosophy-box strong {
-      color: var(--deep-teal);
-    }
-
-    /* ─── COMPARISON TABLE ──────────────────────────── */
-    .compare-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 28px;
-      font-size: 9.5px;
-    }
-
-    .compare-table thead tr {
-      background: var(--deep-teal);
-      color: var(--white);
-    }
-
-    .compare-table thead th {
-      padding: 11px 14px;
-      text-align: left;
-      font-size: 9px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-    }
-
-    .compare-table thead th:first-child {
-      border-radius: 8px 0 0 0;
-    }
-    .compare-table thead th:last-child {
-      border-radius: 0 8px 0 0;
-    }
-
-    .compare-table tbody tr {
-      border-bottom: 1px solid var(--border);
-    }
-
-    .compare-table tbody tr:nth-child(even) {
-      background: var(--off-white);
-    }
-
-    .compare-table tbody td {
-      padding: 10px 14px;
-      color: var(--ink-soft);
-      vertical-align: top;
-      line-height: 1.55;
-    }
-
-    .compare-table tbody td:first-child {
-      font-weight: 600;
-      color: var(--ink);
-    }
-
-    .bad { color: #C45E1A; }
-    .good { color: #1A7A40; }
-    .check { color: #1A7A40; font-weight: 700; font-size: 12px; }
-    .cross { color: #C45E1A; font-weight: 700; font-size: 12px; }
-
-    /* ─── INVESTMENT / NEXT STEPS ───────────────────── */
-    .next-steps-list {
-      counter-reset: steps;
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 28px;
-    }
-
-    .next-steps-list li {
-      counter-increment: steps;
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      padding: 14px 18px;
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      background: var(--off-white);
-    }
-
-    .next-steps-list li::before {
-      content: counter(steps);
-      min-width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--teal), var(--teal-mid));
-      color: var(--white);
-      font-size: 11px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .next-steps-list li .step-content h4 {
-      font-size: 10.5px;
-      font-weight: 700;
-      color: var(--deep-teal);
-      margin-bottom: 3px;
-    }
-
-    .next-steps-list li .step-content p {
-      font-size: 9px;
-      color: var(--ink-soft);
-      line-height: 1.6;
-    }
-
-    /* ─── CLOSING PAGE ──────────────────────────────── */
-    .closing {
-      min-height: 297mm;
-      background: var(--deep-teal);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 60px 52px;
-      position: relative;
-      overflow: hidden;
-      page-break-after: auto;
-    }
-
-    .closing::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        radial-gradient(ellipse 70% 50% at 50% 0%, rgba(201,168,76,0.15) 0%, transparent 55%),
-        radial-gradient(ellipse 60% 40% at 50% 100%, rgba(42,157,143,0.18) 0%, transparent 50%);
-    }
-
-    .closing-content {
-      position: relative;
-      z-index: 1;
-    }
-
-    .closing-icon {
-      font-size: 52px;
-      margin-bottom: 24px;
-    }
-
-    .closing-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 36px;
-      font-weight: 800;
-      color: var(--white);
-      line-height: 1.2;
-      margin-bottom: 16px;
-    }
-
-    .closing-title span {
-      color: var(--gold-light);
-    }
-
-    .closing-sub {
-      font-size: 12px;
-      color: rgba(255,255,255,0.65);
-      max-width: 420px;
-      line-height: 1.75;
-      margin: 0 auto 40px;
-    }
-
-    .closing-divider {
-      width: 60px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      margin: 0 auto 40px;
-    }
-
-    .closing-contact-grid {
-      display: flex;
-      gap: 32px;
-      justify-content: center;
-    }
-
-    .closing-contact-item {
-      text-align: center;
-    }
-
-    .closing-contact-item label {
-      display: block;
-      font-size: 8px;
-      font-weight: 600;
-      color: rgba(255,255,255,0.4);
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      margin-bottom: 5px;
-    }
-
-    .closing-contact-item span {
-      font-size: 11px;
-      font-weight: 500;
-      color: rgba(255,255,255,0.85);
-    }
-
-    .closing-footer {
-      position: absolute;
-      bottom: 36px;
-      left: 0; right: 0;
-      text-align: center;
-      font-size: 8px;
-      color: rgba(255,255,255,0.25);
-      letter-spacing: 0.5px;
-    }
-
-    /* ─── PRINT / PAGE BREAK ────────────────────────── */
-    @media print {
-      @page {
-        size: A4;
-        margin: 0;
-      }
-      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .page { width: 100%; }
-    }
-
-    /* ─── UTILITY ───────────────────────────────────── */
-    .mt-8  { margin-top: 8px; }
-    .mt-16 { margin-top: 16px; }
-    .mt-24 { margin-top: 24px; }
-    .mb-8  { margin-bottom: 8px; }
-    .mb-16 { margin-bottom: 16px; }
-    .mb-24 { margin-bottom: 24px; }
-
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
+      --gold:#C5A059;--gold-light:#D4B978;--gold-pale:#F8F1E4;
+      --deep-teal:#0A1F1C;--teal:#0F2E28;--teal-mid:#1A4D42;--teal-light:#2A7A6A;--teal-pale:#E8F4F1;
+      --ink:#0D0D0D;--ink-soft:#2A2A2A;--muted:#6B6B6B;
+      --white:#FFFFFF;--off-white:#FAFAF7;--border:#E8E4DE;
+      --red:#C45E1A;--red-bg:#FEF7F0;--red-border:#F5D9C4;
+      --green:#1A7A40;--green-bg:#EAF7EF;
+      --blue:#1A6BAF;--blue-bg:#EAF4FF;
+      --purple:#7B2FAE;--purple-bg:#F5EAFF;
+      --shadow:0 4px 24px rgba(10,31,28,0.10);--shadow-lg:0 12px 48px rgba(10,31,28,0.16);
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--ink);font-size:10.5pt;line-height:1.7}
+    .page{width:210mm;margin:0 auto;background:var(--white)}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,46,43,0.95);backdrop-filter:blur(12px);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:64px}
+    nav a{text-decoration:none}
+    .nav-logo{display:flex;align-items:center;gap:12px}
+    .nav-logo-icon{width:36px;height:36px;background:linear-gradient(135deg,#C9A84C,#E8CC7A);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px}
+    .nav-logo-text{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#fff}
+    .nav-logo-text span{color:#E8CC7A}
+    .nav-links{display:flex;gap:32px}
+    .nav-links a{font-size:13px;font-weight:500;color:rgba(255,255,255,0.7);transition:color 0.2s}
+    .nav-links a:hover{color:#fff}
+    .nav-spacer{height:64px}
+
+    /* COVER */
+    .cover{position:relative;min-height:297mm;background:var(--deep-teal);overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:0;page-break-after:always}
+    .cover-bg{position:absolute;inset:0;background-image:radial-gradient(ellipse 80% 60% at 120% -10%,rgba(201,168,76,0.18) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at -20% 110%,rgba(42,157,143,0.22) 0%,transparent 55%)}
+    .cover-gold-bar{position:absolute;bottom:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--gold));z-index:3}
+    .cover-top{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:36px 52px 0}
+    .cover-logo{display:flex;align-items:center;gap:14px}
+    .cover-logo-icon{width:46px;height:46px;background:linear-gradient(135deg,var(--gold),var(--gold-light));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px}
+    .cover-logo-name{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--white)}
+    .cover-logo-sub{font-size:9px;font-weight:500;color:var(--gold-light);letter-spacing:2.5px;text-transform:uppercase;margin-top:2px}
+    .cover-badge{background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.4);border-radius:6px;padding:6px 16px;font-size:8.5px;font-weight:600;color:var(--gold-light);letter-spacing:2px;text-transform:uppercase}
+    .cover-hero{position:relative;z-index:2;padding:0 52px;flex:1;display:flex;flex-direction:column;justify-content:center;padding-top:48px}
+    .cover-eyebrow{font-size:8.5px;font-weight:600;color:var(--gold);letter-spacing:3.5px;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+    .cover-eyebrow::before{content:'';display:block;width:32px;height:1.5px;background:var(--gold)}
+    .cover-title{font-family:'Playfair Display',serif;font-size:52px;font-weight:800;color:var(--white);line-height:1.1;letter-spacing:-0.5px;margin-bottom:10px}
+    .cover-title span{color:var(--gold-light)}
+    .cover-subtitle{font-size:17px;font-weight:300;color:rgba(255,255,255,0.70);margin-bottom:44px;letter-spacing:0.3px}
+    .cover-divider{width:64px;height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin-bottom:36px}
+    .cover-meta{display:flex;gap:40px}
+    .cover-meta-item label{display:block;font-size:8px;font-weight:600;color:rgba(255,255,255,0.4);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:5px}
+    .cover-meta-item span{font-size:11px;font-weight:500;color:rgba(255,255,255,0.85)}
+    .cover-bottom{position:relative;z-index:2;padding:32px 52px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.08)}
+    .cover-bottom-note{font-size:8.5px;color:rgba(255,255,255,0.35)}
+    .cover-conf{font-size:8px;font-weight:600;color:rgba(201,168,76,0.55);letter-spacing:2px;text-transform:uppercase}
+
+    /* INNER PAGES */
+    .inner-page{min-height:297mm;padding:52px;position:relative;page-break-after:always}
+    .inner-page:last-child{page-break-after:auto}
+    .page-header{display:flex;align-items:center;justify-content:space-between;padding-bottom:20px;border-bottom:1.5px solid var(--border);margin-bottom:40px}
+    .page-header-logo{display:flex;align-items:center;gap:10px}
+    .page-header-logo-icon{width:28px;height:28px;background:linear-gradient(135deg,var(--teal),var(--teal-mid));border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px}
+    .page-header-logo-name{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:var(--teal)}
+    .page-header-right{font-size:8px;font-weight:500;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase}
+
+    /* SECTION HEADINGS */
+    .section-eyebrow{font-size:8px;font-weight:700;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+    .section-eyebrow::before{content:'';display:block;width:20px;height:1.5px;background:var(--gold)}
+    .section-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--deep-teal);line-height:1.25;margin-bottom:8px}
+    .section-lead{font-size:11px;color:var(--ink-soft);line-height:1.75;margin-bottom:32px;max-width:88%}
+
+    /* PROBLEM CARDS */
+    .problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:32px}
+    .problem-card{background:var(--red-bg);border:1px solid var(--red-border);border-left:3.5px solid var(--red);border-radius:8px;padding:16px 18px}
+    .problem-card h4{font-size:10px;font-weight:700;color:#C45E1A;margin-bottom:5px;display:flex;align-items:center;gap:6px}
+    .problem-card p{font-size:9.5px;color:var(--ink-soft);line-height:1.65}
+
+    /* SOLUTION BOX */
+    .solution-box{background:linear-gradient(135deg,var(--deep-teal) 0%,var(--teal) 100%);border-radius:14px;padding:30px 34px;margin-bottom:32px;position:relative;overflow:hidden}
+    .solution-box::after{content:'';position:absolute;top:-30px;right:-30px;width:140px;height:140px;border-radius:50%;background:rgba(201,168,76,0.12)}
+    .solution-box h3{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--white);margin-bottom:10px;position:relative;z-index:1}
+    .solution-box p{font-size:10px;color:rgba(255,255,255,0.78);line-height:1.75;max-width:82%;position:relative;z-index:1}
+
+    /* METRICS */
+    .metrics-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:32px}
+    .metric-card{text-align:center;padding:22px 16px;border-radius:10px;background:linear-gradient(145deg,var(--deep-teal),var(--teal));color:var(--white)}
+    .metric-val{font-family:'Playfair Display',serif;font-size:30px;font-weight:800;color:var(--gold-light);line-height:1;margin-bottom:6px}
+    .metric-label{font-size:9px;font-weight:500;color:rgba(255,255,255,0.72);line-height:1.4}
+
+    /* BAR CHART */
+    .bar-chart{display:flex;flex-direction:column;gap:12px;margin-bottom:32px}
+    .bar-row{display:flex;align-items:center;gap:12px}
+    .bar-label{min-width:120px;font-size:9px;font-weight:600;color:var(--ink-soft);text-align:right}
+    .bar-track{flex:1;height:24px;background:var(--border);border-radius:6px;overflow:hidden;position:relative}
+    .bar-fill{height:100%;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:8px;font-weight:700;color:var(--white);transition:width 0.5s}
+    .bar-fill.gold{background:linear-gradient(90deg,var(--gold),var(--gold-light))}
+    .bar-fill.teal{background:linear-gradient(90deg,var(--teal),var(--teal-light))}
+    .bar-fill.blue{background:linear-gradient(90deg,var(--blue),#3A8BD6)}
+    .bar-fill.green{background:linear-gradient(90deg,var(--green),#28A858)}
+
+    /* STAT ROWS */
+    .stat-rows{display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
+    .stat-row{display:flex;align-items:center;gap:14px;padding:14px 18px;border:1px solid var(--border);border-radius:9px;background:var(--off-white)}
+    .stat-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+    .stat-content{flex:1}
+    .stat-content h4{font-size:10px;font-weight:700;color:var(--deep-teal);margin-bottom:2px}
+    .stat-content p{font-size:9px;color:var(--muted);line-height:1.5}
+    .stat-number{font-family:'Playfair Display',serif;font-size:22px;font-weight:800;color:var(--gold);flex-shrink:0}
+
+    /* COMPARISON TABLE */
+    .compare-table{width:100%;border-collapse:collapse;margin-bottom:28px;font-size:9.5px}
+    .compare-table thead tr{background:var(--deep-teal);color:var(--white)}
+    .compare-table thead th{padding:11px 14px;text-align:left;font-size:9px;font-weight:600;letter-spacing:0.5px}
+    .compare-table thead th:first-child{border-radius:8px 0 0 0}
+    .compare-table thead th:last-child{border-radius:0 8px 0 0}
+    .compare-table tbody tr{border-bottom:1px solid var(--border)}
+    .compare-table tbody tr:nth-child(even){background:var(--off-white)}
+    .compare-table tbody td{padding:10px 14px;color:var(--ink-soft);vertical-align:top;line-height:1.55}
+    .compare-table tbody td:first-child{font-weight:600;color:var(--ink)}
+    .bad{color:#C45E1A}.good{color:#1A7A40}
+
+    /* TIMELINE */
+    .timeline{position:relative;padding-left:28px;margin-bottom:10px}
+    .timeline::before{content:'';position:absolute;left:9px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,var(--gold) 0%,var(--teal-light) 100%);border-radius:2px}
+    .timeline-item{position:relative;margin-bottom:22px}
+    .timeline-item:last-child{margin-bottom:0}
+    .timeline-dot{position:absolute;left:-24px;top:4px;width:14px;height:14px;border-radius:50%;border:2.5px solid var(--white);box-shadow:0 0 0 2px currentColor}
+    .timeline-item-header{display:flex;align-items:baseline;gap:12px;margin-bottom:8px}
+    .timeline-phase-badge{font-size:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:20px;white-space:nowrap}
+    .timeline-duration{font-size:9px;font-weight:600;color:var(--muted)}
+    .timeline-title{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;color:var(--deep-teal);margin-bottom:5px}
+    .timeline-deliverables{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+    .deliverable-chip{font-size:8px;font-weight:500;background:var(--teal-pale);color:var(--teal);padding:2px 9px;border-radius:20px}
+    .phase-1{color:#1A6BAF}.phase-1 .timeline-dot{color:#1A6BAF;background:#1A6BAF}.phase-1 .timeline-phase-badge{background:#D0E8FF;color:#1A6BAF}
+    .phase-2{color:#1A7A40}.phase-2 .timeline-dot{color:#1A7A40;background:#1A7A40}.phase-2 .timeline-phase-badge{background:#C9EDD4;color:#1A7A40}
+    .phase-3{color:#B87A10}.phase-3 .timeline-dot{color:#B87A10;background:#B87A10}.phase-3 .timeline-phase-badge{background:#FFE8A8;color:#8A5C0A}
+    .phase-4{color:#7B2FAE}.phase-4 .timeline-dot{color:#7B2FAE;background:#7B2FAE}.phase-4 .timeline-phase-badge{background:#E8D0FF;color:#7B2FAE}
+    .phase-5{color:#AE2F2F}.phase-5 .timeline-dot{color:#AE2F2F;background:#AE2F2F}.phase-5 .timeline-phase-badge{background:#FFD0D0;color:#AE2F2F}
+
+    /* TECH GRID */
+    .tech-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px}
+    .tech-card{padding:16px;border:1px solid var(--border);border-radius:9px;background:var(--off-white);text-align:center}
+    .tech-icon{font-size:22px;margin-bottom:7px}
+    .tech-card h4{font-size:9.5px;font-weight:700;color:var(--deep-teal);margin-bottom:3px}
+    .tech-card p{font-size:8.5px;color:var(--muted)}
+
+    /* PILLAR CARDS */
+    .pillar-list{display:flex;flex-direction:column;gap:14px}
+    .pillar-card{display:flex;gap:18px;align-items:flex-start;padding:18px 20px;border:1px solid var(--border);border-radius:10px;background:var(--off-white)}
+    .pillar-num{min-width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;font-family:'Playfair Display',serif;flex-shrink:0}
+    .pillar-content h4{font-size:11px;font-weight:700;color:var(--deep-teal);margin-bottom:4px}
+    .pillar-content p{font-size:9.5px;color:var(--ink-soft);line-height:1.65}
+    .pillar-tag{display:inline-block;font-size:7.5px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:2px 8px;border-radius:4px;margin-top:6px}
+    .p1{background:var(--blue-bg)}.p1 .pillar-num{background:var(--blue-bg);color:var(--blue)}.p1 .pillar-tag{background:#D0E8FF;color:var(--blue)}
+    .p2{background:var(--green-bg)}.p2 .pillar-num{background:var(--green-bg);color:var(--green)}.p2 .pillar-tag{background:#C9EDD4;color:var(--green)}
+    .p3{background:#FFF8EA}.p3 .pillar-num{background:#FFF8EA;color:#B87A10}.p3 .pillar-tag{background:#FFE8A8;color:#8A5C0A}
+    .p4{background:var(--purple-bg)}.p4 .pillar-num{background:var(--purple-bg);color:var(--purple)}.p4 .pillar-tag{background:#E8D0FF;color:var(--purple)}
+    .p5{background:#FFEAEA}.p5 .pillar-num{background:#FFEAEA;color:#AE2F2F}.p5 .pillar-tag{background:#FFD0D0;color:#AE2F2F}
+
+    /* PHILOSOPHY BOX */
+    .philosophy-box{background:var(--gold-pale);border:1px solid #E0C875;border-left:4px solid var(--gold);border-radius:10px;padding:22px 26px;margin-bottom:28px}
+    .philosophy-box h3{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--deep-teal);margin-bottom:8px}
+    .philosophy-box p{font-size:10px;color:var(--ink-soft);line-height:1.7}
+    .philosophy-box strong{color:var(--deep-teal)}
+
+    /* NEXT STEPS */
+    .next-steps-list{counter-reset:steps;list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
+    .next-steps-list li{counter-increment:steps;display:flex;align-items:flex-start;gap:14px;padding:14px 18px;border:1px solid var(--border);border-radius:9px;background:var(--off-white)}
+    .next-steps-list li::before{content:counter(steps);min-width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--teal-mid));color:var(--white);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .step-content h4{font-size:10.5px;font-weight:700;color:var(--deep-teal);margin-bottom:3px}
+    .step-content p{font-size:9px;color:var(--ink-soft);line-height:1.6}
+
+    /* ARCHITECTURE DIAGRAM */
+    .arch-diagram{background:var(--deep-teal);border-radius:14px;padding:28px;margin-bottom:32px;color:var(--white);font-family:'Courier New',monospace;font-size:8.5px;line-height:1.5;overflow-x:auto}
+    .arch-diagram .layer{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:14px;margin-bottom:10px}
+    .arch-diagram .layer-title{color:var(--gold-light);font-weight:700;font-size:9px;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;font-family:'Inter',sans-serif}
+    .arch-diagram .component{display:inline-block;background:rgba(42,157,143,0.3);border:1px solid rgba(42,157,143,0.5);border-radius:6px;padding:4px 10px;margin:3px;font-size:8px;font-family:'Inter',sans-serif}
+    .arch-diagram .arrow{text-align:center;color:var(--gold);font-size:12px;margin:4px 0}
+    .arch-diagram .warn{background:rgba(196,94,26,0.3);border-color:rgba(196,94,26,0.5);color:#F5A623}
+
+    /* FLOW DIAGRAM */
+    .flow-steps{display:flex;flex-direction:column;gap:0;margin-bottom:32px}
+    .flow-step{display:flex;align-items:stretch;gap:0}
+    .flow-line{width:40px;display:flex;flex-direction:column;align-items:center;position:relative}
+    .flow-dot{width:16px;height:16px;border-radius:50%;background:var(--teal);border:3px solid var(--teal-pale);z-index:1;flex-shrink:0}
+    .flow-connector{width:2px;flex:1;background:linear-gradient(180deg,var(--teal),var(--gold));min-height:20px}
+    .flow-content{flex:1;padding:8px 0 20px 8px}
+    .flow-content h4{font-size:10px;font-weight:700;color:var(--deep-teal);margin-bottom:3px}
+    .flow-content p{font-size:9px;color:var(--ink-soft);line-height:1.55}
+    .flow-badge{display:inline-block;font-size:7.5px;font-weight:600;padding:2px 8px;border-radius:4px;margin-top:4px}
+    .flow-badge.ai{background:#E8D0FF;color:var(--purple)}
+    .flow-badge.code{background:#D0E8FF;color:var(--blue)}
+    .flow-badge.both{background:#C9EDD4;color:var(--green)}
+
+    /* COST TABLE */
+    .cost-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px}
+    .cost-card{padding:18px;border:1px solid var(--border);border-radius:10px;background:var(--off-white)}
+    .cost-card h4{font-size:10px;font-weight:700;color:var(--deep-teal);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+    .cost-row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);font-size:9px}
+    .cost-row:last-child{border-bottom:none}
+    .cost-row .label{color:var(--muted)}
+    .cost-row .amount{font-weight:600;color:var(--ink)}
+    .cost-total{margin-top:8px;padding-top:8px;border-top:2px solid var(--deep-teal);display:flex;justify-content:space-between;font-size:10px;font-weight:700;color:var(--deep-teal)}
+
+    /* TWO COL */
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    .three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+
+    /* ALT METRIC CARDS */
+    .metrics-alt-card{padding:18px 20px;border-radius:10px;border:1px solid var(--border);background:var(--off-white)}
+    .alt-icon{font-size:20px;margin-bottom:8px}
+    .metrics-alt-card h4{font-size:10.5px;font-weight:700;color:var(--deep-teal);margin-bottom:4px}
+    .metrics-alt-card p{font-size:9.5px;color:var(--ink-soft);line-height:1.6}
+
+    /* MARKET DONUT (CSS only) */
+    .donut-container{display:flex;align-items:center;gap:24px;margin-bottom:24px}
+    .donut{width:120px;height:120px;border-radius:50%;position:relative;flex-shrink:0}
+    .donut-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:60px;height:60px;border-radius:50%;background:var(--white);display:flex;flex-direction:column;align-items:center;justify-content:center}
+    .donut-center .val{font-family:'Playfair Display',serif;font-size:16px;font-weight:800;color:var(--deep-teal)}
+    .donut-center .lbl{font-size:7px;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px}
+    .donut-legend{display:flex;flex-direction:column;gap:6px}
+    .legend-item{display:flex;align-items:center;gap:8px;font-size:9px;color:var(--ink-soft)}
+    .legend-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+
+    /* PRINT */
+    @media print{@page{size:A4;margin:0}body{-webkit-print-color-adjust:exact;print-color-adjust:exact}.page{width:100%}nav{display:none}.nav-spacer{display:none}}
+    .mt-8{margin-top:8px}.mt-16{margin-top:16px}.mt-24{margin-top:24px}.mb-8{margin-bottom:8px}.mb-16{margin-bottom:16px}.mb-24{margin-bottom:24px}
   </style>
 </head>
 <body>
-<nav style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,46,43,0.95);backdrop-filter:blur(12px);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:64px;">
-  <a href="index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
-    <div style="width:36px;height:36px;background:linear-gradient(135deg,#C9A84C,#E8CC7A);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;">🌿</div>
-    <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#fff;">santos<span style="color:#E8CC7A;">.travel</span></div>
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-icon">🌿</div>
+    <div class="nav-logo-text">santos<span>.travel</span></div>
   </a>
-  <div style="display:flex;gap:32px;">
-    <a href="index.html" style="font-size:13px;font-weight:500;color:rgba(255,255,255,0.7);text-decoration:none;transition:color 0.2s;">Home</a>
-    <a href="blog.html" style="font-size:13px;font-weight:500;color:rgba(255,255,255,0.7);text-decoration:none;transition:color 0.2s;">Blog</a>
-    <a href="index.html#contact" style="font-size:13px;font-weight:500;color:rgba(255,255,255,0.7);text-decoration:none;transition:color 0.2s;">Contact</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="blog.html">Blog</a>
+    <a href="proposal.html" style="color:#E8CC7A">Proposal</a>
+    <a href="index.html#contact">Contact</a>
   </div>
 </nav>
-<div style="height:64px;"></div>
+<div class="nav-spacer"></div>
 <div class="page">
 
-  <!-- ════════════════════════════════════════════════
-       COVER PAGE
-  ════════════════════════════════════════════════ -->
+  <!-- ═══════════ COVER PAGE ═══════════ -->
   <div class="cover">
-    <div class="cover-bg-pattern"></div>
+    <div class="cover-bg"></div>
     <div class="cover-gold-bar"></div>
-
-    <div class="cover-top-bar">
-      <div class="cover-logo-block">
+    <div class="cover-top">
+      <div class="cover-logo">
         <div class="cover-logo-icon">🌿</div>
         <div>
-          <div class="cover-logo-text">santos.travel</div>
+          <div class="cover-logo-name">santos.travel</div>
           <div class="cover-logo-sub">Kerala · South India · Inbound Tours</div>
         </div>
       </div>
       <div class="cover-badge">Confidential</div>
     </div>
-
     <div class="cover-hero">
-      <div class="cover-eyebrow">Strategic Technical Proposal</div>
-      <div class="cover-title">
-        IVA <span>Cortex</span><br/>
-        Automation<br/>Initiative
-      </div>
+      <div class="cover-eyebrow">Strategic Technical Proposal — June 2026</div>
+      <div class="cover-title">IVA <span>Cortex</span><br/>Automation Initiative</div>
       <div class="cover-subtitle">Intelligent Virtual Assistant for End-to-End Tour Operations</div>
       <div class="cover-divider"></div>
-      <div class="cover-meta-row">
-        <div class="cover-meta-item">
-          <label>Prepared For</label>
-          <span>The Owner, santos.travel</span>
-        </div>
-        <div class="cover-meta-item">
-          <label>Date</label>
-          <span>June 2026</span>
-        </div>
-        <div class="cover-meta-item">
-          <label>Project Timeline</label>
-          <span>20 Weeks · 5 Phases</span>
-        </div>
-        <div class="cover-meta-item">
-          <label>Document Version</label>
-          <span>v1.0 — Initial Draft</span>
-        </div>
+      <div class="cover-meta">
+        <div class="cover-meta-item"><label>Prepared For</label><span>The Owner, santos.travel</span></div>
+        <div class="cover-meta-item"><label>Market Opportunity</label><span>$75.7B India Luxury Travel</span></div>
+        <div class="cover-meta-item"><label>Project Timeline</label><span>20 Weeks · 5 Phases</span></div>
+        <div class="cover-meta-item"><label>Version</label><span>v2.0 — Comprehensive</span></div>
       </div>
     </div>
-
     <div class="cover-bottom">
       <div class="cover-bottom-note">Prepared by the IVA Cortex Engineering Team · santos.travel</div>
-      <div class="cover-confidential">Strictly Confidential</div>
+      <div class="cover-conf">Strictly Confidential</div>
     </div>
   </div>
 
-  <!-- ════════════════════════════════════════════════
-       PAGE 2 — EXECUTIVE SUMMARY
-  ════════════════════════════════════════════════ -->
+  <!-- ═══════════ PAGE 2 — EXECUTIVE SUMMARY ═══════════ -->
   <div class="inner-page">
     <div class="page-header">
-      <div class="page-logo-block" style="display:flex;align-items:center;gap:10px;">
-        <div style="width:28px;height:28px;background:linear-gradient(135deg,#0A2E2B,#1A6B5E);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;">🌿</div>
-        <div style="font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:#0A2E2B;">santos.travel</div>
+      <div class="page-header-logo">
+        <div class="page-header-logo-icon">🌿</div>
+        <div class="page-header-logo-name">santos.travel</div>
       </div>
       <div class="page-header-right">IVA Cortex — Executive Summary</div>
     </div>
@@ -1021,255 +293,214 @@
     <div class="section-eyebrow">Executive Summary</div>
     <h2 class="section-title">Where We Are,<br/>Where We're Going</h2>
     <p class="section-lead">
-      santos.travel has built a trusted reputation delivering premium inbound Kerala and South India experiences. 
-      As demand scales, the current manual operations model creates invisible ceilings — in quote turnaround speed, 
-      human capacity, and revenue per inquiry. This proposal outlines a phased technology transformation to break 
-      through those ceilings without sacrificing the personal touch guests expect.
+      santos.travel has built a trusted reputation delivering premium Kerala and South India experiences.
+      The global luxury travel market is projected to reach $3.04 trillion by 2033 (8.5% CAGR), with
+      India's luxury segment at $75.7 billion and growing. Kerala alone attracted 821,999 foreign arrivals
+      in 2025 (+11.3% YoY), generating ₹50,000 crore in tourism revenue. This proposal outlines how
+      IVA Cortex captures this growth through intelligent automation.
     </p>
 
-    <!-- Problem grid -->
+    <!-- MARKET OPPORTUNITY INFOGRAPHIC -->
+    <div class="section-eyebrow">Market Opportunity at a Glance</div>
+    <div class="stat-rows mb-24">
+      <div class="stat-row">
+        <div class="stat-icon" style="background:var(--gold-pale)">🌍</div>
+        <div class="stat-content"><h4>Global Luxury Travel TAM</h4><p>Projected $3.04T by 2033, growing at 8.5% CAGR</p></div>
+        <div class="stat-number">$1.72T</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-icon" style="background:var(--teal-pale)">🇮🇳</div>
+        <div class="stat-content"><h4>India Luxury Travel Market</h4><p>$75.7B in 2025, Asia-Pacific fastest region at 9.9% CAGR</p></div>
+        <div class="stat-number">$75.7B</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-icon" style="background:#FFF8EA">🌴</div>
+        <div class="stat-content"><h4>Kerala Tourism Revenue</h4><p>821K foreign arrivals (+11.3% YoY), targeting 900K in 2026</p></div>
+        <div class="stat-number">₹50K Cr</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-icon" style="background:#FFEAEA">🤖</div>
+        <div class="stat-content"><h4>AI Adoption in Travel</h4><p>80% of tour operators now use AI (up from 28% two years ago)</p></div>
+        <div class="stat-number">80%</div>
+      </div>
+    </div>
+
+    <!-- PROBLEM GRID -->
     <div class="section-eyebrow">The Current Challenges</div>
     <div class="problem-grid">
       <div class="problem-card">
         <h4>⏳ Slow Quote Turnaround</h4>
-        <p>Manually assembling itineraries from scattered vendor rate sheets takes hours, sometimes days. Leads go cold while competitors respond faster.</p>
+        <p>Manually assembling itineraries from scattered vendor rate sheets takes 2–24 hours. 41% of operators cite manual processes as their top pressure. Leads go cold while competitors respond faster.</p>
       </div>
       <div class="problem-card">
         <h4>📋 Disconnected Data</h4>
-        <p>Vendor rates, guest details, and booking confirmations live in spreadsheets, WhatsApp, and email — with no single source of truth or audit trail.</p>
+        <p>Average tour operator uses 5 disconnected systems. Vendor rates, guest details, and bookings live in spreadsheets, WhatsApp, and email — with no single source of truth.</p>
       </div>
       <div class="problem-card">
         <h4>💸 Inconsistent Margins</h4>
-        <p>Manual pricing calculation introduces human error risk. A single misquoted rate can erode profit on an entire group booking without detection.</p>
+        <p>39% of operators worldwide have no booking system at all. Manual pricing introduces human error risk — a single misquoted rate can erode profit on an entire group booking.</p>
       </div>
       <div class="problem-card">
         <h4>🧠 Human Bottleneck</h4>
-        <p>Every inquiry, quote revision, and on-trip query routes through the same small team — limiting growth and creating burnout risk at peak season.</p>
+        <p>Every inquiry routes through the same small team — 15–25 hours/week on manual coordination. At peak season, this limits growth and creates burnout risk.</p>
       </div>
       <div class="problem-card">
         <h4>📄 Inconsistent Branding</h4>
-        <p>PDF itineraries and quote documents are manually assembled, leading to inconsistent formatting, missed upsells, and a less premium presentation.</p>
+        <p>PDF itineraries are manually assembled, leading to inconsistent formatting, missed upsells, and a less premium presentation that doesn't match the luxury price point.</p>
       </div>
       <div class="problem-card">
         <h4>🌐 Missed Scale Opportunities</h4>
-        <p>No B2B API for travel agent partners, no automated SEO content engine, and no yield management — leaving significant revenue untapped.</p>
+        <p>No B2B API for travel agent partners (15–20% commission potential), no automated SEO content engine, and no yield management — leaving significant revenue untapped.</p>
       </div>
     </div>
 
     <div class="solution-box">
       <h3>🤖 The Solution: IVA Cortex — A Hybrid Automation Engine</h3>
       <p>
-        IVA Cortex is not a chatbot. It is a full-stack intelligent operations platform where AI handles 
-        language (reading messages, writing itineraries) and code handles math (pricing, margins, database queries). 
-        This strict separation ensures financial precision is never left to chance, while every guest interaction 
-        remains warm, eloquent, and on-brand. The result: your team handles strategy; the system handles scale.
+        IVA Cortex is not a chatbot. It is a full-stack intelligent operations platform where AI handles
+        language (reading messages, writing itineraries) and code handles math (pricing, margins, database queries).
+        This strict separation ensures financial precision is never left to chance, while every guest interaction
+        remains warm, eloquent, and on-brand. With 64% of operators planning to increase AI budgets and
+        hyper-personalization driving up to 25% more bookings, IVA Cortex positions santos.travel at the
+        forefront of the industry's technological evolution.
       </p>
     </div>
   </div>
 
-  <!-- ════════════════════════════════════════════════
-       PAGE 3 — THE 5 PILLARS
-  ════════════════════════════════════════════════ -->
+  <!-- ═══════════ PAGE 3 — MARKET LANDSCAPE ═══════════ -->
   <div class="inner-page">
     <div class="page-header">
-      <div style="display:flex;align-items:center;gap:10px;">
-        <div style="width:28px;height:28px;background:linear-gradient(135deg,#0A2E2B,#1A6B5E);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;">🌿</div>
-        <div style="font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:#0A2E2B;">santos.travel</div>
-      </div>
-      <div class="page-header-right">IVA Cortex — The 5 Core Pillars</div>
+      <div class="page-header-logo"><div class="page-header-logo-icon">🌿</div><div class="page-header-logo-name">santos.travel</div></div>
+      <div class="page-header-right">IVA Cortex — Market Landscape</div>
     </div>
 
-    <div class="section-eyebrow">System Architecture</div>
-    <h2 class="section-title">The 5 Core Pillars<br/>of IVA Cortex</h2>
+    <div class="section-eyebrow">Market Intelligence</div>
+    <h2 class="section-title">Luxury Travel Market<br/>Landscape 2026</h2>
     <p class="section-lead">
-      Every pillar is an independently deployable module. They communicate through a shared PostgreSQL 
-      database and typed API contracts — meaning each can be built, tested, and rolled back without 
-      destabilising the others.
+      The luxury travel sector is experiencing unprecedented growth driven by experience-seeking millennials,
+      AI-powered personalization, and a post-pandemic shift toward meaningful travel. Here's the data that
+      informs our strategy.
     </p>
 
-    <div class="pillar-list">
-      <div class="pillar-card p1">
-        <div class="pillar-num">1</div>
-        <div class="pillar-content">
-          <h4>🎯 AI Intake & Triage — The Smart Front Door</h4>
-          <p>
-            An NLP agent monitors the WhatsApp Business inbox. When a lead arrives — even in fragmented, 
-            informal language — the AI extracts structured parameters: number of travelers, travel dates, 
-            destinations, budget signals, and group type. This data is written directly to the PostgreSQL CRM, 
-            a quote is automatically triggered, and a priority score flags high-value leads for immediate human attention.
-          </p>
-          <span class="pillar-tag">WhatsApp API · LLM · PostgreSQL CRM</span>
-        </div>
+    <!-- MARKET GROWTH BAR CHART -->
+    <div class="section-eyebrow">Market Growth Projections</div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:16px;color:var(--deep-teal);margin-bottom:16px">Global Luxury Travel CAGR by Source</h3>
+    <div class="bar-chart">
+      <div class="bar-row">
+        <div class="bar-label">Asia-Pacific</div>
+        <div class="bar-track"><div class="bar-fill gold" style="width:99%">9.9%</div></div>
       </div>
-
-      <div class="pillar-card p2">
-        <div class="pillar-num">2</div>
-        <div class="pillar-content">
-          <h4>⚙️ Deterministic Quoting Engine — The Financial Heart</h4>
-          <p>
-            A strict code-only module (no AI involvement in numbers) that queries vendor rate tables, applies 
-            seasonal multipliers, calculates per-person pricing, adds configured margins, and assembles a complete 
-            quote. The final structured data is then passed to an LLM which writes only the descriptive itinerary 
-            text — never touching the numbers. Every quote is versioned and auditable.
-          </p>
-          <span class="pillar-tag">PostgreSQL · Node.js/Python · LLM Text Layer</span>
-        </div>
+      <div class="bar-row">
+        <div class="bar-label">MarkWide Research</div>
+        <div class="bar-track"><div class="bar-fill teal" style="width:86%">8.6%</div></div>
       </div>
-
-      <div class="pillar-card p3">
-        <div class="pillar-num">3</div>
-        <div class="pillar-content">
-          <h4>📄 Automated PDF Storefront — Instant Branded Proposals</h4>
-          <p>
-            Once a quote is approved, the system passes the structured data and generated text into a 
-            premium branded HTML template and renders a pixel-perfect PDF itinerary — complete with santos.travel 
-            branding, day-wise breakdowns, inclusions, hotel details, and terms. This replaces hours of manual 
-            document assembly with an automated, consistent, 30-second pipeline.
-          </p>
-          <span class="pillar-tag">Puppeteer · Handlebars Templates · Cloud Storage</span>
-        </div>
+      <div class="bar-row">
+        <div class="bar-label">Grand View Research</div>
+        <div class="bar-track"><div class="bar-fill blue" style="width:85%">8.5%</div></div>
       </div>
-
-      <div class="pillar-card p4">
-        <div class="pillar-num">4</div>
-        <div class="pillar-content">
-          <h4>🗺️ On-Trip Concierge & Dispatch — AI for Active Travelers</h4>
-          <p>
-            A RAG (Retrieval-Augmented Generation) WhatsApp bot serves guests during their active trip. 
-            It retrieves their confirmed itinerary, hotel contacts, and driver details to answer questions 
-            instantly. A Voice AI agent (Vapi.ai) handles outbound dispatch calls to vendors and drivers — 
-            reducing the operations team's communication load by an estimated 70%.
-          </p>
-          <span class="pillar-tag">RAG · WhatsApp Bot · Voice AI (Vapi.ai)</span>
-        </div>
+      <div class="bar-row">
+        <div class="bar-label">Allied Market Research</div>
+        <div class="bar-track"><div class="bar-fill green" style="width:74%">7.4%</div></div>
       </div>
-
-      <div class="pillar-card p5">
-        <div class="pillar-num">5</div>
-        <div class="pillar-content">
-          <h4>🚀 Growth Flywheels — Revenue Beyond Direct Bookings</h4>
-          <p>
-            Three independent growth engines: (1) A B2B Whitelabel API allowing international travel agents 
-            to query, price, and book itineraries under their own brand. (2) An autonomous SEO content engine 
-            that generates, optimises, and publishes destination guides to drive organic traffic. 
-            (3) A yield-management scraper that monitors competitor pricing to inform dynamic rate adjustments.
-          </p>
-          <span class="pillar-tag">REST API · Content Engine · Yield Scraper</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ════════════════════════════════════════════════
-       PAGE 4 — BUSINESS IMPACT & ROI
-  ════════════════════════════════════════════════ -->
-  <div class="inner-page">
-    <div class="page-header">
-      <div style="display:flex;align-items:center;gap:10px;">
-        <div style="width:28px;height:28px;background:linear-gradient(135deg,#0A2E2B,#1A6B5E);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;">🌿</div>
-        <div style="font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:#0A2E2B;">santos.travel</div>
-      </div>
-      <div class="page-header-right">IVA Cortex — Business Impact & ROI</div>
-    </div>
-
-    <div class="section-eyebrow">Business Impact</div>
-    <h2 class="section-title">Projected Improvements<br/>& Return on Investment</h2>
-    <p class="section-lead">
-      These projections are based on industry benchmarks for travel agencies that have implemented comparable 
-      automation systems, combined with santos.travel's current operational baseline.
-    </p>
-
-    <div class="metrics-grid">
-      <div class="metric-card">
-        <div class="metric-val">80%</div>
-        <div class="metric-label">Reduction in quote<br/>turnaround time</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-val">3×</div>
-        <div class="metric-label">Lead handling capacity<br/>without new hires</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-val">0</div>
-        <div class="metric-label">Pricing errors due to<br/>deterministic math engine</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-val">70%</div>
-        <div class="metric-label">Drop in on-trip team<br/>communication load</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-val">24/7</div>
-        <div class="metric-label">Inquiry response coverage<br/>including off-hours</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-val">+40%</div>
-        <div class="metric-label">Organic traffic potential<br/>from SEO content engine</div>
+      <div class="bar-row">
+        <div class="bar-label">India Hotels</div>
+        <div class="bar-track"><div class="bar-fill gold" style="width:95%">11.3%</div></div>
       </div>
     </div>
 
-    <!-- Comparison table -->
-    <div class="section-eyebrow">Before vs. After Comparison</div>
+    <!-- KEY TRENDS -->
+    <div class="section-eyebrow">Key Luxury Travel Trends 2026</div>
+    <div class="three-col mb-24">
+      <div class="metrics-alt-card">
+        <div class="alt-icon">🎯</div>
+        <h4>Experience Over Opulence</h4>
+        <p>87% of luxury travelers prioritize authentic cultural experiences. 79% of Millennials seek local workshops specific to destinations.</p>
+      </div>
+      <div class="metrics-alt-card">
+        <div class="alt-icon">✨</div>
+        <h4>Hyper-Personalization</h4>
+        <p>74% want personalized trips. 25% want search to start with "mood" not destination. Cookie-cutter itineraries are dead.</p>
+      </div>
+      <div class="metrics-alt-card">
+        <div class="alt-icon">🌱</div>
+        <h4>Sustainable Tourism</h4>
+        <p>75% say sustainability influences hotel choice. Willing to pay 11.7% premium. Regenerative travel is the next frontier.</p>
+      </div>
+      <div class="metrics-alt-card">
+        <div class="alt-icon">🤖</div>
+        <h4>AI as Table Stakes</h4>
+        <p>56% of travelers used AI for trip planning. 44% of operators use AI for itineraries. AI doubles conversion rates.</p>
+      </div>
+      <div class="metrics-alt-card">
+        <div class="alt-icon">👨‍👩‍👧‍👦</div>
+        <h4>Multigenerational Travel</h4>
+        <p>#2 trend per Virtuoso advisors. Corporate bleisure driving blended trips. Full medical concierge demand rising.</p>
+      </div>
+      <div class="metrics-alt-card">
+        <div class="alt-icon">🏖️</div>
+        <h4>Crowd-Free Destinations</h4>
+        <p>76% of advisors see peak-season shifting to off-peak. Growing interest in remote, uncrowded experiences.</p>
+      </div>
+    </div>
+
+    <!-- COMPETITOR LANDSCAPE -->
+    <div class="section-eyebrow">Competitive Landscape</div>
     <table class="compare-table">
       <thead>
-        <tr>
-          <th>Operational Area</th>
-          <th>Current State</th>
-          <th>After IVA Cortex</th>
-        </tr>
+        <tr><th>Competitor</th><th>Focus</th><th>Tech Advantage</th><th>Our Edge</th></tr>
       </thead>
       <tbody>
         <tr>
-          <td>Inquiry Response Time</td>
-          <td class="bad">2–24 hours (manual)</td>
-          <td class="good">Under 5 minutes (automated)</td>
+          <td>Abercrombie & Kent India</td>
+          <td>Ultra-luxury, private jets</td>
+          <td>Global brand, DMC Trade Hub</td>
+          <td class="good">We own the Kerala specialist niche with AI speed</td>
         </tr>
         <tr>
-          <td>Quote Generation</td>
-          <td class="bad">3–6 hours of manual assembly</td>
-          <td class="good">Under 30 seconds (automated pipeline)</td>
+          <td>Lux Crafter (Voyanta)</td>
+          <td>B2B DMC, sustainable luxury</td>
+          <td>AI itinerary + carbon tracking</td>
+          <td class="good">We combine AI + deterministic pricing + voice AI</td>
         </tr>
         <tr>
-          <td>Pricing Accuracy</td>
-          <td class="bad">Human error risk on every quote</td>
-          <td class="good">Deterministic — 100% consistent</td>
+          <td>Bayard Vacations</td>
+          <td>Premium India travel</td>
+          <td>AI Itinerary Hub (60-sec generation)</td>
+          <td class="good">We go further: full CRM + B2B API + on-trip concierge</td>
         </tr>
         <tr>
-          <td>CRM & Data Storage</td>
-          <td class="bad">Spreadsheets + WhatsApp history</td>
-          <td class="good">Relational PostgreSQL — fully auditable</td>
+          <td>Pioneer Holidays (Kochi)</td>
+          <td>South India specialist</td>
+          <td>National Tourism Award winner</td>
+          <td class="good">Technology-first approach vs traditional ops</td>
         </tr>
         <tr>
-          <td>On-Trip Guest Support</td>
-          <td class="bad">Team manually fields all queries</td>
-          <td class="good">RAG bot handles ~70% autonomously</td>
-        </tr>
-        <tr>
-          <td>PDF Proposal Quality</td>
-          <td class="bad">Inconsistent, manually assembled</td>
-          <td class="good">Branded, pixel-perfect, instant</td>
-        </tr>
-        <tr>
-          <td>B2B Agent Distribution</td>
-          <td class="bad">Not available</td>
-          <td class="good">Whitelabel API for agent partners</td>
-        </tr>
-        <tr>
-          <td>Off-Hours Coverage</td>
-          <td class="bad">Zero — leads lost at night/weekend</td>
-          <td class="good">Full 24/7 AI-powered coverage</td>
+          <td>KTDC / Regional DMCs</td>
+          <td>Volume, government-backed</td>
+          <td>Manual processes, phone/email</td>
+          <td class="good">24/7 AI vs business-hours-only operations</td>
         </tr>
       </tbody>
     </table>
+
+    <!-- CUSTOMER EXPECTATIONS -->
+    <div class="section-eyebrow">Luxury Customer Expectations</div>
+    <div class="two-col">
+      <div class="metrics-alt-card">
+        <h4>⏱️ Response Time Standards</h4>
+        <p><strong>Standard:</strong> 24 hours<br/><strong>Luxury:</strong> Under 1 hour, VIP under 15 minutes<br/><strong>IVA Cortex:</strong> Under 5 minutes, 24/7</p>
+      </div>
+      <div class="metrics-alt-card">
+        <h4>📱 Channel Preferences</h4>
+        <p><strong>98%</strong> open WhatsApp messages<br/><strong>65%</strong> engage in-app conversations<br/><strong>70%</strong> prefer credit card payments</p>
+      </div>
+    </div>
   </div>
 
-  <!-- ════════════════════════════════════════════════
-       PAGE 5 — TECH STACK + PHILOSOPHY
-  ════════════════════════════════════════════════ -->
+  <!-- ═══════════ PAGE 4 — TECHNICAL ARCHITECTURE ═══════════ -->
   <div class="inner-page">
     <div class="page-header">
-      <div style="display:flex;align-items:center;gap:10px;">
-        <div style="width:28px;height:28px;background:linear-gradient(135deg,#0A2E2B,#1A6B5E);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;">🌿</div>
-        <div style="font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:#0A2E2B;">santos.travel</div>
-      </div>
+      <div class="page-header-logo"><div class="page-header-logo-icon">🌿</div><div class="page-header-logo-name">santos.travel</div></div>
       <div class="page-header-right">IVA Cortex — Technical Architecture</div>
     </div>
 
@@ -1278,186 +509,571 @@
       <h3>⚖️ The Hybrid Automation Principle</h3>
       <p>
         The core design rule of IVA Cortex is non-negotiable: <strong>AI handles language. Code handles math. Never the reverse.</strong><br/><br/>
-        LLMs are extraordinary at reading informal human messages, writing eloquent itinerary prose, and 
-        understanding intent. They are unreliable for arithmetic. Therefore, every financial calculation — 
-        vendor rates, seasonal multipliers, per-pax pricing, margin application — is performed by deterministic 
-        backend code querying a structured database. Only after the numbers are finalized does an LLM receive 
-        a typed JSON payload to generate descriptive text <em>around</em> those numbers. This guarantees that 
-        no guest is ever quoted an incorrect price due to an AI hallucination.
+        LLMs are extraordinary at reading informal human messages, writing eloquent itinerary prose, and
+        understanding intent. They are unreliable for arithmetic. Therefore, every financial calculation —
+        vendor rates, seasonal multipliers, per-pax pricing, margin application — is performed by deterministic
+        backend code. Only after numbers are finalized does an LLM generate descriptive text <em>around</em>
+        those numbers. This guarantees no guest is ever quoted an incorrect price due to an AI hallucination.
       </p>
     </div>
 
-    <div class="section-eyebrow">Technology Stack</div>
-    <h2 class="section-title" style="font-size:20px;margin-bottom:20px;">Production-Grade<br/>Technology Choices</h2>
+    <!-- ARCHITECTURE DIAGRAM -->
+    <div class="section-eyebrow">System Architecture</div>
+    <div class="arch-diagram">
+      <div class="layer">
+        <div class="layer-title">📡 Channel Layer — Inbound / Outbound</div>
+        <span class="component">WhatsApp Business API</span>
+        <span class="component">Voice AI Agent</span>
+        <span class="component">B2B Whitelabel API</span>
+        <span class="component">SEO Content Engine</span>
+      </div>
+      <div class="arrow">▼</div>
+      <div class="layer">
+        <div class="layer-title">🔧 API Gateway — Express 5</div>
+        <span class="component">Auth (API Key)</span>
+        <span class="component">Rate Limiter</span>
+        <span class="component">Request Validator (Zod)</span>
+        <span class="component">CORS</span>
+        <span class="component">Webhook Signature Verify</span>
+      </div>
+      <div class="arrow">▼</div>
+      <div class="layer">
+        <div class="layer-title">🧠 AI Layer — Language Only</div>
+        <span class="component">NLP Extraction Agent</span>
+        <span class="component">Prose Augmenter</span>
+        <span class="component">RAG Concierge Bot</span>
+        <span class="component">Voice Dispatcher</span>
+        <span class="component">SEO Writer</span>
+      </div>
+      <div class="arrow">▼</div>
+      <div class="layer">
+        <div class="layer-title">⚙️ Deterministic Engine — Zero LLM, Pure Math</div>
+        <span class="component warn">computeLineItem()</span>
+        <span class="component warn">computeQuoteSummary()</span>
+        <span class="component warn">getMarkupForCategory()</span>
+        <span class="component warn">generateQuoteNumber()</span>
+      </div>
+      <div class="arrow">▼</div>
+      <div class="layer">
+        <div class="layer-title">🗄️ Data Layer — PostgreSQL 16</div>
+        <span class="component">vendors</span>
+        <span class="component">vendor_products</span>
+        <span class="component">inquiries</span>
+        <span class="component">quotes</span>
+        <span class="component">quote_line_items</span>
+        <span class="component">trips</span>
+        <span class="component">trip_events</span>
+        <span class="component">payments</span>
+        <span class="component">conversations</span>
+      </div>
+      <div class="arrow">▼</div>
+      <div class="layer">
+        <div class="layer-title">📤 Output Layer</div>
+        <span class="component">PDF Generator (Puppeteer)</span>
+        <span class="component">WhatsApp Sender</span>
+        <span class="component">Admin Dashboard</span>
+        <span class="component">Analytics (Metabase)</span>
+      </div>
+    </div>
 
-    <div class="tech-grid">
-      <div class="tech-card">
-        <div class="tech-icon">🐘</div>
-        <h4>PostgreSQL</h4>
-        <p>Primary database. Strict relational schema separating static vendor inventory from dynamic client quotes.</p>
+    <!-- DATA FLOW -->
+    <div class="section-eyebrow">Data Flow — Lead to Booking</div>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot" style="background:var(--blue)"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>Step 1: WhatsApp Message Received</h4>
+          <p>Customer sends: "Hi, I want a 5-day Kerala trip for 2 adults in March, budget around ₹2 lakh"</p>
+        </div>
       </div>
-      <div class="tech-card">
-        <div class="tech-icon">⚡</div>
-        <h4>Node.js / FastAPI</h4>
-        <p>Core business logic and API routing. Deterministic quoting engine lives here — no AI involvement in calculations.</p>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot" style="background:var(--purple)"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>Step 2: NLP Extraction Agent (AI)</h4>
+          <p>GPT-4o function-calling extracts structured data from informal text. Output validated against Zod schema before any DB write.</p>
+          <span class="flow-badge ai">AI — gpt-4o</span>
+        </div>
       </div>
-      <div class="tech-card">
-        <div class="tech-icon">🤖</div>
-        <h4>LLM (Function Calling)</h4>
-        <p>Structured output models for data extraction from WhatsApp and descriptive itinerary text generation only.</p>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot" style="background:var(--blue)"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>Step 3: Vendor Matching & Rate Lookup</h4>
+          <p>PostgreSQL queries vendor_products for matching categories, dates, and availability. Pure SQL — no AI involved.</p>
+          <span class="flow-badge code">CODE — PostgreSQL</span>
+        </div>
       </div>
-      <div class="tech-card">
-        <div class="tech-icon">📱</div>
-        <h4>WhatsApp Business API</h4>
-        <p>Inbound lead capture, structured quote delivery, and RAG-powered on-trip concierge for active guests.</p>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot" style="background:var(--blue)"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>Step 4: Deterministic Quote Building</h4>
+          <p>computeLineItem() applies base prices × markup percentages. computeQuoteSummary() aggregates totals. Zero AI — pure arithmetic.</p>
+          <span class="flow-badge code">CODE — Pure Math</span>
+        </div>
       </div>
-      <div class="tech-card">
-        <div class="tech-icon">📄</div>
-        <h4>Puppeteer / Playwright</h4>
-        <p>HTML-to-PDF rendering engine for pixel-perfect branded itinerary documents — automated, consistent, instant.</p>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot" style="background:var(--purple)"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>Step 5: LLM Prose Generation</h4>
+          <p>GPT-4o receives finalized numbers as typed JSON and generates eloquent itinerary prose. Never touches the numbers.</p>
+          <span class="flow-badge ai">AI — Text Only</span>
+        </div>
       </div>
-      <div class="tech-card">
-        <div class="tech-icon">🎙️</div>
-        <h4>Vapi.ai (Voice AI)</h4>
-        <p>Outbound voice agent for vendor and driver dispatch calls, reducing manual communication overhead by 70%.</p>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot" style="background:var(--blue)"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>Step 6: PDF Generation & Delivery</h4>
+          <p>Puppeteer renders branded HTML template to pixel-perfect PDF. Delivered via WhatsApp within seconds.</p>
+          <span class="flow-badge code">CODE — Puppeteer</span>
+        </div>
       </div>
-      <div class="tech-card">
-        <div class="tech-icon">☁️</div>
-        <h4>VPS / Cloud Hosting</h4>
-        <p>Self-hosted VPS for core services (cost-efficient, full control) with cloud object storage for PDFs and media.</p>
-      </div>
-      <div class="tech-card">
-        <div class="tech-icon">🔍</div>
-        <h4>RAG (Vector DB)</h4>
-        <p>Retrieval-Augmented Generation for on-trip bot — retrieves guest-specific itinerary data for accurate answers.</p>
-      </div>
-      <div class="tech-card">
-        <div class="tech-icon">🔒</div>
-        <h4>Security & Backups</h4>
-        <p>Encrypted connections, daily automated PostgreSQL backups, and role-based access control throughout.</p>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot" style="background:var(--teal)"></div></div>
+        <div class="flow-content">
+          <h4>Step 7: Booking Conversion</h4>
+          <p>Customer replies "YES" → trip created, vendors notified, invoice generated. Human confirms final booking.</p>
+          <span class="flow-badge both">BOTH — Human in Loop</span>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- ════════════════════════════════════════════════
-       PAGE 6 — IMPLEMENTATION TIMELINE
-  ════════════════════════════════════════════════ -->
+  <!-- ═══════════ PAGE 5 — AI MODEL SELECTION ═══════════ -->
   <div class="inner-page">
     <div class="page-header">
-      <div style="display:flex;align-items:center;gap:10px;">
-        <div style="width:28px;height:28px;background:linear-gradient(135deg,#0A2E2B,#1A6B5E);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;">🌿</div>
-        <div style="font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:#0A2E2B;">santos.travel</div>
+      <div class="page-header-logo"><div class="page-header-logo-icon">🌿</div><div class="page-header-logo-name">santos.travel</div></div>
+      <div class="page-header-right">IVA Cortex — AI Model Selection</div>
+    </div>
+
+    <div class="section-eyebrow">AI Model Strategy</div>
+    <h2 class="section-title">Right Model for<br/>the Right Job</h2>
+    <p class="section-lead">
+      Not every task needs the most powerful (or expensive) model. IVA Cortex uses a tiered approach:
+      lightweight models for classification, mid-tier for extraction, and premium models for creative prose.
+      Total LLM cost per WhatsApp message processed: approximately $0.005–$0.025.
+    </p>
+
+    <table class="compare-table mb-24">
+      <thead>
+        <tr><th>Task</th><th>Model</th><th>Cost</th><th>Latency</th><th>Why This Model</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Intent Classification</td>
+          <td>GPT-4o-mini</td>
+          <td>$0.15/$0.60 per 1M</td>
+          <td>~200ms</td>
+          <td>Binary decision, cheap, fast, >95% accuracy</td>
+        </tr>
+        <tr>
+          <td>Entity Extraction (WhatsApp → JSON)</td>
+          <td>GPT-4o</td>
+          <td>$2.50/$10 per 1M</td>
+          <td>~800ms</td>
+          <td>Best function calling, structured output reliability</td>
+        </tr>
+        <tr>
+          <td>Itinerary Prose Generation</td>
+          <td>GPT-4o</td>
+          <td>$2.50/$10 per 1M</td>
+          <td>~1.5s</td>
+          <td>Creative writing quality matters, receives final numbers only</td>
+        </tr>
+        <tr>
+          <td>RAG Concierge (On-trip)</td>
+          <td>GPT-4o-mini + pgvector</td>
+          <td>$0.15/$0.60 per 1M</td>
+          <td>&lt;1s</td>
+          <td>High volume, low-stakes, needs speed</td>
+        </tr>
+        <tr>
+          <td>Voice Calls (Outbound)</td>
+          <td>GPT-4o + Whisper STT + ElevenLabs TTS</td>
+          <td>$0.07–$0.17/min</td>
+          <td>600–900ms</td>
+          <td>Real-time conversation, handles accents</td>
+        </tr>
+        <tr>
+          <td>SEO Content</td>
+          <td>GPT-4o</td>
+          <td>$2.50/$10 per 1M</td>
+          <td>Batch</td>
+          <td>Long-form quality, not real-time</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- TECH STACK COMPARISON -->
+    <div class="section-eyebrow">Technology Stack Selections</div>
+    <div class="two-col mb-24">
+      <div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:14px;color:var(--deep-teal);margin-bottom:12px">Core Infrastructure</h3>
+        <div class="stat-rows">
+          <div class="stat-row">
+            <div class="stat-icon" style="background:var(--blue-bg)">🐘</div>
+            <div class="stat-content"><h4>PostgreSQL 16 (Supabase)</h4><p>Free tier → $25/mo Pro. Auth, storage, realtime, pgvector</p></div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-icon" style="background:var(--green-bg)">⚡</div>
+            <div class="stat-content"><h4>Node.js + Express 5</h4><p>Core business logic. Deterministic quoting engine</p></div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-icon" style="background:#FFF8EA">📱</div>
+            <div class="stat-content"><h4>WhatsApp (360dialog/Twilio)</h4><p>$0.01–0.02/msg. Service conversations free</p></div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-icon" style="background:var(--purple-bg)">📄</div>
+            <div class="stat-content"><h4>Puppeteer / Playwright</h4><p>HTML → PDF rendering. 3–58ms latency</p></div>
+          </div>
+        </div>
       </div>
-      <div class="page-header-right">IVA Cortex — Implementation Timeline</div>
+      <div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:14px;color:var(--deep-teal);margin-bottom:12px">AI & Growth Tools</h3>
+        <div class="stat-rows">
+          <div class="stat-row">
+            <div class="stat-icon" style="background:#FFEAEA">🎙️</div>
+            <div class="stat-content"><h4>Retell.ai / Bland.ai (Voice)</h4><p>$0.08–0.12/min. Best latency for outbound</p></div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-icon" style="background:var(--teal-pale)">🔍</div>
+            <div class="stat-content"><h4>LlamaIndex + LangGraph (RAG)</h4><p>Open source. 18–25% better retrieval accuracy</p></div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-icon" style="background:var(--gold-pale)">✍️</div>
+            <div class="stat-content"><h4>Frase ($15/mo) — SEO</h4><p>Content briefs, SERP research, AI writer</p></div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-icon" style="background:var(--blue-bg)">📊</div>
+            <div class="stat-content"><h4>Metabase (Analytics)</h4><p>Free OSS. SQL + visual builder, embeddable</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COST COMPARISON -->
+    <div class="section-eyebrow">Hosting Cost Comparison</div>
+    <div class="bar-chart">
+      <div class="bar-row">
+        <div class="bar-label">Hetzner VPS</div>
+        <div class="bar-track"><div class="bar-fill green" style="width:15%">$15/mo</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Vercel + Supabase</div>
+        <div class="bar-track"><div class="bar-fill teal" style="width:25%">$25/mo</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Railway</div>
+        <div class="bar-track"><div class="bar-fill blue" style="width:50%">$50–100/mo</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Render</div>
+        <div class="bar-track"><div class="bar-fill gold" style="width:85%">$85/mo</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">AWS</div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:linear-gradient(90deg,var(--red),#E05A2A)">$200–800/mo</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ PAGE 6 — THE 5 PILLARS ═══════════ -->
+  <div class="inner-page">
+    <div class="page-header">
+      <div class="page-header-logo"><div class="page-header-logo-icon">🌿</div><div class="page-header-logo-name">santos.travel</div></div>
+      <div class="page-header-right">IVA Cortex — The 5 Core Pillars</div>
+    </div>
+
+    <div class="section-eyebrow">System Architecture</div>
+    <h2 class="section-title">The 5 Core Pillars<br/>of IVA Cortex</h2>
+    <p class="section-lead">
+      Every pillar is an independently deployable module communicating through shared PostgreSQL
+      and typed API contracts. Each can be built, tested, and rolled back without destabilising the others.
+    </p>
+
+    <div class="pillar-list">
+      <div class="pillar-card p1">
+        <div class="pillar-num">1</div>
+        <div class="pillar-content">
+          <h4>🎯 AI Intake & Triage — The Smart Front Door</h4>
+          <p>
+            An NLP agent monitors WhatsApp Business. When a lead arrives in fragmented, informal language,
+            the AI extracts structured parameters: travelers, dates, destinations, budget signals, group type.
+            Data written to PostgreSQL CRM, quote auto-triggered, high-value leads flagged for immediate attention.
+            <strong>Industry benchmark: 7x better conversion with sub-1-hour response.</strong>
+          </p>
+          <span class="pillar-tag">WhatsApp API · GPT-4o · PostgreSQL CRM</span>
+        </div>
+      </div>
+      <div class="pillar-card p2">
+        <div class="pillar-num">2</div>
+        <div class="pillar-content">
+          <h4>⚙️ Deterministic Quoting Engine — The Financial Heart</h4>
+          <p>
+            Strict code-only module (no AI in numbers). Queries vendor rate tables, applies seasonal multipliers,
+            calculates per-person pricing, adds configured margins. LLM writes only descriptive text after
+            numbers finalized. Every quote versioned and auditable. <strong>Industry data: up to 20% profit boost with automated pricing.</strong>
+          </p>
+          <span class="pillar-tag">PostgreSQL · Node.js · LLM Text Layer</span>
+        </div>
+      </div>
+      <div class="pillar-card p3">
+        <div class="pillar-num">3</div>
+        <div class="pillar-content">
+          <h4>📄 Automated PDF Storefront — Instant Branded Proposals</h4>
+          <p>
+            Structured data + generated text → premium branded HTML template → pixel-perfect PDF.
+            Complete with santos.travel branding, day-wise breakdowns, inclusions, hotel details, terms.
+            Replaces hours of manual assembly with automated, consistent, 30-second pipeline.
+          </p>
+          <span class="pillar-tag">Puppeteer · Handlebars · Cloud Storage</span>
+        </div>
+      </div>
+      <div class="pillar-card p4">
+        <div class="pillar-num">4</div>
+        <div class="pillar-content">
+          <h4>🗺️ On-Trip Concierge & Dispatch — AI for Active Travelers</h4>
+          <p>
+            RAG WhatsApp bot serves guests during active trips — retrieves itinerary, hotel contacts,
+            driver details. Voice AI handles outbound dispatch calls to vendors/drivers.
+            <strong>Industry benchmark: HiJiffy handles 70–80% queries without humans.</strong>
+          </p>
+          <span class="pillar-tag">RAG · LlamaIndex · Voice AI (Retell.ai)</span>
+        </div>
+      </div>
+      <div class="pillar-card p5">
+        <div class="pillar-num">5</div>
+        <div class="pillar-content">
+          <h4>🚀 Growth Flywheels — Revenue Beyond Direct Bookings</h4>
+          <p>
+            Three engines: (1) B2B Whitelabel API for international agents with multi-tenancy and commission tracking.
+            (2) Autonomous SEO content engine for organic traffic.
+            (3) Yield management scraper for competitor pricing intelligence.
+            <strong>Direct bookings yield up to 60% higher revenue vs OTA.</strong>
+          </p>
+          <span class="pillar-tag">REST API · Frase SEO · Yield Scraper</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ PAGE 7 — PAIN POINT → SOLUTION ═══════════ -->
+  <div class="inner-page">
+    <div class="page-header">
+      <div class="page-header-logo"><div class="page-header-logo-icon">🌿</div><div class="page-header-logo-name">santos.travel</div></div>
+      <div class="page-header-right">IVA Cortex — Pain Point Solutions</div>
+    </div>
+
+    <div class="section-eyebrow">Solving Every Pain Point</div>
+    <h2 class="section-title">Pain Point →<br/>Technical Solution</h2>
+    <p class="section-lead">
+      Each operational challenge maps to a specific technical solution with measurable outcomes.
+      No vague promises — concrete implementations with industry-validated benchmarks.
+    </p>
+
+    <table class="compare-table mb-24">
+      <thead>
+        <tr><th>Pain Point</th><th>Root Cause</th><th>IVA Cortex Solution</th><th>AI Model</th><th>Expected Impact</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Quote turnaround 2–24h</td>
+          <td>Manual rate lookup across spreadsheets</td>
+          <td>Deterministic pricing engine + auto PDF</td>
+          <td>GPT-4o (text only)</td>
+          <td class="good">Under 5 minutes</td>
+        </tr>
+        <tr>
+          <td>Disconnected data (5 systems)</td>
+          <td>No unified CRM, data in WhatsApp/email</td>
+          <td>PostgreSQL CRM with WhatsApp webhook</td>
+          <td>Direct integration</td>
+          <td class="good">Single source of truth</td>
+        </tr>
+        <tr>
+          <td>Pricing errors</td>
+          <td>Human arithmetic on every quote</td>
+          <td>Code-only math engine (zero AI in numbers)</td>
+          <td>None — pure code</td>
+          <td class="good">Zero pricing errors</td>
+        </tr>
+        <tr>
+          <td>Human bottleneck</td>
+          <td>Same team handles all inquiries</td>
+          <td>24/7 AI triage + auto quote trigger</td>
+          <td>GPT-4o-mini (intent) + GPT-4o (extraction)</td>
+          <td class="good">3x capacity without hires</td>
+        </tr>
+        <tr>
+          <td>Inconsistent branding</td>
+          <td>Manual PDF assembly</td>
+          <td>Template-based Puppeteer pipeline</td>
+          <td>None — HTML/CSS templates</td>
+          <td class="good">Pixel-perfect, instant</td>
+        </tr>
+        <tr>
+          <td>No B2B distribution</td>
+          <td>No API for agent partners</td>
+          <td>Whitelabel REST API + commission tracking</td>
+          <td>None — REST endpoints</td>
+          <td class="good">15–20% new revenue channel</td>
+        </tr>
+        <tr>
+          <td>No SEO/content strategy</td>
+          <td>No content engine</td>
+          <td>AI content generator + auto-publish</td>
+          <td>GPT-4o (long-form)</td>
+          <td class="good">+40% organic traffic</td>
+        </tr>
+        <tr>
+          <td>No yield management</td>
+          <td>Static pricing, no competitor data</td>
+          <td>Competitor price scraper + rules engine</td>
+          <td>None — scraping + rules</td>
+          <td class="good">10–40% revenue increase</td>
+        </tr>
+        <tr>
+          <td>Poor on-trip support</td>
+          <td>Team manually fields all queries</td>
+          <td>RAG WhatsApp concierge bot</td>
+          <td>GPT-4o-mini + pgvector</td>
+          <td class="good">70% queries handled autonomously</td>
+        </tr>
+        <tr>
+          <td>No analytics</td>
+          <td>No data visibility</td>
+          <td>Real-time Metabase dashboards</td>
+          <td>None — SQL views</td>
+          <td class="good">Data-driven decisions</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════ PAGE 8 — IMPLEMENTATION ROADMAP ═══════════ -->
+  <div class="inner-page">
+    <div class="page-header">
+      <div class="page-header-logo"><div class="page-header-logo-icon">🌿</div><div class="page-header-logo-name">santos.travel</div></div>
+      <div class="page-header-right">IVA Cortex — Implementation Roadmap</div>
     </div>
 
     <div class="section-eyebrow">Project Timeline</div>
     <h2 class="section-title">20-Week Implementation<br/>Roadmap</h2>
     <p class="section-lead">
-      Each phase delivers a working, independently valuable module. The project is structured so 
-      Phase 2 is immediately valuable to operations — you don't need to wait 20 weeks to see returns. 
-      Phases can be reprioritised based on business needs at any checkpoint.
+      Each phase delivers a working, independently valuable module. Phase 2 is immediately valuable
+      to operations — you don't need to wait 20 weeks to see returns.
     </p>
 
-    <div class="timeline">
+    <!-- GANTT-STYLE VISUAL -->
+    <div style="margin-bottom:28px;overflow-x:auto">
+      <div style="display:grid;grid-template-columns:140px repeat(20,1fr);gap:2px;font-size:7.5px;min-width:600px">
+        <div style="font-weight:600;color:var(--muted);padding:6px 4px">Phase</div>
+        <div style="text-align:center;color:var(--muted);padding:6px 2px;border-bottom:1px solid var(--border)">W1</div>
+        <div style="text-align:center;color:var(--muted);padding:6px 2px;border-bottom:1px solid var(--border)">W2</div>
+        <div style="text-align:center;color:var(--muted);padding:6px 2px;border-bottom:1px solid var(--border)">W3</div>
+        <div style="text-align:center;color:var(--muted);padding:6px 2px;border-bottom:1px solid var(--border)">W4</div>
+        <div style="text-align:center;color:var(--muted);padding:6px 2px;border-bottom:1px solid var(--border)">W5</div>
+        <div style="text-align:center;color:var(--muted);padding:6px 2px;border-bottom:1px solid var(--border)">W6</div>
+        <div style="text-align:center;color:var(--muted);padding:6px 2px;border-bottom:1px solid var(--border)">W7</div>
+        <div style="text-align:center;color:var(--muted);padding:6px 2px;border-bottom:1px solid var(--border)">W8</div>
+        <div style="text-align:center;color:var(--muted);padding:6px 2px;border-bottom:1px solid var(--border)">W9</div>
+        <div style="text-align:center;color:var(--muted);padding:6px 2px;border-bottom:1px solid var(--border)">W10</div>
+        <div style="text-align:center;color:var(--muted);padding:6px 2px;border-bottom:1px solid var(--border)">W11</div>
+        <div style="text-align:center;color:var(--muted);padding:6px 2px;border-bottom:1px solid var(--border)">W12</div>
+        <div style="text-align:center;color:var(--muted);padding:6px 2px;border-bottom:1px solid var(--border)">W13</div>
+        <div style="text-align:center;color:var(--muted);padding:6px 2px;border-bottom:1px solid var(--border)">W14</div>
+        <div style="text-align:center;color:var(--muted);padding:6px 2px;border-bottom:1px solid var(--border)">W15</div>
+        <div style="text-align:center;color:var(--muted);padding:6px 2px;border-bottom:1px solid var(--border)">W16</div>
+        <div style="text-align:center;color:var(--muted);padding:6px 2px;border-bottom:1px solid var(--border)">W17</div>
+        <div style="text-align:center;color:var(--muted);padding:6px 2px;border-bottom:1px solid var(--border)">W18</div>
+        <div style="text-align:center;color:var(--muted);padding:6px 2px;border-bottom:1px solid var(--border)">W19</div>
+        <div style="text-align:center;color:var(--muted);padding:6px 2px;border-bottom:1px solid var(--border)">W20</div>
 
+        <div style="padding:6px 4px;font-weight:600;color:var(--blue)">Phase 1: Foundation</div>
+        <div style="background:var(--blue);border-radius:4px;grid-column:2/5"></div>
+        <div style="grid-column:5/21"></div>
+
+        <div style="padding:6px 4px;font-weight:600;color:var(--green)">Phase 2: Quoting Engine</div>
+        <div style="grid-column:2/5"></div>
+        <div style="background:var(--green);border-radius:4px;grid-column:5/9"></div>
+        <div style="grid-column:9/21"></div>
+
+        <div style="padding:6px 4px;font-weight:600;color:#B87A10">Phase 3: AI Intake & CRM</div>
+        <div style="grid-column:2/9"></div>
+        <div style="background:#FFE8A8;border-radius:4px;grid-column:9/14"></div>
+        <div style="grid-column:14/21"></div>
+
+        <div style="padding:6px 4px;font-weight:600;color:var(--purple)">Phase 4: Concierge & Voice</div>
+        <div style="grid-column:2/14"></div>
+        <div style="background:#E8D0FF;border-radius:4px;grid-column:14/18"></div>
+        <div style="grid-column:18/21"></div>
+
+        <div style="padding:6px 4px;font-weight:600;color:#AE2F2F">Phase 5: Growth & Scale</div>
+        <div style="grid-column:2/18"></div>
+        <div style="background:#FFD0D0;border-radius:4px;grid-column:18/21"></div>
+      </div>
+    </div>
+
+    <div class="timeline">
       <div class="timeline-item phase-1">
         <div class="timeline-dot"></div>
-        <div class="timeline-item-header">
-          <span class="timeline-phase-badge">Phase 1</span>
-          <span class="timeline-duration">Weeks 1–3</span>
-        </div>
+        <div class="timeline-item-header"><span class="timeline-phase-badge">Phase 1</span><span class="timeline-duration">Weeks 1–3</span></div>
         <div class="timeline-title">🗄️ The Relational Foundation</div>
-        <p style="font-size:9.5px;color:#3D3D52;line-height:1.6;">
-          Design and implement the complete PostgreSQL schema — vendor inventory, rate cards, seasonal pricing 
-          tiers, client CRM, quote tables, and booking records. This is the data backbone every other system 
-          reads from and writes to. Includes seed data, migration scripts, and an admin panel for vendor management.
-        </p>
+        <p style="font-size:9.5px;color:#3D3D52;line-height:1.6">Design and implement the complete PostgreSQL schema — vendor inventory, rate cards, seasonal pricing tiers, client CRM, quote tables, and booking records. Includes seed data, migration scripts, and admin panel for vendor management.</p>
         <div class="timeline-deliverables">
           <span class="deliverable-chip">PostgreSQL Schema</span>
           <span class="deliverable-chip">Vendor Rate Tables</span>
-          <span class="deliverable-chip">Client CRM Tables</span>
+          <span class="deliverable-chip">Client CRM</span>
           <span class="deliverable-chip">Migration Scripts</span>
-          <span class="deliverable-chip">Seed Data</span>
+          <span class="deliverable-chip">Admin Panel</span>
         </div>
       </div>
 
       <div class="timeline-item phase-2">
         <div class="timeline-dot"></div>
-        <div class="timeline-item-header">
-          <span class="timeline-phase-badge">Phase 2</span>
-          <span class="timeline-duration">Weeks 4–7</span>
-        </div>
+        <div class="timeline-item-header"><span class="timeline-phase-badge">Phase 2</span><span class="timeline-duration">Weeks 4–7</span></div>
         <div class="timeline-title">⚙️ Deterministic Quoting Engine</div>
-        <p style="font-size:9.5px;color:#3D3D52;line-height:1.6;">
-          Build the core pricing engine — rate queries, seasonal multipliers, vehicle/pax tier logic, 
-          configurable margin rules, and quote versioning. An LLM text layer is added on top to generate 
-          descriptive itinerary prose from the finalized numbers. First real PDFs are produced at end of this phase.
-        </p>
+        <p style="font-size:9.5px;color:#3D3D52;line-height:1.6">Core pricing engine — rate queries, seasonal multipliers, vehicle/pax tier logic, configurable margin rules, quote versioning. LLM text layer generates descriptive prose from finalized numbers. First real PDFs produced.</p>
         <div class="timeline-deliverables">
           <span class="deliverable-chip">Rate Query Engine</span>
           <span class="deliverable-chip">Margin Calculator</span>
           <span class="deliverable-chip">Quote Builder</span>
           <span class="deliverable-chip">LLM Text Layer</span>
-          <span class="deliverable-chip">Quote Versioning</span>
           <span class="deliverable-chip">First PDF Output</span>
         </div>
       </div>
 
       <div class="timeline-item phase-3">
         <div class="timeline-dot"></div>
-        <div class="timeline-item-header">
-          <span class="timeline-phase-badge">Phase 3</span>
-          <span class="timeline-duration">Weeks 8–12</span>
-        </div>
+        <div class="timeline-item-header"><span class="timeline-phase-badge">Phase 3</span><span class="timeline-duration">Weeks 8–12</span></div>
         <div class="timeline-title">📲 AI Intake, Triage & CRM Automation</div>
-        <p style="font-size:9.5px;color:#3D3D52;line-height:1.6;">
-          Connect the WhatsApp Business API webhook. Build the NLP extraction agent that reads incoming 
-          messages and populates the CRM. Implement lead scoring, priority routing, and the human handoff 
-          protocol for low-confidence extractions. The quoting engine is now triggered automatically on new leads.
-        </p>
+        <p style="font-size:9.5px;color:#3D3D52;line-height:1.6">WhatsApp Business API webhook. NLP extraction agent reads incoming messages, populates CRM. Lead scoring, priority routing, human handoff protocol. Quoting engine now triggered automatically on new leads.</p>
         <div class="timeline-deliverables">
           <span class="deliverable-chip">WhatsApp Webhook</span>
           <span class="deliverable-chip">NLP Extraction Agent</span>
           <span class="deliverable-chip">Lead Scoring</span>
           <span class="deliverable-chip">Auto Quote Trigger</span>
-          <span class="deliverable-chip">Human Handoff Logic</span>
+          <span class="deliverable-chip">Human Handoff</span>
         </div>
       </div>
 
       <div class="timeline-item phase-4">
         <div class="timeline-dot"></div>
-        <div class="timeline-item-header">
-          <span class="timeline-phase-badge">Phase 4</span>
-          <span class="timeline-duration">Weeks 13–17</span>
-        </div>
+        <div class="timeline-item-header"><span class="timeline-phase-badge">Phase 4</span><span class="timeline-duration">Weeks 13–17</span></div>
         <div class="timeline-title">🗺️ On-Trip Concierge & Voice Dispatch</div>
-        <p style="font-size:9.5px;color:#3D3D52;line-height:1.6;">
-          Deploy the RAG-powered WhatsApp concierge bot for active travelers, retrieving guest-specific 
-          itinerary data for accurate, real-time answers. Integrate Vapi.ai voice agent for outbound 
-          vendor and driver dispatch calls — dramatically reducing manual coordination overhead.
-        </p>
+        <p style="font-size:9.5px;color:#3D3D52;line-height:1.6">RAG-powered WhatsApp concierge bot for active travelers. Voice AI (Retell.ai) for outbound vendor/driver dispatch calls — reducing communication overhead by 70%.</p>
         <div class="timeline-deliverables">
           <span class="deliverable-chip">RAG Concierge Bot</span>
-          <span class="deliverable-chip">Vector DB Setup</span>
-          <span class="deliverable-chip">Voice AI (Vapi.ai)</span>
-          <span class="deliverable-chip">Vendor Dispatch Calls</span>
+          <span class="deliverable-chip">Vector DB (pgvector)</span>
+          <span class="deliverable-chip">Voice AI Integration</span>
+          <span class="deliverable-chip">Vendor Dispatch</span>
           <span class="deliverable-chip">Trip Monitoring</span>
         </div>
       </div>
 
       <div class="timeline-item phase-5">
         <div class="timeline-dot"></div>
-        <div class="timeline-item-header">
-          <span class="timeline-phase-badge">Phase 5</span>
-          <span class="timeline-duration">Weeks 18–20</span>
-        </div>
+        <div class="timeline-item-header"><span class="timeline-phase-badge">Phase 5</span><span class="timeline-duration">Weeks 18–20</span></div>
         <div class="timeline-title">🚀 Growth Flywheels & Scale</div>
-        <p style="font-size:9.5px;color:#3D3D52;line-height:1.6;">
-          Launch the B2B Whitelabel API for international travel agent partners with multi-tenancy and 
-          commission tracking. Deploy the autonomous SEO content engine for organic traffic growth. 
-          Activate the yield management scraper for dynamic pricing intelligence. Full analytics dashboard go-live.
-        </p>
+        <p style="font-size:9.5px;color:#3D3D52;line-height:1.6">B2B Whitelabel API with multi-tenancy and commission tracking. Autonomous SEO content engine. Yield management scraper for dynamic pricing intelligence. Full analytics dashboard.</p>
         <div class="timeline-deliverables">
           <span class="deliverable-chip">B2B Whitelabel API</span>
           <span class="deliverable-chip">SEO Content Engine</span>
@@ -1466,124 +1082,239 @@
           <span class="deliverable-chip">Multi-Tenant Billing</span>
         </div>
       </div>
-
     </div>
   </div>
 
-  <!-- ════════════════════════════════════════════════
-       PAGE 7 — NEXT STEPS
-  ════════════════════════════════════════════════ -->
+  <!-- ═══════════ PAGE 9 — BUSINESS IMPACT & ROI ═══════════ -->
   <div class="inner-page">
     <div class="page-header">
-      <div style="display:flex;align-items:center;gap:10px;">
-        <div style="width:28px;height:28px;background:linear-gradient(135deg,#0A2E2B,#1A6B5E);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;">🌿</div>
-        <div style="font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:#0A2E2B;">santos.travel</div>
+      <div class="page-header-logo"><div class="page-header-logo-icon">🌿</div><div class="page-header-logo-name">santos.travel</div></div>
+      <div class="page-header-right">IVA Cortex — Business Impact & ROI</div>
+    </div>
+
+    <div class="section-eyebrow">Business Impact</div>
+    <h2 class="section-title">Projected Improvements<br/>& Return on Investment</h2>
+    <p class="section-lead">
+      Projections based on industry benchmarks for travel agencies with comparable automation, combined with
+      santos.travel's operational baseline. AI-driven hyper-personalization increases bookings by up to 25%.
+    </p>
+
+    <div class="metrics-grid">
+      <div class="metric-card"><div class="metric-val">80%</div><div class="metric-label">Reduction in quote<br/>turnaround time</div></div>
+      <div class="metric-card"><div class="metric-val">3×</div><div class="metric-label">Lead handling capacity<br/>without new hires</div></div>
+      <div class="metric-card"><div class="metric-val">0</div><div class="metric-label">Pricing errors<br/>deterministic math</div></div>
+      <div class="metric-card"><div class="metric-val">70%</div><div class="metric-label">Drop in on-trip<br/>communication load</div></div>
+      <div class="metric-card"><div class="metric-val">24/7</div><div class="metric-label">Inquiry response<br/>including off-hours</div></div>
+      <div class="metric-card"><div class="metric-val">+40%</div><div class="metric-label">Organic traffic<br/>SEO content engine</div></div>
+    </div>
+
+    <!-- ROI VISUAL -->
+    <div class="section-eyebrow">Return on Investment</div>
+    <div class="two-col mb-24">
+      <div class="solution-box" style="margin-bottom:0">
+        <h3>💰 Monthly Revenue Impact</h3>
+        <p>
+          <strong>Current state:</strong> 15–25 hrs/week manual coordination, 39% of operators have no system.<br/><br/>
+          <strong>After IVA Cortex:</strong> 3× lead capacity × average booking value × improved conversion = significant revenue uplift.
+          Direct bookings yield up to 60% higher revenue vs OTA channels. B2B API opens 15–20% commission stream.
+        </p>
       </div>
-      <div class="page-header-right">IVA Cortex — Next Steps</div>
+      <div>
+        <div class="stat-rows">
+          <div class="stat-row">
+            <div class="stat-icon" style="background:var(--green-bg)">📈</div>
+            <div class="stat-content"><h4>Conversion Lift</h4><p>AI personalization drives 25% more bookings</p></div>
+            <div class="stat-number">+25%</div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-icon" style="background:var(--gold-pale)">💵</div>
+            <div class="stat-content"><h4>Cost Savings</h4><p>66% report significant savings with AI adoption</p></div>
+            <div class="stat-number">66%</div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-icon" style="background:var(--blue-bg)">📊</div>
+            <div class="stat-content"><h4>Marketing ROI</h4><p>28% conversion lift, 45% higher email opens</p></div>
+            <div class="stat-number">+28%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BEFORE vs AFTER -->
+    <div class="section-eyebrow">Before vs. After Comparison</div>
+    <table class="compare-table">
+      <thead><tr><th>Operational Area</th><th>Current State</th><th>After IVA Cortex</th></tr></thead>
+      <tbody>
+        <tr><td>Inquiry Response Time</td><td class="bad">2–24 hours (manual)</td><td class="good">Under 5 minutes (automated)</td></tr>
+        <tr><td>Quote Generation</td><td class="bad">3–6 hours manual assembly</td><td class="good">Under 30 seconds (pipeline)</td></tr>
+        <tr><td>Pricing Accuracy</td><td class="bad">Human error risk on every quote</td><td class="good">Deterministic — 100% consistent</td></tr>
+        <tr><td>CRM & Data</td><td class="bad">Spreadsheets + WhatsApp</td><td class="good">PostgreSQL — fully auditable</td></tr>
+        <tr><td>On-Trip Support</td><td class="bad">Team manually fields all</td><td class="good">RAG bot handles ~70%</td></tr>
+        <tr><td>PDF Quality</td><td class="bad">Inconsistent, manual</td><td class="good">Branded, pixel-perfect, instant</td></tr>
+        <tr><td>B2B Distribution</td><td class="bad">Not available</td><td class="good">Whitelabel API for agents</td></tr>
+        <tr><td>Off-Hours</td><td class="bad">Zero — leads lost</td><td class="good">Full 24/7 AI coverage</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════ PAGE 10 — COST ANALYSIS ═══════════ -->
+  <div class="inner-page">
+    <div class="page-header">
+      <div class="page-header-logo"><div class="page-header-logo-icon">🌿</div><div class="page-header-logo-name">santos.travel</div></div>
+      <div class="page-header-right">IVA Cortex — Cost Analysis</div>
+    </div>
+
+    <div class="section-eyebrow">Total Cost of Ownership</div>
+    <h2 class="section-title">Monthly Operating<br/>Cost Breakdown</h2>
+    <p class="section-lead">
+      IVA Cortex is designed for cost efficiency. The recommended stack keeps monthly operating costs
+      between $60–$400/month depending on scale — a fraction of a single hire's salary.
+    </p>
+
+    <div class="cost-grid mb-24">
+      <div class="cost-card">
+        <h4>🛠️ Infrastructure (MVP Phase)</h4>
+        <div class="cost-row"><span class="label">Supabase (PostgreSQL + Auth)</span><span class="amount">$0–$25/mo</span></div>
+        <div class="cost-row"><span class="label">Vercel (Frontend Hosting)</span><span class="amount">$0–$20/mo</span></div>
+        <div class="cost-row"><span class="label">Hetzner VPS (Core Services)</span><span class="amount">$15/mo</span></div>
+        <div class="cost-row"><span class="label">Domain + SSL</span><span class="amount">$2/mo</span></div>
+        <div class="cost-total"><span>Subtotal</span><span>$17–$62/mo</span></div>
+      </div>
+      <div class="cost-card">
+        <h4>🤖 AI & LLM Costs</h4>
+        <div class="cost-row"><span class="label">OpenAI API (GPT-4o + mini)</span><span class="amount">$20–$80/mo</span></div>
+        <div class="cost-row"><span class="label">WhatsApp (360dialog)</span><span class="amount">$5–$30/mo</span></div>
+        <div class="cost-row"><span class="label">Voice AI (Retell.ai)</span><span class="amount">$10–$50/mo</span></div>
+        <div class="cost-row"><span class="label">Embeddings (pgvector)</span><span class="amount">$0 (included)</span></div>
+        <div class="cost-total"><span>Subtotal</span><span>$35–$160/mo</span></div>
+      </div>
+      <div class="cost-card">
+        <h4>📈 Growth & Analytics</h4>
+        <div class="cost-row"><span class="label">Frase SEO ($15/mo)</span><span class="amount">$15/mo</span></div>
+        <div class="cost-row"><span class="label">Metabase (self-hosted)</span><span class="amount">$0</span></div>
+        <div class="cost-row"><span class="label">Email (Resend/SendGrid)</span><span class="amount">$0–$20/mo</span></div>
+        <div class="cost-row"><span class="label">Monitoring (UptimeRobot)</span><span class="amount">$0</span></div>
+        <div class="cost-total"><span>Subtotal</span><span>$15–$35/mo</span></div>
+      </div>
+      <div class="cost-card">
+        <h4>📊 Total Monthly Cost</h4>
+        <div class="cost-row"><span class="label">MVP Phase (Months 1–3)</span><span class="amount" style="color:var(--green)">$60–$100/mo</span></div>
+        <div class="cost-row"><span class="label">Growth Phase (Months 4–12)</span><span class="amount" style="color:var(--blue)">$150–$250/mo</span></div>
+        <div class="cost-row"><span class="label">Scale Phase (Year 2+)</span><span class="amount" style="color:var(--gold)">$200–$400/mo</span></div>
+        <div class="cost-row"><span class="label">vs. One Full-Time Hire</span><span class="amount" style="color:var(--red)">$2,000–$4,000/mo</span></div>
+        <div class="cost-total"><span>Cost Savings</span><span style="color:var(--green)">90%+ vs hiring</span></div>
+      </div>
+    </div>
+
+    <!-- COMPARISON: AI COST vs HUMAN COST -->
+    <div class="section-eyebrow">Cost Per Operation Comparison</div>
+    <table class="compare-table">
+      <thead><tr><th>Operation</th><th>Human Cost</th><th>IVA Cortex Cost</th><th>Savings</th></tr></thead>
+      <tbody>
+        <tr><td>Quote Generation</td><td>$15–$40 (2–6 hrs × $7–$10/hr)</td><td>$0.02–$0.05 (LLM + compute)</td><td class="good">99.7% reduction</td></tr>
+        <tr><td>WhatsApp Triage</td><td>$5–$10 per inquiry</td><td>$0.005–$0.025</td><td class="good">99.5% reduction</td></tr>
+        <tr><td>PDF Creation</td><td>$8–$20 (manual formatting)</td><td>$0.001 (Puppeteer render)</td><td class="good">99.9% reduction</td></tr>
+        <tr><td>On-Trip Support</td><td>$50–$100 per trip (staff time)</td><td>$0.50–$2.00 (RAG bot)</td><td class="good">96–98% reduction</td></tr>
+        <tr><td>Voice Dispatch Call</td><td>$3–$8 per call</td><td>$0.07–$0.17 per min</td><td class="good">95%+ reduction</td></tr>
+        <tr><td>SEO Blog Post</td><td>$50–$200 (freelancer)</td><td>$0.50–$2.00 (GPT-4o)</td><td class="good">99% reduction</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════ PAGE 11 — NEXT STEPS ═══════════ -->
+  <div class="inner-page">
+    <div class="page-header">
+      <div class="page-header-logo"><div class="page-header-logo-icon">🌿</div><div class="page-header-logo-name">santos.travel</div></div>
+      <div class="page-header-right">IVA Cortex — Next Steps & Governance</div>
     </div>
 
     <div class="section-eyebrow">Next Steps</div>
     <h2 class="section-title">How We Begin</h2>
     <p class="section-lead">
-      Phase 1 begins immediately upon approval. The first deliverable — a complete, reviewed PostgreSQL schema — 
-      will be ready within the first week. Here is what happens in the immediate term:
+      Phase 1 begins immediately upon approval. The first deliverable — a complete PostgreSQL schema —
+      will be ready within the first week.
     </p>
 
     <ul class="next-steps-list">
-      <li>
-        <div class="step-content">
-          <h4>Schema Design Workshop</h4>
-          <p>A collaborative session to map existing vendor rate structures, seasonal pricing rules, and client data fields into the PostgreSQL schema. All current spreadsheet logic will be captured and formalized.</p>
-        </div>
-      </li>
-      <li>
-        <div class="step-content">
-          <h4>VPS & PostgreSQL Environment Setup</h4>
-          <p>Provision the production server, configure PostgreSQL with role-based access, set up daily automated backups, and establish encrypted connection protocols before writing a single line of application code.</p>
-        </div>
-      </li>
-      <li>
-        <div class="step-content">
-          <h4>Vendor Data Onboarding</h4>
-          <p>Migrate existing vendor rates, hotel contracts, vehicle pricing, and seasonal rules into the new database. This includes building the admin interface for ongoing rate management by the operations team.</p>
-        </div>
-      </li>
-      <li>
-        <div class="step-content">
-          <h4>Phase 2 Kickoff — Quoting Engine</h4>
-          <p>With the database ready, the deterministic quoting engine is built and tested against real historical quote scenarios to validate pricing accuracy before any automation is customer-facing.</p>
-        </div>
-      </li>
-      <li>
-        <div class="step-content">
-          <h4>Stakeholder Review at Phase 2 Completion</h4>
-          <p>Before advancing to AI/communication layers, a full demo of the quoting engine and PDF output will be presented. This is the most critical milestone — sign-off here confirms the financial foundation is correct.</p>
-        </div>
-      </li>
+      <li><div class="step-content"><h4>Schema Design Workshop</h4><p>Collaborative session to map vendor rate structures, seasonal pricing rules, and client data fields into the PostgreSQL schema. All current spreadsheet logic captured and formalized.</p></div></li>
+      <li><div class="step-content"><h4>VPS & PostgreSQL Environment Setup</h4><p>Provision production server, configure PostgreSQL with role-based access, set up daily automated backups, establish encrypted connections before writing application code.</p></div></li>
+      <li><div class="step-content"><h4>Vendor Data Onboarding</h4><p>Migrate existing vendor rates, hotel contracts, vehicle pricing, and seasonal rules into the new database. Build admin interface for ongoing rate management.</p></div></li>
+      <li><div class="step-content"><h4>Phase 2 Kickoff — Quoting Engine</h4><p>With the database ready, the deterministic quoting engine is built and tested against real historical quote scenarios to validate pricing accuracy.</p></div></li>
+      <li><div class="step-content"><h4>Stakeholder Review at Phase 2 Completion</h4><p>Full demo of quoting engine and PDF output. This is the most critical milestone — sign-off confirms the financial foundation is correct before advancing to AI layers.</p></div></li>
     </ul>
 
-    <!-- Risk & Governance -->
+    <!-- RISK & GOVERNANCE -->
     <div class="section-eyebrow mt-24">Risk & Governance</div>
     <div class="two-col">
       <div class="metrics-alt-card">
         <div class="alt-icon">🔒</div>
         <h4>Data Safety First</h4>
-        <p>All existing vendor and client data is migrated — never replaced — with full backups at each phase. No production data is touched without explicit approval.</p>
+        <p>All existing vendor and client data is migrated — never replaced — with full backups at each phase. No production data touched without explicit approval.</p>
       </div>
       <div class="metrics-alt-card">
         <div class="alt-icon">🔄</div>
         <h4>Rollback Capability</h4>
-        <p>Every database migration has a corresponding rollback script. Phases are independently deployable, so any module can be paused or reverted without affecting others.</p>
+        <p>Every database migration has a rollback script. Phases are independently deployable — any module can be paused or reverted without affecting others.</p>
       </div>
       <div class="metrics-alt-card">
         <div class="alt-icon">👤</div>
         <h4>Human Remains in Control</h4>
-        <p>The AI never acts on a booking or financial transaction autonomously. All actions that involve money or confirmation require human sign-off until explicitly configured otherwise.</p>
+        <p>AI never acts on booking or financial transactions autonomously. All actions involving money or confirmation require human sign-off until configured otherwise.</p>
       </div>
       <div class="metrics-alt-card">
         <div class="alt-icon">📊</div>
         <h4>Measurable Milestones</h4>
-        <p>Each phase has defined, measurable acceptance criteria. Payment and progress are tied to working demonstrations — not just code delivery.</p>
+        <p>Each phase has defined, measurable acceptance criteria. Payment and progress tied to working demonstrations — not just code delivery.</p>
+      </div>
+    </div>
+
+    <!-- OPERATIONAL METRICS -->
+    <div class="section-eyebrow mt-24">Key Performance Indicators</div>
+    <div class="three-col">
+      <div class="metrics-alt-card" style="text-align:center">
+        <div class="alt-icon">⏱️</div>
+        <h4>Response Time</h4>
+        <p style="font-family:'Playfair Display',serif;font-size:22px;font-weight:800;color:var(--gold);margin-top:8px">&lt; 5 min</p>
+        <p>24/7 automated</p>
+      </div>
+      <div class="metrics-alt-card" style="text-align:center">
+        <div class="alt-icon">📋</div>
+        <h4>Quote Accuracy</h4>
+        <p style="font-family:'Playfair Display',serif;font-size:22px;font-weight:800;color:var(--green);margin-top:8px">100%</p>
+        <p>Deterministic engine</p>
+      </div>
+      <div class="metrics-alt-card" style="text-align:center">
+        <div class="alt-icon">💰</div>
+        <h4>Monthly Operating Cost</h4>
+        <p style="font-family:'Playfair Display',serif;font-size:22px;font-weight:800;color:var(--blue);margin-top:8px">$60–400</p>
+        <p>90%+ less than a hire</p>
       </div>
     </div>
   </div>
 
-  <!-- ════════════════════════════════════════════════
-       CLOSING PAGE
-  ════════════════════════════════════════════════ -->
-  <div class="closing">
-    <div class="closing-content">
-      <div class="closing-icon">🌿</div>
-      <div class="closing-title">
-        Let's Build the Future<br/>of <span>santos.travel</span>
-      </div>
-      <div class="closing-sub">
-        IVA Cortex is designed to grow with you — from automating today's manual quote bottlenecks 
-        to opening tomorrow's B2B revenue streams. Every line of code serves the same mission: 
+  <!-- ═══════════ CLOSING PAGE ═══════════ -->
+  <div class="closing" style="min-height:297mm;background:var(--deep-teal);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 52px;position:relative;overflow:hidden">
+    <div style="position:absolute;inset:0;background-image:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(201,168,76,0.15) 0%,transparent 55%),radial-gradient(ellipse 60% 40% at 50% 100%,rgba(42,157,143,0.18) 0%,transparent 50%)"></div>
+    <div style="position:relative;z-index:1">
+      <div style="font-size:52px;margin-bottom:24px">🌿</div>
+      <div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:800;color:var(--white);line-height:1.2;margin-bottom:16px">Let's Build the Future<br/>of <span style="color:var(--gold-light)">santos.travel</span></div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.65);max-width:420px;line-height:1.75;margin:0 auto 40px">
+        IVA Cortex is designed to grow with you — from automating today's manual quote bottlenecks
+        to opening tomorrow's B2B revenue streams. Every line of code serves the same mission:
         letting your team focus on what humans do best, while the system handles the rest.
       </div>
-      <div class="closing-divider"></div>
-      <div class="closing-contact-grid">
-        <div class="closing-contact-item">
-          <label>Website</label>
-          <span>santos.travel</span>
-        </div>
-        <div class="closing-contact-item">
-          <label>Project</label>
-          <span>IVA Cortex Initiative</span>
-        </div>
-        <div class="closing-contact-item">
-          <label>Version</label>
-          <span>Proposal v1.0 — June 2026</span>
-        </div>
+      <div style="width:60px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0 auto 40px"></div>
+      <div style="display:flex;gap:32px;justify-content:center">
+        <div style="text-align:center"><label style="display:block;font-size:8px;font-weight:600;color:rgba(255,255,255,0.4);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:5px">Website</label><span style="font-size:11px;font-weight:500;color:rgba(255,255,255,0.85)">santos.travel</span></div>
+        <div style="text-align:center"><label style="display:block;font-size:8px;font-weight:600;color:rgba(255,255,255,0.4);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:5px">Project</label><span style="font-size:11px;font-weight:500;color:rgba(255,255,255,0.85)">IVA Cortex Initiative</span></div>
+        <div style="text-align:center"><label style="display:block;font-size:8px;font-weight:600;color:rgba(255,255,255,0.4);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:5px">Version</label><span style="font-size:11px;font-weight:500;color:rgba(255,255,255,0.85)">v2.0 — June 2026</span></div>
       </div>
     </div>
-    <div class="closing-footer">
-      This document is strictly confidential and intended solely for the owner of santos.travel.
-      © 2026 santos.travel — All rights reserved.
+    <div style="position:absolute;bottom:36px;left:0;right:0;text-align:center;font-size:8px;color:rgba(255,255,255,0.25);letter-spacing:0.5px">
+      This document is strictly confidential. © 2026 santos.travel — All rights reserved.
     </div>
   </div>
 
-</div><!-- /.page -->
+</div>
 </body>
 </html>
